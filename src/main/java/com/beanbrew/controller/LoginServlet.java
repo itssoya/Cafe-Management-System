@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import com.beanbrew.model.User;
 import com.beanbrew.service.LoginService;
+import com.beanbrew.util.SessionUtil;
 
 /**
  * Servlet implementation class LoginServlet
@@ -56,8 +57,7 @@ public class LoginServlet extends HttpServlet {
 			
 			if(user != null){
 				
-				HttpSession session = request.getSession();
-				session.setAttribute("currentUser", user);
+				SessionUtil.setAttribute(request, "currentUser", user, 3600);
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 				
 			} else{
