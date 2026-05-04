@@ -1,34 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Account</title>
+
+    
+    <link rel="stylesheet" href="css/login.css">
+
+    
 </head>
+
 <body>
-    <h2>Login</h2>
 
-    <%-- Add this block to show the error --%>
-    <% String errorMessage = (String) request.getAttribute("errorMessage");
-       if (errorMessage != null) { %>
-        <p style="color: red;"><%= errorMessage %></p>
-    <% } %>
+<div class="layout">
 
-    <form action="${pageContext.request.contextPath}/login" method="post">
-        <table>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username" required></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password" required></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Login">
-                </td>
-            </tr>
-        </table>
-    </form>
+    <!-- CENTER CARD -->
+    <div class="form-card">
+        <h2>Hopping Back !</h2>
+
+        <!-- ERROR MESSAGE -->
+        <c:if test="${not empty error}">
+            <div id="errorPopup" class="error-container">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>${error}</span>
+            </div>
+        </c:if>
+
+        <!-- FORM -->
+        <form action="${pageContext.request.contextPath}/login" method="post">
+
+            <!-- USERNAME -->
+            <div class="field">
+                <label>Username</label>
+                <div class="input-wrap">
+                    
+                    <input type="text" name="username" placeholder="ILoveCoffee123@01" value="${typedUser}" required>
+                </div>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="field">
+                <label>Password</label>
+                <div class="input-wrap">
+                    
+                    <input type="password" placeholder="***********" name="password" required>
+                </div>
+            </div>
+
+            
+            <button class="submit-btn" type="submit">
+                Login
+            </button>
+        </form>
+
+        <!-- FOOTER -->
+        <div class="footer-text">
+            New here? <a href="${pageContext.request.contextPath}/register">SignUp</a>
+        </div>
+
+        <div class="footer-text" style="margin-top:10px;">
+            <a href="${pageContext.request.contextPath}/home">← Back to Home</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const errorPopup = document.getElementById('errorPopup');
+
+    if (errorPopup) {
+        setTimeout(() => {
+            errorPopup.classList.add('fade-out');
+            setTimeout(() => errorPopup.remove(), 500);
+        }, 5000);
+    }
+});
+</script>
+
 </body>
 </html>

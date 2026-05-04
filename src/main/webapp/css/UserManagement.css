@@ -1,0 +1,61 @@
+.container{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+
+.sidebar-content{
+	display: flex;
+	flex-direction: column;
+	border-right: 0.0625rem solid #16319E;
+	width: 15rem;
+	background-color: #FFF8ED;
+	color: #16319E;
+	padding: 1rem;
+	height: 100vh;
+	justify-content: flex-start;
+	position: fixed;
+}
+
+.sidebar-content h1{
+	font-size: 1.2rem;
+	padding-left: 0.6rem;
+}
+
+.category{
+	list-style : none;
+	padding: 0.5rem;
+}
+
+.category li{
+	display: flex;
+	gap: 1rem;
+	padding:1rem;
+	border-radius: 0.5rem;
+	align-items: center;
+}
+
+.category li:hover{
+	background-color: white;
+}
+
+.category .logout{
+	padding-top: 25rem;
+}
+.user-registry-container{
+    height: 100%;
+    width: 75%;
+    margin-left: 20%; 
+}
+.page-header{
+    padding-left: 30px;;
+}
+
+.page-header h1{
+    bottom: 0px;
+    margin-bottom: 0px;
+}
+.page-header p{
+    top: 0px;
+    margin-top: 8px;
+}

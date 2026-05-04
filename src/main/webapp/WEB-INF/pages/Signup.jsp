@@ -1,34 +1,64 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Registration Form</title>
+    <title>Signup</title>
 </head>
 <body>
-    <h2>Register New User</h2>
-    <form action="${pageContext.request.contextPath}/signup" method="post">
-        <table>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username" maxlength="150" required></td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input type="email" name="email_id" maxlength="100" required></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password" maxlength="255" required></td>
-            </tr>
-            <tr>
-                <td>Is Admin:</td>
-                <td>
-                    <input type="checkbox" name="is_admin" value="true">
-                </td>
-            </tr>
-        </table>
-        <input type="submit" value="Register">
+
+    <h2>User Signup</h2>
+
+    <form action="signup" method="post" enctype="multipart/form-data">
+        
+        <!-- Username -->
+        <div>
+            <label>username:</label>
+            <input type="text" name="username" required>
+        </div>
+
+        <br>
+
+        <!-- Email -->
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email_id" required>
+        </div>
+
+        <br>
+
+        <!-- Password -->
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <br>
+
+        <!-- Admin -->
+        <div>
+            <label>Is Admin:</label>
+            <select name="is_admin">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
+
+        <br>
+
+        <!-- Profile Image -->
+        <div>
+            <label>Profile Image:</label>
+            <input type="file" name="profile_image" accept="image/*">
+        </div>
+
+        <br>
+
+        <!-- Submit -->
+        <div>
+            <button type="submit">Register</button>
+        </div>
+
     </form>
+
 </body>
 </html>

@@ -7,48 +7,40 @@ import com.beanbrew.util.DBConnection;
 
 public class LoginDAO {
 	
+	private static final String query = "SELECT * FROM users WHERE username = ?  ";
+	
+	private User user = null;
+	
 	public User login(String username) {
+
 		
-		
-		User user = null;
-		String query = "SELECT * FROM users WHERE username = ?  ";
-		
-		
-		try {
+		try (Connection con = DBConnection.buildConnection();
 			
-			Connection con = DBConnection.buildConnection();
-			
-			PreparedStatement preparedStatement = con.prepareStatement(query);
+			PreparedStatement preparedStatement = con.prepareStatement(query)){
 			
 			preparedStatement.setString(1, username);
 			
-			ResultSet resultSet = preparedStatement.executeQuery();
+			try (ResultSet resultSet = preparedStatement.executeQuery()){
 			
-			if (resultSet.next()) {
+				if (resultSet.next()) {
+					
+					user = new User();
+					user.setUserId(resultSet.getInt("user_id"));
+					user.setUsername(resultSet.getString("username"));
+					user.setEmail(resultSet.getString("email_id"));
+					user.setPassword(resultSet.getString("password"));
+					user.setCreatedAt(resultSet.getString("created_at"));
+					user.setIsAdmin(resultSet.getBoolean("is_admin"));
+					
+				}
+			}	
 				
-				user = new User();
-				user.setUserId(resultSet.getInt("user_id"));
-				user.setUsername(resultSet.getString("username"));
-				user.setEmail(resultSet.getString("email_id"));
-				user.setPassword(resultSet.getString("password"));
-				user.setCreatedAt(resultSet.getString("created_at"));
-				user.setIsAdmin(resultSet.getBoolean("is_admin"));
-				
-			}
+		} catch (SQLException | ClassNotFoundException e) {
 			
+			e.printStackTrace();
 			
-			resultSet.close();
-			preparedStatement.close();
-			con.close();
-			
-				
-		} catch (Exception e) {
-			
-			System.out.println(e.getMessage());
-			
-		}
+		}	
 		
 		return user;
 	}
-
 }

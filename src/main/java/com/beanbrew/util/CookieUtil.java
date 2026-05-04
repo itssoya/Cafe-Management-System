@@ -25,7 +25,7 @@ public class CookieUtil {
 	
 	public static Optional<String> getCookieValue(HttpServletRequest request, String name){
 		
-		Cookie[] cookie = request.getCookies();
+		Cookie[] cookie = request.getCookies(); 
 		
 		if (cookie == null) {
 	        return Optional.empty();

@@ -1,0 +1,143 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #e7dfd6; /* beige */
+    height: 100vh;
+}
+
+/* CENTER EVERYTHING */
+.layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* LOGIN CARD */
+.form-card {
+    background: #f5efe8;
+    border: 2px solid #2d47a0;
+    border-radius: 12px;
+    padding: 35px 40px;
+    width: 380px;
+    text-align: center;
+}
+
+/* TITLE */
+.form-card h2 {
+    color: #2d47a0;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* FIELD */
+.field {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    color: #2d47a0;
+    margin-bottom: 6px;
+}
+
+/* INPUT BOX */
+.input-wrap {
+    display: flex;
+    align-items: center;
+    border: 2px solid #2d47a0;
+    border-radius: 6px;
+    padding: 10px;
+    background: #fff;
+}
+
+.input-wrap i {
+    color: #2d47a0;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.input-wrap input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    background: transparent;
+}
+
+/* BUTTON */
+.submit-btn {
+    width: 100%;
+    margin-top: 15px;
+    background-color: #2d47a0;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #1f3580;
+}
+
+/* FOOTER LINKS */
+.footer-text {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #444;
+}
+
+.footer-text a {
+    color: #2d47a0;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* error animation */
+        .error-container {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #e11d48;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.3s ease forwards;
+            transition: opacity 0.5s ease, transform 0.5s ease, margin 0.5s ease;
+            text-align: left;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+            margin: 0;
+            padding: 0;
+            height: 0;
+            border: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
