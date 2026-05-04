@@ -33,8 +33,37 @@
       <artifactId>mysql-connector-j</artifactId>
       <version>8.3.0</version>
     </dependency>
-  </dependencies>
+ 
+  
+  <dependency>
+    	<groupId>jakarta.servlet.jsp.jstl</groupId>
+    	<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    	<version>3.0.0</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>org.glassfish.web</groupId>
+    	<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+    	<version>3.0.1</version>
+	</dependency>
+	
+	<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>6.0.0</version>
+    <scope>provided</scope>
+</dependency>
 
+<!-- Jakarta JSP API -->
+<dependency>
+    <groupId>jakarta.servlet.jsp</groupId>
+    <artifactId>jakarta.servlet.jsp-api</artifactId>
+    <version>3.1.0</version>
+    <scope>provided</scope>
+</dependency>
+
+ </dependencies>
+ 
   <build>
     <finalName>Cafe_Management_System</finalName>
   </build>

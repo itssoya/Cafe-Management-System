@@ -78,6 +78,7 @@ public class UserManagementService {
 		
 		boolean userStatus = disableUserDAO.disableUser(userId);
 		
+		
 		return userStatus;
 		
 	}
