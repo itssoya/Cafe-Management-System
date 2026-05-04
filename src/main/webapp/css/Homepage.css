@@ -104,19 +104,6 @@ nav button:hover , nav button:active{
 .hero main{
 	flex: 1;
 }
-.bean-bear {
-	position: absolute;
-	bottom: -1rem;
-	left: 47%;
-	transform: translateX(-50%);
-	z-index: 10;
-}
-
-.bean-bear img {
-	width: 15rem;
-	height: auto;
-}
-
 
 .herotext{  
 	display: flex; 
