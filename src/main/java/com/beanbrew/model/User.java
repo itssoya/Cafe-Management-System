@@ -8,6 +8,9 @@ public class User {
 	 private String password;
 	 private String createdAt;
 	 private boolean isAdmin;
+	 private boolean isVerified;
+	 private boolean isActive;
+	 private String profileImageURL;
 	 
 	 
 	 //Getter methods
@@ -27,12 +30,23 @@ public class User {
 		 return password;
 	 }
 	 
-	 public String getcreatedAt() {
+	 public String getCreatedAt() {
 		 return createdAt;
 	 }
 	 
-	 public boolean getIsAdmin() {
+	 public boolean isAdmin() {
 		 return isAdmin;
+	 }
+	 
+	 public boolean isVerified() {
+		 return isVerified;
+	 }
+	 
+	 public boolean isActive() {
+		 return isActive;
+	 }
+	 public String getProfileImageURL() {
+		 return profileImageURL;
 	 }
 	 
 	 //Setter Methods
@@ -59,6 +73,16 @@ public class User {
 	 public void setIsAdmin(boolean isAdmin) {
 		 this.isAdmin = isAdmin;
 	 }
-
 	 
+	 public void setIsVerified(boolean isVerified) {
+		 this.isVerified = isVerified;
+	 }
+
+	 public void setIsActive(boolean isActive) {
+		 this.isActive = isActive;
+	 }
+	 
+	 public void setProfileImageURL(String profileImageURL) {
+		 this.profileImageURL = profileImageURL;
+	 }
 }
