@@ -1,16 +1,21 @@
 @charset "UTF-8";
 
 *{
+	font-family: Fustat, sans-serif;
 	box-sizing: border-box;
 	font-size: 16px;
 	margin: 0px;
-	padding: 0px;
-	font-family: Futsat, sans-serif;
-	
+	padding: 0px;	
 } 
+
+
 
 body{
 	background-color: #FFF8ED;
+}
+
+h1, h2, p{
+	font-family: Fustat, sans-serif;
 }
 section{
 	margin: 2rem 0rem;
@@ -157,9 +162,9 @@ button{
 }
 
 .checker{
-	background-image: url("../public/checker.svg");
+	background-image: url(../images/checker.svg);
 	background-repeat: repeat-x;
-	margin: 2rem 0rem;
+	margin: 1.5rem 0rem;
 	overflow: hidden;
 }
 
@@ -623,9 +628,7 @@ footer {
 		font-size: 0.8rem;
 	}
 
-	.bean-bear {
-		display: none;
-	}
+
 }
 
 .intro p{
@@ -673,9 +676,6 @@ footer {
 
   .imageframe {
     display: none;
-  }
-  .bean-bear{
-	display: none;
   }
   .intro{
 	padding: 4rem 2rem;

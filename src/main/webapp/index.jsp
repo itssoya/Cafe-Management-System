@@ -68,11 +68,6 @@
 		</div>
 	</section>
 
-	<!-- Bean Bear -->
-	<div class="bean-bear">
-		<img src ="${pageContext.request.contextPath}/images/BeanBear.svg">
-	</div>
-
 	<!-- intro text -->
 	<section class="intro">
 		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est magni, eaque perferendis culpa iusto incidunt pariatur asperiores amet! Magni officia optio, iste minus aliquam eaque quos debitis velit expedita ipsam excepturi corporis earum ut, quia similique id veritatis. Atque tenetur vitae illo officia ea ducimus error. Eaque corrupti aperiam magni asperiores consectetur ullam dolore, temporibus molestias placeat labore quia veritatis. Fugiat exercitationem doloribus velit. Provident natus assumenda, id corporis earum ut soluta sapiente necessitatibus quibusdam recusandae. Minima incidunt, quam deleniti adipisci voluptatibus nihil repellat suscipit iure mollitia tenetur cupiditate voluptatem, id esse iste nostrum. Veniam exercitationem eaque voluptatibus at rerum!</p><br>
@@ -80,7 +75,7 @@
 	</section>
 
 	<section class="checker">
-		<br><br><br><br><br><br>
+		<br><br><br><br><br><br><br>
 	</section>
 	
 	<!-- menu section -->
