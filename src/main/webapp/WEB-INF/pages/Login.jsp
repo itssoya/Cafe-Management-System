@@ -10,7 +10,7 @@
     <title>Login Account</title>
 
     
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 
     
 </head>

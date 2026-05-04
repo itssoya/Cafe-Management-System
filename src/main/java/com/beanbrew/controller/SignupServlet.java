@@ -37,7 +37,7 @@ public class SignupServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Signup.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Signup.jsp");
 		rd.forward(request,response);
 		
 	}
@@ -52,7 +52,7 @@ public class SignupServlet extends HttpServlet {
 			
 			User user = new User();
 			user.setUsername(request.getParameter("username"));
-			user.setEmail(request.getParameter("email_id"));
+			user.setEmail(request.getParameter("email"));
 			user.setPassword(request.getParameter("password"));
 			user.setIsAdmin(Boolean.parseBoolean(request.getParameter("is_admin")));
 			
@@ -63,6 +63,9 @@ public class SignupServlet extends HttpServlet {
 		
 			response.getWriter().println("Registered successfully!");
 			
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			
+			
 		/*doGet(request, response);*/
 		}
 		
@@ -71,7 +74,8 @@ public class SignupServlet extends HttpServlet {
             response.getWriter().println("Error: " + e.getMessage());
 		}
 		
-	}	
+	}
+	
 	
 
 }

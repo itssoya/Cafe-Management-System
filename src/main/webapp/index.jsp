@@ -40,8 +40,8 @@
 					<h2>Welcome Guest</h2>
 				</div>
 				<div class="auth-buttons">
-					<button onclick="">Login</button>
-					<button onclick="">Sign Up</button>
+					 <a href="${pageContext.request.contextPath}/login"><button onclick="">Login</button></a>
+					 <a href="${pageContext.request.contextPath}/signup"><button onclick="">Sign Up</button></a>
 				</div>
 			</div>
 		</div>
