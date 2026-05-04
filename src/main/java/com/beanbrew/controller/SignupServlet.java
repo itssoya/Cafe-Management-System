@@ -2,10 +2,13 @@ package com.beanbrew.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
 
 import com.beanbrew.model.User;
@@ -15,6 +18,7 @@ import com.beanbrew.service.SignupService;
  * Servlet implementation class SignupServlet
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/signup" })
+@MultipartConfig
 public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,9 +55,11 @@ public class SignupServlet extends HttpServlet {
 			user.setEmail(request.getParameter("email_id"));
 			user.setPassword(request.getParameter("password"));
 			user.setIsAdmin(Boolean.parseBoolean(request.getParameter("is_admin")));
+			
+			Part imagePart = request.getPart("profile_image");
 		
 			SignupService obj = new SignupService();
-			obj.addUser(user);
+			obj.addUser(user, imagePart);
 		
 			response.getWriter().println("Registered successfully!");
 			
