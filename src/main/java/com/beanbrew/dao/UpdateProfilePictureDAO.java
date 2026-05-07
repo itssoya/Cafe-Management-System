@@ -28,7 +28,7 @@ public class UpdateProfilePictureDAO {
 			return rowsAffected == 1;
 		
 			
-		} catch (SQLException | ClassNotFoundException e){
+		} catch (SQLException e){
 			
 			e.printStackTrace();
 			return false;

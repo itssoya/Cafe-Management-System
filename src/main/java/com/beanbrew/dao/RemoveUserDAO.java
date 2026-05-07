@@ -10,7 +10,7 @@ public class RemoveUserDAO {
 	
 	private static final String query = "DELETE FROM users WHERE user_id = ?";
 	
-	public boolean removeUserByID(int userId) throws ClassNotFoundException, SQLException {
+	public boolean removeUserByID(int userId) throws SQLException {
 		
 		try (Connection con = DBConnection.buildConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(query)){

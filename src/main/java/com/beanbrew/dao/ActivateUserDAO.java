@@ -10,7 +10,7 @@ public class ActivateUserDAO {
 	
 	private static final String query = "UPDATE users SET active_status = ? WHERE user_id = ?";
 	
-		public boolean activateUser( int userID) throws ClassNotFoundException, SQLException {
+		public boolean activateUser( int userID) throws SQLException {
 				
 				try (Connection con = DBConnection.buildConnection();
 					

@@ -88,7 +88,7 @@ public class FetchUserBySearchFilter {
 				preparedStatement.close();
 				con.close();
 				
-			}catch (ClassNotFoundException | SQLException e) {
+			}catch (SQLException e) {
 				e.printStackTrace();
 				
 			}
@@ -154,7 +154,7 @@ public class FetchUserBySearchFilter {
 				return rowsCount;
 				
 				
-			} catch (ClassNotFoundException | SQLException e) {
+			} catch (SQLException e) {
 				
 				e.printStackTrace();
 				

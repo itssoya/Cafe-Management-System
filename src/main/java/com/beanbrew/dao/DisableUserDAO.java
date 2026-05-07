@@ -10,7 +10,7 @@ public class DisableUserDAO {
 	
 	private static final String query = "UPDATE users SET active_status = ? WHERE user_id = ?";
 	
-	public boolean disableUser( int userID) throws ClassNotFoundException, SQLException  {
+	public boolean disableUser( int userID) throws SQLException  {
 				
 			try (Connection con = DBConnection.buildConnection();	
 				PreparedStatement preparedStatement = con.prepareStatement(query)){

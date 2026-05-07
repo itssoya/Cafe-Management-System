@@ -11,11 +11,10 @@ public class LoginDAO {
 	
 	private User user = null;
 	
-	public User login(String username) throws SQLException, ClassNotFoundException {
+	public User login(String username) throws SQLException {
 
 		
 		try (Connection con = DBConnection.buildConnection();
-			
 			PreparedStatement preparedStatement = con.prepareStatement(query)){
 			
 			preparedStatement.setString(1, username);

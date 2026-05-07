@@ -12,7 +12,7 @@ public class AddMenuDAO {
 	private String query = "INSERT INTO MENU ( item_name, item_category, item_price, item_description, item_img_url, file_extension, createdDate) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, now())";
 	
-	public boolean addItem(MenuItem item) throws SQLException, ClassNotFoundException {
+	public boolean addItem(MenuItem item) throws SQLException {
 		
 		try (Connection con = DBConnection.buildConnection();
 			PreparedStatement preparedStatment = con.prepareStatement(query)){

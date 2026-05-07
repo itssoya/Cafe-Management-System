@@ -10,19 +10,19 @@ public class AdminPrivilegeDAO {
 
     private static final String query = "UPDATE users SET is_admin = ? WHERE user_id = ?";
 
-    public boolean makeAdmin(int userId) throws ClassNotFoundException, SQLException{
+    public boolean makeAdmin(int userId) throws SQLException{
     	
         return updateAdminStatus(userId, true);
         
     }
 
-    public boolean removeAdmin(int userId) throws ClassNotFoundException, SQLException {
+    public boolean removeAdmin(int userId) throws SQLException {
     	
         return updateAdminStatus(userId, false);
         
     }
 
-    private boolean updateAdminStatus(int userId, boolean isAdmin) throws ClassNotFoundException, SQLException  {
+    private boolean updateAdminStatus(int userId, boolean isAdmin) throws SQLException  {
     	
         try (Connection con = DBConnection.buildConnection();
         	

@@ -11,7 +11,7 @@ public class SignupDAO {
 	
 	private static final String query = "INSERT INTO users ( username, email_id, password, created_at, is_admin, profileimageurl) VALUES ( ?, ?, ?, now(), ?, ?)";
 	
-	public  boolean signUp(User user) throws SQLException, ClassNotFoundException {
+	public  boolean signUp(User user) throws SQLException {
 		
 		try (Connection con = DBConnection.buildConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(query)){

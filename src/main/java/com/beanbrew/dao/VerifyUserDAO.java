@@ -20,7 +20,7 @@ public class VerifyUserDAO {
 	 * @throws SQLException if a database access error occurs
 	 */
 	
-	public boolean verifyUserById (int userID) throws ClassNotFoundException, SQLException {
+	public boolean verifyUserById (int userID) throws SQLException {
 		
 		try (Connection con = DBConnection.buildConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(query)){
