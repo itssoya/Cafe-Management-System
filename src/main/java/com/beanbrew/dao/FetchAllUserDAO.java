@@ -14,7 +14,7 @@ public class FetchAllUserDAO {
 	
 	private static final String query = "SELECT * FROM users";
 	
-	public List <User> getAllUser() throws ClassNotFoundException, SQLException {
+	public List <User> getAllUser() throws SQLException {
 		
 		 List<User> users = new ArrayList<> ();
 		

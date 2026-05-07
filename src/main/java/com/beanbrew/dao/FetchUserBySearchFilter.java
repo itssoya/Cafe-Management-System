@@ -13,7 +13,7 @@ import com.beanbrew.util.DBConnection;
 public class FetchUserBySearchFilter {
 	
 	
-		public List <User> getUser(int currentPageNumber, Boolean isAdmin, Boolean isVerified, String search){
+		public List <User> getUser  (int currentPageNumber, Boolean isAdmin, Boolean isVerified, String search) throws SQLException{
 			
 			StringBuilder query = new StringBuilder ( "SELECT * FROM users WHERE 1 = 1");
 			int offset = (currentPageNumber - 1) * 10;
@@ -41,11 +41,8 @@ public class FetchUserBySearchFilter {
 			query.append(" LIMIT ? OFFSET ?");
 			
 	
-			try {
-				
-				Connection con = DBConnection.buildConnection();
-				
-				PreparedStatement preparedStatement = con.prepareStatement(query.toString());
+			try (Connection con = DBConnection.buildConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(query.toString())) {
 				
 				int index = 1;
 				
@@ -82,21 +79,14 @@ public class FetchUserBySearchFilter {
 					user.setIsActive(resultSet.getBoolean("active_status"));
 					
 					users.add(user);
+					
 				}
-				
-				resultSet.close();
-				preparedStatement.close();
-				con.close();
-				
-			}catch (SQLException e) {
-				e.printStackTrace();
-				
+				return users;
 			}
-			return users;
 		}
 		
 		
-		public int countUserForFilter(Boolean isAdmin, Boolean isVerified, String search) {
+		public int countUserForFilter(Boolean isAdmin, Boolean isVerified, String search) throws SQLException {
 			
 			StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM users WHERE 1=1");
 			
@@ -119,10 +109,8 @@ public class FetchUserBySearchFilter {
 				patternSearch = "%" + search + "%";
 			}
 			
-			try {
-				
-				Connection con = DBConnection.buildConnection();
-				PreparedStatement preparedStatement = con.prepareStatement(query.toString());
+			try (Connection con = DBConnection.buildConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(query.toString())){
 				
 				int index = 1;
 				
@@ -154,12 +142,6 @@ public class FetchUserBySearchFilter {
 				return rowsCount;
 				
 				
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-				
-				return rowsCount;
-				
-			}
-	}
+			} 
+		}
 }
