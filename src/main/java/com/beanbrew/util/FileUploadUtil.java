@@ -33,11 +33,11 @@ public class FileUploadUtil {
         return contentType != null && contentType.startsWith("image/");
     }
     
-    public static boolean isValidType (Part part) throws Exception {
+    public static boolean isValidType (Part part)  {
         String contentType = part.getContentType(); // e.g., "image/jpeg"
         if (contentType != null && !allowedFileType.contains(contentType.toLowerCase())) {
         	
-        	throw new Exception("Not Valid Type");
+        	throw new TypeMismatchException("Supported file format: JPEG, WEB, PNG");
         	
         }
         
