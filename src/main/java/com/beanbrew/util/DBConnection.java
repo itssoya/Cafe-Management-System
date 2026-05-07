@@ -3,26 +3,27 @@ package com.beanbrew.util;
 import java.sql.*;
 
 public class DBConnection {
-
-	public static Connection buildConnection() throws ClassNotFoundException {
-		// TODO Auto-generated method stub
-		
-		String url = "jdbc:mysql://localhost:3306/cafe_management";
-		String username = "root";
-		String password = "";
-		
+	
+	private static String url = "jdbc:mysql://localhost:3306/cafe_management";
+	private static String username = "root";
+	private static String password = "";
+	
+	static {
+	
 		try {
-			
+		
 			//Loading Driver
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("Driver Loaded Sucessfully");
-			
-		} catch (ClassNotFoundException e) {
-			
-			System.out.println(e.getMessage());
-		}
 		
-		try {
+		}catch (ClassNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+	}
+
+	public static Connection buildConnection() throws SQLException{
+		// TODO Auto-generated method stub
 			
 			//Building Connection with Database
 			Connection con = DriverManager.getConnection(url, username, password);
@@ -30,12 +31,7 @@ public class DBConnection {
 			
 			return con;
 			
-		} catch(Exception e) {
-			
-			System.out.println(e.getMessage());
-			
-			return null;
-			
-		}
+	
+
 	}
 }
