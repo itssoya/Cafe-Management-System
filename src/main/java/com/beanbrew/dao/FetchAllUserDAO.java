@@ -14,16 +14,13 @@ public class FetchAllUserDAO {
 	
 	private static final String query = "SELECT * FROM users";
 	
-	public List <User> getAllUser(){
+	public List <User> getAllUser() throws ClassNotFoundException, SQLException {
 		
 		 List<User> users = new ArrayList<> ();
 		
-		try {
-			
-			Connection con = DBConnection.buildConnection();
-			
+		try (Connection con = DBConnection.buildConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(query);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery()){
 			
 			while (resultSet.next()) {
 				
@@ -40,18 +37,8 @@ public class FetchAllUserDAO {
 				
 				users.add(user);
 			}
-			
-			resultSet.close();
-			preparedStatement.close();
-			con.close();
-			
-		}catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			
 		}
-		 
 		
 		return users;
 	}
-
 }

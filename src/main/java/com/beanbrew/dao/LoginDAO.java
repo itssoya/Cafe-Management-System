@@ -11,7 +11,7 @@ public class LoginDAO {
 	
 	private User user = null;
 	
-	public User login(String username) {
+	public User login(String username) throws SQLException, ClassNotFoundException {
 
 		
 		try (Connection con = DBConnection.buildConnection();
@@ -33,13 +33,8 @@ public class LoginDAO {
 					user.setIsAdmin(resultSet.getBoolean("is_admin"));
 					
 				}
-			}	
-				
-		} catch (SQLException | ClassNotFoundException e) {
-			
-			e.printStackTrace();
-			
-		}	
+			}		
+		} 
 		
 		return user;
 	}

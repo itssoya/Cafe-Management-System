@@ -10,41 +10,31 @@ public class AdminPrivilegeDAO {
 
     private static final String query = "UPDATE users SET is_admin = ? WHERE user_id = ?";
 
-    public boolean makeAdmin(int userId) {
+    public boolean makeAdmin(int userId) throws ClassNotFoundException, SQLException{
     	
         return updateAdminStatus(userId, true);
         
     }
 
-    public boolean removeAdmin(int userId) {
+    public boolean removeAdmin(int userId) throws ClassNotFoundException, SQLException {
     	
         return updateAdminStatus(userId, false);
         
     }
 
-    private boolean updateAdminStatus(int userId, boolean isAdmin) {
+    private boolean updateAdminStatus(int userId, boolean isAdmin) throws ClassNotFoundException, SQLException  {
     	
-        try {
+        try (Connection con = DBConnection.buildConnection();
         	
-        	Connection con = DBConnection.buildConnection();
-        	
-            PreparedStatement preparedStatement = con.prepareStatement(query);
+            PreparedStatement preparedStatement = con.prepareStatement(query)){
 
             preparedStatement.setBoolean(1, isAdmin);
             preparedStatement.setInt(2, userId);
 
             int rowsAffected = preparedStatement.executeUpdate();
-            
-            preparedStatement.close();
-			con.close();
 			
             return rowsAffected == 1;
 
-        } catch (ClassNotFoundException | SQLException e) {
-        	
-            e.printStackTrace(); 
-            return false;
-            
-        }
+        } 
     }
 }

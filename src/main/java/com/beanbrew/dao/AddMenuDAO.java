@@ -2,20 +2,20 @@ package com.beanbrew.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import com.beanbrew.model.MenuItem;
 import com.beanbrew.util.DBConnection;
 
 public class AddMenuDAO {
 	
-	private String query = "INSERT INTO MENU ( item_name, item_category, item_price, item_description, item_img_url, file_extension, createdDate) VALUES (?, ?, ?, ?, ?, ?, now())";
+	private String query = "INSERT INTO MENU ( item_name, item_category, item_price, item_description, item_img_url, file_extension, createdDate) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, now())";
 	
-	public boolean addItem(MenuItem item) {
+	public boolean addItem(MenuItem item) throws SQLException, ClassNotFoundException {
 		
-		try{
-			
-			Connection con = DBConnection.buildConnection();
-			PreparedStatement preparedStatment = con.prepareStatement(query);
+		try (Connection con = DBConnection.buildConnection();
+			PreparedStatement preparedStatment = con.prepareStatement(query)){
 			
 			preparedStatment.setString(1, item.getItemName());
 			preparedStatment.setString(2, item.getCategory());
@@ -26,16 +26,8 @@ public class AddMenuDAO {
 			
 			int rowsAffected = preparedStatment.executeUpdate();
 			
-			preparedStatment.close();
-			con.close();
-			
 			return rowsAffected == 1;	
 			
-		} catch(Exception e) {
-			
-			e.printStackTrace();
-			return false;
-		}
+		} 
 	}
-
 }
