@@ -1,5 +1,6 @@
 package com.beanbrew.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.beanbrew.dao.ActivateUserDAO;
@@ -10,6 +11,8 @@ import com.beanbrew.dao.FetchUserBySearchFilter;
 import com.beanbrew.dao.RemoveUserDAO;
 import com.beanbrew.dao.VerifyUserDAO;
 import com.beanbrew.model.User;
+import com.beanbrew.util.ServiceException;
+import com.beanbrew.util.ServiceExecutor;
 
 public class UserManagementService {
 	
@@ -25,70 +28,82 @@ public class UserManagementService {
 	
 	public List<User> fetchUser(){
 		
-		return fau.getAllUser();		
+		try {
+			return fau.getAllUser();
+			
+		} catch(SQLException e) {
+			 
+			e.printStackTrace();
+			throw new ServiceException("Failed to load Data", e);
+		}
+				
 	}
 	
-	public boolean removeUser(int userId) {
+	public void removeUser(int userId) {
 		
-		boolean attempt = ru.removeUserByID(userId);
+		ServiceExecutor.execute( 
+				() -> ru.removeUserByID(userId), "User removal unsuccessful");
+		}
+	
+	public void verifyUser(int userId) {
 		
-		return attempt;
+		ServiceExecutor.execute(
+				() -> vu.verifyUserById(userId), "Failed to verify User");
+		}
+	
+	public void provideAdminPrivilege(int userId) {
 		
+		ServiceExecutor.execute(
+				() -> apd.makeAdmin(userId), "Failed to provide privilege");
 	}
 	
-	public boolean verifyUser(int userId) {
+	public void removeAdminPrivilege(int userId) {
 		
-		boolean attempt = vu.verifyUserById(userId);
+		ServiceExecutor.execute(
+				()-> apd.removeAdmin(userId), "Failed to remove admin privilege" );
 		
-		return attempt;
-	}
-	
-	public boolean provideAdminPrivilege(int userId) {
-		
-		boolean attempt = apd.makeAdmin(userId);
-		
-		return attempt;
-		
-	}
-	
-	public boolean removeAdminPrivilege(int userId) {
-			
-			
-			boolean attempt = apd.removeAdmin(userId);
-			
-			return attempt;
-			
 		}
 	
 	public List<User> fetchFilteredUser(int currentPageNumber, Boolean isAdmin, Boolean isVerified, String search){
 		
-			return fetchUserBySearchFilter.getUser(currentPageNumber, isAdmin, isVerified, search);
+			try {
+				
+				return fetchUserBySearchFilter.getUser(currentPageNumber, isAdmin, isVerified, search);
+				
+			} catch (SQLException e) {
+				
+				throw new ServiceException("Failed to Fetch User");
+			}
 		
 	}
 	
 	public int getTotalPages(Boolean isAdmin, Boolean isVerified, String search){
+		
+		try {
 			
 			int total = fetchUserBySearchFilter.countUserForFilter(isAdmin, isVerified, search);
 			
 			return (int) Math.ceil ((double) total/userPerPage);
 			
-		}
+		} catch (SQLException e) {
+			
+			throw new ServiceException("Falied to Fetch User");
+		}	
+	}
 	
-	public boolean disableUser(int userId) {
+	public void disableUser(int userId) {
 		
-		boolean userStatus = disableUserDAO.disableUser(userId);
+		ServiceExecutor.execute(
+				() -> disableUserDAO.disableUser(userId), "Failed to Disable user");
 		
-		
-		return userStatus;
 		
 	}
 	
-	public boolean activateUser(int userId) {
+	public void activateUser(int userId) {
+		
+		ServiceExecutor.execute(
+				() -> activateUserDAO.activateUser(userId), "Failed to activate user");
 			
-			boolean userStatus = activateUserDAO.activateUser(userId);
-			
-			return userStatus;
-			
-		}
+	}
 	
 }

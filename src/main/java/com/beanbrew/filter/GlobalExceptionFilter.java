@@ -13,20 +13,20 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import com.beanbrew.util.SessionUtil;
+import com.beanbrew.util.ServiceException;
 
 /**
- * Servlet Filter implementation class AuthenticationFilter
+ * Servlet Filter implementation class GlobalExceptionFilter
  */
-@WebFilter(urlPatterns = {"/addmenu", "/usermanagement"})
-public class AuthenticationFilter extends HttpFilter implements Filter {
+@WebFilter("/*")
+public class GlobalExceptionFilter extends HttpFilter implements Filter {
 	
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public AuthenticationFilter() {
+    public GlobalExceptionFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,28 +45,24 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		
-		// Cast the generic request/response to HTTP-specific versions
-			HttpServletRequest httpRequest = (HttpServletRequest) request;
-			HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-			// Logic: Check if the session exists and contains your login identifier
-			// Change "user" to whatever attribute name you set in your LoginServlet
-			boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "user", Object.class) != null;
-
-			if (isLoggedIn) {
-				// User is logged in, allow the request to proceed to the destination
-				// In my case, now go to that servlet which I have called
-					chain.doFilter(request, response);
-			} else {
-				// User is not logged in, redirect to login page
-				// Note: Avoid caching the dashboard so the back button doesn't reveal data
-				httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
-				
-				return;
-			}
+		 HttpServletRequest req = (HttpServletRequest) request;
+	     HttpServletResponse res = (HttpServletResponse) response;
 
 		// pass the request along the filter chain
+	     try {
+	    	 
+	    	 chain.doFilter(request, response); 
+	    	 
+	     }catch (Exception e) {
+	    	 
+	    	 
+	    	 System.out.println("Unhandled error cautch by Filter");
+	    	 
+	    	 req.setAttribute("error", "Unexpected system error");
+	         req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req, res);
+	         
+	     }
+		
 	}
 
 	/**

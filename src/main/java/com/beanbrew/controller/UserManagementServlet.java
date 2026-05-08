@@ -12,6 +12,9 @@ import java.util.List;
 
 import com.beanbrew.model.User;
 import com.beanbrew.service.UserManagementService;
+import com.beanbrew.util.MessageKeysUtil;
+import com.beanbrew.util.ServiceException;
+import com.beanbrew.util.SessionUtil;
 
 /**
  * Servlet implementation class AuthenticateUserServlet
@@ -96,17 +99,32 @@ public class UserManagementServlet extends HttpServlet {
 		String action = request.getParameter("action");
         int userId = Integer.parseInt(request.getParameter("userId"));
         
-
-        switch(action) {
+        if ( action == null || action.isBlank()) {
+        	
+        	SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, "Invalid action.");
+        }
+        try {
+        	switch(action) {
 	        case "verify" -> userManagementService.verifyUser(userId);
 	        case "makeAdmin" -> userManagementService.provideAdminPrivilege(userId);
 	        case "removeAdmin" -> userManagementService.removeAdminPrivilege(userId);
 	        case "removeUser" -> userManagementService.removeUser(userId);
 	        case "makeActive" -> userManagementService.activateUser(userId);
 	        case "removeActive" -> userManagementService.disableUser(userId);
+	        default -> {
+                request.getSession().setAttribute(MessageKeysUtil.ERROR, "Unknown action: " + action);
+                response.sendRedirect(request.getContextPath() + "/usermanagement");
+                return;
+            }
+        }
+        	
+        request.getSession().setAttribute(MessageKeysUtil.SUCCESS, "Action applied successfully.");
+        response.sendRedirect(request.getContextPath() + "/usermanagement");
+        
+        } catch (ServiceException e) {
+        	
         }
         
-        response.sendRedirect(request.getContextPath() + "/usermanagement");
 
 	}
 

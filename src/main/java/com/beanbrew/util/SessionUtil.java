@@ -12,6 +12,11 @@ public class SessionUtil {
 		session.setMaxInactiveInterval(seconds);
 	}
 	
+	public static <T> void setAttribute(HttpServletRequest request, String name, T value) {
+	    HttpSession session = request.getSession(true);
+	    session.setAttribute(name, value);
+	}
+	
 	public static <T> T getAttribute(HttpServletRequest request, String name, Class<T> type){
 		
 		HttpSession session = request.getSession(false);
