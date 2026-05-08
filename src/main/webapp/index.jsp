@@ -25,7 +25,7 @@
 		</div>
 		<div class="profile">
 			<button type="button" class="profilePage" onclick="toggleSidebar()">
-				<main class="username">UserName</main>
+				<main class="username">${username}</main>
 			</button>
 		</div>
 	</nav>
@@ -37,7 +37,7 @@
 			<div id="loggedOutView">
 				<div class="guest-header">
 					<img src ="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg">
-					<h2>Welcome Guest</h2>
+					<h2>Welcome ${username}</h2>
 				</div>
 				<div class="auth-buttons">
 					 <button onclick="window.location.href='${pageContext.request.contextPath}/login'">Login</button>
