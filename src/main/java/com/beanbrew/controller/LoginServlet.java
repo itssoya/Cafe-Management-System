@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 			if(user != null){
 				
 				SessionUtil.setAttribute(request, "currentUser", user, 3600);
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				response.sendRedirect(request.getContextPath() + "/index");
 				
 			} else{
 				

@@ -88,7 +88,7 @@ public class UserManagementServlet extends HttpServlet {
 		request.setAttribute("currentPage",    page);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UserManagement.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/UserManagement.jsp");
 		rd .forward(request, response);
 		
 	}
