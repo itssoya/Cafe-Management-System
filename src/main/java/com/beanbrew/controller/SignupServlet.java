@@ -13,6 +13,8 @@ import java.io.IOException;
 
 import com.beanbrew.model.User;
 import com.beanbrew.service.SignupService;
+import com.beanbrew.util.MessageKeysUtil;
+import com.beanbrew.util.SessionUtil;
 
 /**
  * Servlet implementation class SignupServlet
@@ -60,8 +62,6 @@ public class SignupServlet extends HttpServlet {
 		
 			SignupService obj = new SignupService();
 			obj.addUser(user, imagePart);
-		
-			response.getWriter().println("Registered successfully!");
 			
 			response.sendRedirect(request.getContextPath() + "/login");
 			
@@ -70,8 +70,10 @@ public class SignupServlet extends HttpServlet {
 		}
 		
 		catch(Exception e) {
-			e.printStackTrace();
-            response.getWriter().println("Error: " + e.getMessage());
+            
+            SessionUtil.setAttribute(request, MessageKeysUtil.ERROR , e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/pages/Signup.jsp")
+                   .forward(request, response);
 		}
 		
 	}

@@ -55,7 +55,7 @@ public class GlobalExceptionFilter extends HttpFilter implements Filter {
 
 	        } catch (Exception e) {
 	           
-	        	System.out.println("Unhandled error cautch by Filter");
+	        	System.out.println("Unhandled error catch by Filter");
 
 	            HttpServletRequest  httpReq = (HttpServletRequest)  req;
 	            HttpServletResponse httpRes = (HttpServletResponse) res;

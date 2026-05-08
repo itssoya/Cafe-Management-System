@@ -12,6 +12,8 @@ import java.io.IOException;
 
 import com.beanbrew.model.User;
 import com.beanbrew.service.LoginService;
+import com.beanbrew.util.MessageKeysUtil;
+import com.beanbrew.util.ServiceException;
 import com.beanbrew.util.SessionUtil;
 
 /**
@@ -58,7 +60,16 @@ public class LoginServlet extends HttpServlet {
 			if(user != null){
 				
 				SessionUtil.setAttribute(request, "currentUser", user, 3600);
-				response.sendRedirect(request.getContextPath() + "/index");
+				
+				if(user.isAdmin()) {
+					
+					response.sendRedirect(request.getContextPath() + "/admindasboard");
+				} else {
+					
+					response.sendRedirect(request.getContextPath() + "/index");
+					
+				}
+				
 				
 			} else{
 				
@@ -68,10 +79,10 @@ public class LoginServlet extends HttpServlet {
 				
 			}	
 			
-		} catch(Exception e) {
+		} catch(ServiceException e) {
 			
 			e.printStackTrace();
-			request.setAttribute("errorMessage", "Something went wrong. Please try again");
+			SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, e.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 			rd.forward(request, response);
 		}

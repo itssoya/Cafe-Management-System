@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,11 @@
 
     <div class="card">
         <h2>Someone New !</h2>
+        
+        <!-- Error message block -->
+	    <c:if test="${not empty error}">
+	        <div class="error-message">${error}</div>
+	    </c:if>
 
         <div class="avatar">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -39,7 +45,7 @@
             <label>Password</label>
             <input type="password" name="password" placeholder="••••••••"/>
 
-                <button onclick="window.location.href='${pageContext.request.contextPath}/login'">Sign Up</button>
+                <button type="submit">Sign Up</button>
 
         </form>
 

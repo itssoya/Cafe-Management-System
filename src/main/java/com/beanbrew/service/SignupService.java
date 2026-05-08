@@ -64,7 +64,7 @@ public class SignupService {
 			
 			case 1062 ->
 	            throw new ServiceException(
-	                "Email already exists", e);
+	                "Username already exists", e);
 
 	        case 1048 ->
 	            throw new ServiceException(
