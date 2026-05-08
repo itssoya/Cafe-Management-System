@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 			} else{
 				
 				request.setAttribute("errorMessage", "Invalid username or password");
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 				rd.forward(request, response);
 				
 			}	
@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 			
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "Something went wrong. Please try again");
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 			rd.forward(request, response);
 		}
 		
