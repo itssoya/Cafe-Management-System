@@ -62,21 +62,25 @@ public class UserManagementServlet extends HttpServlet {
 			pendingPercent = Math.round((pending * 100.0) / total);
 		}
 		
-		
-		List<User> fetchFilteredUser = userManagementService.fetchFilteredUser(page, isAdmin,  isVerified,  search);
-		int totalPages = userManagementService.getTotalPages(isAdmin, isVerified, search);
-		
-		
-		
-		request.setAttribute("Users", fetchFilteredUser);
-		request.setAttribute("totalPages", totalPages);
-		request.setAttribute("page", page);
-		
-		request.setAttribute("totalUsers", total);
-		request.setAttribute("verifiedUser", verified);
-		request.setAttribute("pendingUser", pending);
-		request.setAttribute("pendingPercent", pendingPercent);
-		request.setAttribute("totalAdmin", admins);
+		try {
+			
+			List<User> fetchFilteredUser = userManagementService.fetchFilteredUser(page, isAdmin,  isVerified,  search);
+			int totalPages = userManagementService.getTotalPages(isAdmin, isVerified, search);
+			
+			request.setAttribute("Users", fetchFilteredUser);
+			request.setAttribute("totalPages", totalPages);
+			request.setAttribute("page", page);
+			
+			request.setAttribute("totalUsers", total);
+			request.setAttribute("verifiedUser", verified);
+			request.setAttribute("pendingUser", pending);
+			request.setAttribute("pendingPercent", pendingPercent);
+			request.setAttribute("totalAdmin", admins);
+			
+		} catch(ServiceException e) {
+			
+			SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, e.getMessage());
+		}
 		
 		request.setAttribute("search",         search != null ? search : "");
 		request.setAttribute("filterVerified", isVerifiedParam != null ? isVerifiedParam : "");
@@ -103,6 +107,7 @@ public class UserManagementServlet extends HttpServlet {
         	
         	SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, "Invalid action.");
         }
+        
         try {
         	switch(action) {
 	        case "verify" -> userManagementService.verifyUser(userId);
@@ -112,19 +117,21 @@ public class UserManagementServlet extends HttpServlet {
 	        case "makeActive" -> userManagementService.activateUser(userId);
 	        case "removeActive" -> userManagementService.disableUser(userId);
 	        default -> {
-                request.getSession().setAttribute(MessageKeysUtil.ERROR, "Unknown action: " + action);
+	        	
+	        	SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, "Unknown action: " + action);
                 response.sendRedirect(request.getContextPath() + "/usermanagement");
                 return;
             }
         }
         	
         request.getSession().setAttribute(MessageKeysUtil.SUCCESS, "Action applied successfully.");
-        response.sendRedirect(request.getContextPath() + "/usermanagement");
         
         } catch (ServiceException e) {
         	
+        	SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, e.getMessage());
         }
-        
+       
+        response.sendRedirect(request.getContextPath() + "/usermanagement");
 
 	}
 

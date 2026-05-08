@@ -51,7 +51,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 
 			// Logic: Check if the session exists and contains your login identifier
 			// Change "user" to whatever attribute name you set in your LoginServlet
-			boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "user", Object.class) != null;
+			boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "currentUser", Object.class) != null;
 
 			if (isLoggedIn) {
 				// User is logged in, allow the request to proceed to the destination

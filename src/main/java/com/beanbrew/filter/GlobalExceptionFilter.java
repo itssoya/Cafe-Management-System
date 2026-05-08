@@ -49,19 +49,20 @@ public class GlobalExceptionFilter extends HttpFilter implements Filter {
 	     HttpServletResponse res = (HttpServletResponse) response;
 
 		// pass the request along the filter chain
+	     
 	     try {
-	    	 
-	    	 chain.doFilter(request, response); 
-	    	 
-	     }catch (Exception e) {
-	    	 
-	    	 
-	    	 System.out.println("Unhandled error cautch by Filter");
-	    	 
-	    	 req.setAttribute("error", "Unexpected system error");
-	         req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req, res);
-	         
-	     }
+	            chain.doFilter(req, res);
+
+	        } catch (Exception e) {
+	           
+	        	System.out.println("Unhandled error cautch by Filter");
+
+	            HttpServletRequest  httpReq = (HttpServletRequest)  req;
+	            HttpServletResponse httpRes = (HttpServletResponse) res;
+
+	            httpReq.setAttribute("errorMessage", "Something went wrong. Please try again later.");
+	            httpReq.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(httpReq, httpRes);
+	        }
 		
 	}
 
