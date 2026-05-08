@@ -9,6 +9,11 @@ public class ServiceExecutor {
 		public boolean executeAction() throws SQLException;
 	}
 	
+	/*@FunctionalInterface
+	public interface DatabaseQuery{
+		
+	}*/
+	
 	public static void execute(DatabaseAction action, String errorMessage) {
 		
 		try {
