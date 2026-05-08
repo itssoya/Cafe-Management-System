@@ -63,7 +63,7 @@ public class SignupServlet extends HttpServlet {
 		
 			response.getWriter().println("Registered successfully!");
 			
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/login");
 			
 			
 		/*doGet(request, response);*/

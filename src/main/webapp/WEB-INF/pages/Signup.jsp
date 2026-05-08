@@ -39,14 +39,14 @@
             <label>Password</label>
             <input type="password" name="password" placeholder="••••••••"/>
 
-                <button type="submit">Sign Up</button>
+                <button onclick="window.location.href='${pageContext.request.contextPath}/login'">Sign Up</button>
 
         </form>
 
-        <p>Been here before ? Proceed to <a href="login.html">Login</a></p>
+        <p>Been here before ? Proceed to <a href="${pageContext.request.contextPath}/login">Login</a> →</p>
     </div>
 
-    <p class="back">Back to <a href="index.html">Home</a> →</p>
+    <p class="back">Back to <a href="${pageContext.request.contextPath}/index.jsp">Home</a> →</p>
 <div class = "checkboard">
    <img src="${pageContext.request.contextPath}/images/main_container/checkboard.svg" alt="BeanBrew logo">
 </div>
