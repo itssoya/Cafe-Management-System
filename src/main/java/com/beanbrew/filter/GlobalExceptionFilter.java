@@ -61,7 +61,7 @@ public class GlobalExceptionFilter extends HttpFilter implements Filter {
 	            HttpServletResponse httpRes = (HttpServletResponse) res;
 
 	            httpReq.setAttribute("errorMessage", "Something went wrong. Please try again later.");
-	            httpReq.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(httpReq, httpRes);
+	            httpRes.sendRedirect(httpReq.getContextPath() + "/unexpectederror");
 	        }
 		
 	}

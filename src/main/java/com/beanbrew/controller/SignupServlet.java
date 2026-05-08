@@ -14,6 +14,7 @@ import java.io.IOException;
 import com.beanbrew.model.User;
 import com.beanbrew.service.SignupService;
 import com.beanbrew.util.MessageKeysUtil;
+import com.beanbrew.util.ServiceException;
 import com.beanbrew.util.SessionUtil;
 
 /**
@@ -69,11 +70,14 @@ public class SignupServlet extends HttpServlet {
 		/*doGet(request, response);*/
 		}
 		
-		catch(Exception e) {
+		catch(ServiceException e) {
             
             SessionUtil.setAttribute(request, MessageKeysUtil.ERROR , e.getMessage());
             request.getRequestDispatcher("/WEB-INF/pages/Signup.jsp")
                    .forward(request, response);
+		} catch(Exception e) {
+			
+			throw new ServletException(e);
 		}
 		
 	}

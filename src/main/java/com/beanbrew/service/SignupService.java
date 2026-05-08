@@ -74,12 +74,8 @@ public class SignupService {
 	            throw new ServiceException(
 	                "Input is too long", e);
 
-	        case 2002 ->
-	            throw new ServiceException(
-	                "Database server unavailable", e);
-
 	        default ->
-	            throw new ServiceException(
+	            throw new RuntimeException(
 	                "Something went wrong", e);
 			}
 		}
