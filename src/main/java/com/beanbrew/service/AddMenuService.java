@@ -1,39 +1,63 @@
 package com.beanbrew.service;
 
-import com.beanbrew.dao.AddMenuDAO;
-import com.beanbrew.model.MenuItem;
+import java.io.File;
+import java.io.IOException;
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.beanbrew.dao.AddMenuDAO;
+import com.beanbrew.dao.CheckCategoryDAO;
+import com.beanbrew.model.Category;
+import com.beanbrew.model.MenuItem;
+import com.beanbrew.util.FileUploadUtil;
+import com.beanbrew.util.ServiceException;
+import com.beanbrew.util.TypeMismatchException;
+
 import jakarta.servlet.http.Part;
 
 public class AddMenuService {
 	
-	public boolean addItem(MenuItem item, HttpServletRequest request) {
+	private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads/menu_items";
+	
+	public boolean addItem(MenuItem item, Part imagePart, String category_name) {
 		
 		try {
+			if(imagePart != null&& imagePart.getSize() > 0) {
+				
+				FileUploadUtil.isValidType(imagePart);
+				
+				if(FileUploadUtil.isImage(imagePart) ) {
+				
+					String extension = FileUploadUtil.getFileExtension(imagePart.getSubmittedFileName());
+					String fileName = "Img_" + System.currentTimeMillis() + extension;
+	                FileUploadUtil.saveFile(imagePart, UPLOAD_DIR, fileName);
+	                
+	                String imageUrl =  fileName;
+	        		item.setImageUrl(imageUrl);
+				
+				}
+			}
+			
+		} catch(TypeMismatchException e) {
+				throw e;
+			}
+		catch(IOException e) {
+			
+			 e.printStackTrace();
+			 throw new ServiceException("File Not Found");
+		}
 		
-		Part imgPart = item.getImage();
 		
-		String orginalName = imgPart.getSubmittedFileName().trim();
-		String extension = orginalName.substring(orginalName.lastIndexOf("."));
+		try {
+			
+			Category categoryOBJ = CheckCategoryDAO.checkCatgeory(category_name);
+			
+			if(categoryOBJ == null) throw new ServiceException("Category doesn't exists");
+			
+			if(categoryOBJ.isActiveStatus()) throw new ServiceException("Category is not active");
 		
-		String imgName = "Img_" + System.currentTimeMillis() + extension;
-		
-		String directoryPath = "C:/Users/eliti/eclipse-workspace/Cafe_Management_System/src/main/webapp/Product_Image{id}";
-		
-		System.out.println("File is being saved to : " + directoryPath);
-		
-		imgPart.write(directoryPath + java.io.File.separator + imgName);
-		
-		String imageUrl = "Product_Image/" + imgName;
-		item.setImageUrl(imageUrl);
-		
-		item.setFileExtension(extension);
-		
-		AddMenuDAO addMenuDAO = new AddMenuDAO();
-		boolean success = addMenuDAO.addItem(item);
-		
-		return success;
+			AddMenuDAO addMenuDAO = new AddMenuDAO();
+			boolean success = addMenuDAO.addItem(item);
+			
+			return success;
 		
 		} catch (Exception e) {
 			

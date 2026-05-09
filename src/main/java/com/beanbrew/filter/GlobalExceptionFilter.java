@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import com.beanbrew.util.MessageKeysUtil;
+
 
 
 /**
@@ -60,7 +62,7 @@ public class GlobalExceptionFilter extends HttpFilter implements Filter {
 	            HttpServletRequest  httpReq = (HttpServletRequest)  req;
 	            HttpServletResponse httpRes = (HttpServletResponse) res;
 
-	            httpReq.setAttribute("errorMessage", "Something went wrong. Please try again later.");
+	            httpReq.setAttribute(MessageKeysUtil.ERROR, "Something went wrong. Please try again later.");
 	            httpRes.sendRedirect(httpReq.getContextPath() + "/unexpectederror");
 	        }
 		
