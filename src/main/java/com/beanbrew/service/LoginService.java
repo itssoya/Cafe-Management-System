@@ -14,6 +14,8 @@ public class LoginService {
     public User validateUser(String username, String password) {
 
         try {
+        	
+        	if(username.trim().isEmpty() || password.trim().isEmpty()) throw new ServiceException("Please fill the fields");
 
             User user = dao.login(username);
 
@@ -27,6 +29,8 @@ public class LoginService {
             if (!isValidPassword) {
                 throw new ServiceException("Invalid username or password");
             }
+            
+            if (!user.isVerified()) throw new ServiceException ("Wait for vendor to approve account");
 
             return user;
 
@@ -35,5 +39,6 @@ public class LoginService {
         	e.printStackTrace();
             throw new ServiceException("Something went wrong! Please try again later", e);
         }
+       
     }
 }

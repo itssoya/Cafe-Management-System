@@ -62,9 +62,17 @@ public class SignupService {
 			
 			switch (e.getErrorCode()) {
 			
-			case 1062 ->
-	            throw new ServiceException(
-	                "Username already exists", e);
+			case 1062 ->{
+	            	
+				String msg = e.getMessage().toLowerCase();
+	            		
+	            		if(msg.contains("username")) {
+	            			throw new ServiceException ("Username already taken", e);
+	            		} else if (msg.contains("email_id")){
+	            			throw new ServiceException ("Email already taken", e);
+	            		} else { 
+	            			throw new ServiceException("Duplicate value", e);}		
+			}
 
 	        case 1048 ->
 	            throw new ServiceException(

@@ -6,7 +6,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -57,13 +56,14 @@ public class LoginServlet extends HttpServlet {
 			LoginService service = new LoginService();
 			User user = service.validateUser(username, password);
 			
-			if(user != null){
+			if(user != null && user.isVerified()){
 				
 				SessionUtil.setAttribute(request, "currentUser", user, 3600);
 				
 				if(user.isAdmin()) {
 					
-					response.sendRedirect(request.getContextPath() + "/admindasboard");
+					response.sendRedirect(request.getContextPath() + "/usermanagement");
+					
 				} else {
 					
 					response.sendRedirect(request.getContextPath() + "/index");
@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 	
 			} else{
 				
-				request.setAttribute("errorMessage", "Invalid username or password");
+				request.setAttribute(MessageKeysUtil.ERROR, "Invalid username or password");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 				rd.forward(request, response);
 				
@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 		} catch(ServiceException e) {
 			
 			e.printStackTrace();
-			SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, e.getMessage());
+			request.setAttribute( MessageKeysUtil.ERROR, e.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 			rd.forward(request, response);
 		}

@@ -30,9 +30,9 @@
     <div class="layout">
     <div class="form">
         <h2>Hopping Back !</h2>
-        <c:if test="${not empty errorMessage}">
+        <c:if test="${not empty error}">
             <p style="color: red; text-align: center; margin-bottom: 12px;">
-                ${errorMessage}
+                ${error}
             </p>
         </c:if>
         
