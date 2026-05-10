@@ -13,6 +13,8 @@ import java.io.IOException;
 
 import com.beanbrew.model.User;
 import com.beanbrew.service.SignupService;
+import com.beanbrew.util.MessageKeysUtil;
+import com.beanbrew.util.ServiceException;
 
 /**
  * Servlet implementation class SignupServlet
@@ -50,28 +52,48 @@ public class SignupServlet extends HttpServlet {
 		
 		try {
 			
-			User user = new User();
-			user.setUsername(request.getParameter("username"));
-			user.setEmail(request.getParameter("email"));
-			user.setPassword(request.getParameter("password"));
-			user.setIsAdmin(Boolean.parseBoolean(request.getParameter("is_admin")));
+			String username = request.getParameter("username");
+	        String email = request.getParameter("email");
+	        String password = request.getParameter("password");
+			
+			if (username == null || username.trim().isEmpty() ||
+		        email == null || email.trim().isEmpty() ||
+		        password == null || password.trim().isEmpty()) 
+			{
+
+		           request.setAttribute(MessageKeysUtil.ERROR, "All fields are required.");
+		            
+		           request.getRequestDispatcher("/WEB-INF/pages/Signup.jsp").forward(request, response);
+		            
+		           return;
+		            
+			}
+			
+			 User user = new User();
+		     user.setUsername(username.trim());
+		     user.setEmail(email.trim());
+		     user.setPassword(password);
+		     user.setIsAdmin(Boolean.parseBoolean(request.getParameter("is_admin")));
 			
 			Part imagePart = request.getPart("profile_image");
 		
 			SignupService obj = new SignupService();
 			obj.addUser(user, imagePart);
-		
-			response.getWriter().println("Registered successfully!");
 			
 			response.sendRedirect(request.getContextPath() + "/login");
-			
-			
+				
 		/*doGet(request, response);*/
 		}
 		
-		catch(Exception e) {
-			e.printStackTrace();
-            response.getWriter().println("Error: " + e.getMessage());
+		catch(ServiceException e) {
+            
+            request.setAttribute( MessageKeysUtil.ERROR , e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/pages/Signup.jsp")
+                   .forward(request, response);
+            
+		} catch(Exception e) {
+			
+			throw new ServletException(e);
 		}
 		
 	}

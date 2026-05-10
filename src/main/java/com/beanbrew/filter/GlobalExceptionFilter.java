@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import com.beanbrew.util.ServiceException;
+
 
 /**
  * Servlet Filter implementation class GlobalExceptionFilter
@@ -55,13 +55,13 @@ public class GlobalExceptionFilter extends HttpFilter implements Filter {
 
 	        } catch (Exception e) {
 	           
-	        	System.out.println("Unhandled error cautch by Filter");
+	        	System.out.println("Unhandled error catch by Filter");
 
 	            HttpServletRequest  httpReq = (HttpServletRequest)  req;
 	            HttpServletResponse httpRes = (HttpServletResponse) res;
 
 	            httpReq.setAttribute("errorMessage", "Something went wrong. Please try again later.");
-	            httpReq.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(httpReq, httpRes);
+	            httpRes.sendRedirect(httpReq.getContextPath() + "/unexpectederror");
 	        }
 		
 	}

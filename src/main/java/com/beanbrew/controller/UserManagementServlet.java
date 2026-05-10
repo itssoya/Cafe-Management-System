@@ -124,11 +124,11 @@ public class UserManagementServlet extends HttpServlet {
             }
         }
         	
-        request.getSession().setAttribute(MessageKeysUtil.SUCCESS, "Action applied successfully.");
+        	request.setAttribute( MessageKeysUtil.SUCCESS, "Action applied successfully.");
         
         } catch (ServiceException e) {
         	
-        	SessionUtil.setAttribute(request, MessageKeysUtil.ERROR, e.getMessage());
+        	request.setAttribute( MessageKeysUtil.ERROR, e.getMessage());
         }
        
         response.sendRedirect(request.getContextPath() + "/usermanagement");

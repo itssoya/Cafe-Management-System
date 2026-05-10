@@ -23,7 +23,6 @@ public class SignupDAO {
 			preparedStatement.setBoolean(4, user.isAdmin());
 			preparedStatement.setString(5, user.getProfileImageURL());
 			
-			preparedStatement.execute();
 			
 			int rowsAffected = preparedStatement.executeUpdate();
 			

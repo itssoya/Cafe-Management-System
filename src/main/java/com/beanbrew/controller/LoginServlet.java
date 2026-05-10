@@ -6,12 +6,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
 import com.beanbrew.model.User;
 import com.beanbrew.service.LoginService;
+import com.beanbrew.util.MessageKeysUtil;
+import com.beanbrew.util.ServiceException;
 import com.beanbrew.util.SessionUtil;
 
 /**
@@ -55,23 +56,32 @@ public class LoginServlet extends HttpServlet {
 			LoginService service = new LoginService();
 			User user = service.validateUser(username, password);
 			
-			if(user != null){
+			if(user != null && user.isVerified()){
 				
 				SessionUtil.setAttribute(request, "currentUser", user, 3600);
-				response.sendRedirect(request.getContextPath() + "/index");
 				
+				if(user.isAdmin()) {
+					
+					response.sendRedirect(request.getContextPath() + "/usermanagement");
+					
+				} else {
+					
+					response.sendRedirect(request.getContextPath() + "/index");
+					
+				}
+	
 			} else{
 				
-				request.setAttribute("errorMessage", "Invalid username or password");
+				request.setAttribute(MessageKeysUtil.ERROR, "Invalid username or password");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 				rd.forward(request, response);
 				
 			}	
 			
-		} catch(Exception e) {
+		} catch(ServiceException e) {
 			
 			e.printStackTrace();
-			request.setAttribute("errorMessage", "Something went wrong. Please try again");
+			request.setAttribute( MessageKeysUtil.ERROR, e.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 			rd.forward(request, response);
 		}
