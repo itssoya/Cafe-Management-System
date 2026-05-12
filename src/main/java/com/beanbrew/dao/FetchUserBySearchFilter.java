@@ -104,7 +104,8 @@ public class FetchUserBySearchFilter {
 			
 			if(search != null && !search.isEmpty()) {
 				query.append(" AND (username LIKE ?");
-				query.append(" OR email_id LIKE ?)");
+				query.append(" OR em"
+						+ "ail_id LIKE ?)");
 				
 				patternSearch = "%" + search + "%";
 			}

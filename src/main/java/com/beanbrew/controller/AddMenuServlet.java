@@ -7,6 +7,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -55,23 +57,19 @@ public class AddMenuServlet extends HttpServlet {
 		menuItem.setCategory(request.getParameter("category"));
 		menuItem.setPrice(Double.parseDouble(request.getParameter("price")));
 		menuItem.setDescription(request.getParameter("description"));
-		menuItem.setImage(request.getPart("image"));
+		//menuItem.setImage(request.getPart("image"));
+		
+		Part imagePart = request.getPart("image");
+		String category = request.getParameter("category");
 		
 		AddMenuService service = new AddMenuService();
-	    boolean result = service.addItem(menuItem, request);
+	    boolean result = service.addItem(menuItem, imagePart, category);
 	    
 	    if(result){
 	        response.getWriter().println("Item Added Successfully");
 	    } else {
 	        response.getWriter().println("Failed to Add Item");
 	    }
-		
-		//String orginalName = filePart.getSubmittedFileName();
-		//String extension = 
-		//String fileName = "Img" + System.currentTimeMillis();
-		
-		
-		//doGet(request, response);
 	}
 
 }
