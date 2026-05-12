@@ -1,0 +1,317 @@
+@charset "UTF-8";
+
+body{
+	font-family: Futsat, sans-serif;
+	margin:0;
+	padding:0;
+	background-color: #FFF8ED;
+	display: flex;
+	flex-direction: row;
+	box-sizing: border-box;
+}
+
+h1, h2, p{
+	font-family: Futsat, sans-serif;
+}
+
+.sidebar{
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	border-right: 0.0625rem solid #16319E;
+	width: 15rem;
+	background-color: #FFF8ED;
+	color: #16319E;
+	justify-content: space-between;
+	height: 100vh;
+}
+
+.main-icon{
+	width: 10rem;
+	padding-left: 1.5rem;
+	padding-top: 1rem;
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-content h1{
+	font-size: 2.5rem;
+	padding-left: 1.5rem;
+	margin:0;
+	padding-top: 0.25rem;
+}
+
+.category{
+	display: flex;
+	flex-direction: column;
+	list-style : none;
+	padding: 0.5rem;
+}
+
+.category li{
+	display: flex;
+	gap: 1.5rem;
+	padding:1.5rem;
+	border-radius: 0.5rem;
+	align-items: center;
+	font-size: 1.25rem;
+}
+
+.bottom{
+	list-style : none;
+	margin-top:auto;
+}
+
+.bottom li{
+	display: flex;
+	gap: 1.2rem;
+	border-radius: 0.5rem;
+	align-items: center;
+	font-size: 1.25rem;
+}
+
+.icon{
+	width: 1.25rem;
+	height: 1.25rem;
+	left: 2rem;
+}
+
+.main-container{
+	background-color: #FFF8ED;
+	margin-left:16rem;
+	padding: 0 2rem;
+	overflow-y: auto;
+}
+
+.header{
+	display:flex;
+	align-items: center;
+	justify-content:center;
+	gap: 2rem;
+}
+
+.header h1{
+	color:#16319E; 
+	text-align:center; 
+	font-size: 2.5rem; 
+	padding-top: 1rem;
+}
+
+.header-icon{
+	width: 8rem;
+	height: 5rem;
+}
+
+.flex-containers{
+	display: flex;
+	flex-direction: row;
+	gap: 1.25rem;
+	padding-top: 2rem;
+}
+
+.flex-container{
+	display: flex;
+	flex-direction: column;
+	flex-wrap:wrap;
+	background-color: #FFF8ED;
+	padding: 2rem;
+	width: 18rem;
+	border-radius: 1rem;
+}
+
+.stock-top{
+	display: flex;
+	justify-content: space-between;
+}
+
+.stock-bottom{
+	display: flex;
+	justify-content: space-between;
+}
+
+.stock-icon{
+	width: 2rem;
+	height: 2rem;
+	padding-top: 1.5rem;
+}
+
+.active-order{
+	padding: 1rem;
+}
+
+table{
+	width: 100%;
+}
+
+th{
+	width: 20%;
+	text-align: left;
+	color: #5A5957;
+	font-size: 1rem;
+	padding: 0.6rem 0.2rem;
+}
+
+td{
+	width: 20%;
+	font-size: 1rem;
+	color: #16319E;
+	padding: 1rem 0rem;
+}
+
+.cancel{
+	display: flex;
+	gap: 0.5rem;
+}
+
+.status{
+	width: 8rem;
+	border-radius:2rem;
+	background-color: #F6C251;
+	padding: 0.5rem 1rem;
+	text-align: center;
+}
+
+.cancel-icon{
+	width: 1.5rem;
+	height: 2rem;
+	cursor: pointer;
+}
+
+@media (max-width: 1024px){
+	
+	.sidebar{
+	width: 12rem;
+	}
+	
+	.main-container{
+	margin-left:12rem;
+	width: auto;
+	}
+	
+	.sidebar-content h1{
+	font-size: 2rem;
+	}
+	
+	.category li{
+	font-size: 1rem;
+	padding: 1rem;
+	gap: 1rem;
+	}
+	
+	.bottom li{
+	left: 0;
+	font-size: 1rem;
+	}
+	
+	.flex-containers{
+	flex-direction: column;
+	padding: 0.5rem;
+	width: 100%;
+	}
+	
+	.flex-container{
+	width: 100%;
+	}
+}
+
+@media (max-width: 768px){
+	
+	body{
+	flex-direction: column;
+	}
+	
+	.sidebar{
+	display:flex;
+	flex-direction: row;
+	border-right: none;
+	border-bottom: 0.0625rem solid #16319E;
+	width: 100%;
+	height: auto;
+	position: relative;
+	}
+	
+	.main-icon{
+	display:none;
+	}
+	
+	.sidebar-content h1{
+	display: none;
+	}
+	
+	.sidebar-content {
+	 flex-direction: row;
+	 align-items: center;
+     flex-wrap: nowrap;
+     gap: 1rem;
+    }
+	
+	.category{
+	flex-direction: row;
+	flex-wrap: nowrap;
+	}
+	
+	.category li{
+	padding:1rem;
+	font-size: 1rem;
+	}
+	
+	.bottom{
+	padding:0rem;
+	}
+	
+	.bottom li{
+	padding: 1rem;
+	font-size: 1rem;
+	margin-top:1rem;
+	}
+	
+	.main-container{
+	margin-left: 0;
+	padding: 0 1rem;
+	}
+	
+	
+	.header h1{
+	font-size:2rem;
+	}
+	
+	
+	.active-order{
+	overflow-x: auto;
+	}
+	
+}
+
+@media (max-width: 480px){
+	
+	.category span{
+	display: none;
+	}
+	
+	.bottom span{
+	display: none;
+	}
+	
+	.header h1{
+	font-size: 1.5rem;
+	}
+	
+	.header-icon{
+	width:4rem;
+	height:3rem;
+	}
+	
+	.flex-container h1{
+	font-size: 1.5rem;
+	}
+	
+	.flex-container p{
+	font-size: 0.6rem;
+	}
+	
+}
+
