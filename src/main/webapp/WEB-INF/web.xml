@@ -4,4 +4,29 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+  <!-- 404 -->
+<error-page>
+    <error-code>404</error-code>
+    <location>/pages/404Page.jsp</location>
+</error-page>
+
+<!-- All uncaught exceptions -->
+<error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/pages/ErrorPage.jsp</location>
+</error-page>
+
+<!-- 500 -->
+<error-page>
+    <error-code>500</error-code>
+    <location>/pages/ErrorPage.jsp</location>
+</error-page>
+
+<!-- 403 -->
+<error-page>
+    <error-code>403</error-code>
+    <location>/pages/ErrorPage.jsp</location>
+</error-page>
 </web-app>
+
