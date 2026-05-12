@@ -13,7 +13,6 @@
     
 
     <title>Login Page</title>
-    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 <nav>
@@ -24,6 +23,7 @@
             <li><a href="${pageContext.request.contextPath}/index">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Menu</a></li>
+            <li><a href="#">Rating</a></li>
         </div>
       
 </nav>

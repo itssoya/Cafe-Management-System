@@ -1,6 +1,6 @@
 body {
     background: #FEF3DC;
-    font-family: "Fustat";
+    font-family: Fustat, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,13 +16,13 @@ nav{
     z-index: 9999;
 
 
-    color: #16319E;
+    color: #1e40af;
     background-color: #FFF0D8;
     padding: .75rem 3.75rem .75rem 3.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between; 
-     margin-bottom: 50px;
+    font-family: Fustat, sans-serif;
 }
 
 nav>.links{ 
@@ -37,7 +37,7 @@ nav>.links{
 }
 .links>li>a{
     text-decoration: none;
-    color: #16319E;
+    color: #1e40af;
 }
 
 .logo img{
@@ -55,7 +55,7 @@ nav>.links{
     font-size: 0.7em;
 }
 nav button{
-    color: #16319E;
+    color: #1e40af;
     background-color:#FFF0D8; 
     border-style: none;
     margin-top:0rem;
@@ -81,7 +81,7 @@ nav button:hover , nav button:active{
 
 .card h2 {
     font-family: "Fustat";
-    color: #1A237E;
+    color: #1e40af;
     font-size: 2rem;
     margin-bottom: 16px;
     padding-top: 20px;
@@ -106,18 +106,18 @@ form {
 }
 
 label {
-    color: #1A237E;
+	color: #1e40af;
     font-weight: 800;
     font-size: 0.9rem;
     margin-bottom: 6px;
 }
 
 input {
-    border: 2px solid #1A237E;
+    border: 2px solid #16319E;;
     border-radius: 5px;
     padding: 12px 16px;
     font-size: 0.95rem;
-    color: #1A237E;
+    color: #1e40af; 
     margin-bottom: 16px;
     outline: none;
 }
@@ -128,7 +128,7 @@ button {
     align-items: center; 
     width: 150px;
     height: 50px;
-    background: #1A237E;
+    background: #16338a;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -143,12 +143,12 @@ button {
 button:hover { background: #283593; }
 
 p { 
-    color: #1A237E; 
+    color: #1e40af;
     font-size: 0.9rem;
  }
 
 a { 
-    color: #1A237E; 
+    color: #1e40af;
     font-weight: 800; 
 }
 

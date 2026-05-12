@@ -14,9 +14,10 @@
             <img src="${pageContext.request.contextPath}/images/logo.svg" alt="BeanBrew logo">
         </div>
         <div class="links">
-            <li><a href="#">Home</a></li>
+            <li><a href="${pageContext.request.contextPath}/index">Home</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="../menu.html">Menu</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Rating</a></li>
         </div>
     </nav>
 
