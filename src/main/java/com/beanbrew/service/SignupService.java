@@ -9,6 +9,7 @@ import com.beanbrew.model.User;
 import com.beanbrew.util.PasswordUtil;
 import com.beanbrew.util.TypeMismatchException;
 import com.beanbrew.util.FileUploadUtil;
+import com.beanbrew.util.MessageKeysUtil;
 import com.beanbrew.util.ServiceException;
 
 
@@ -20,12 +21,23 @@ public class SignupService {
 
 	private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads";
 	
+	private static final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+	
 	
 	public void addUser(User user, Part imagePart)  {
+		
+		String password = user.getPassword();
+		
+		if(!password.matches(passwordRegex)) throw new ServiceException ("Password must be minimium 8 charcaters, atleast one letter and one number.");
 		
 		String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
 		
 		user.setPassword(hashedPassword);
+		
+		
+		
+			
+		
 		
 		try {
 			if(imagePart != null&& imagePart.getSize() > 0) {

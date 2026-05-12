@@ -23,10 +23,12 @@
     <div class="card">
         <h2>Someone New !</h2>
         
+     
         <!-- Error message block -->
 	    <c:if test="${not empty error}">
 	        <div class="error-message">${error}</div>
 	    </c:if>
+	    
 
         <div class="avatar">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -40,7 +42,7 @@
             <input type="text" name="username" placeholder="ILoveCoffee123@01"/>
 
             <label>Email</label>
-            <input type="email" name="email" placeholder="coooffeeeiielover@gmail.com"/>
+            <input type="text" name="email" placeholder="coooffeeeiielover@gmail.com"/>
 
             <label>Password</label>
             <input type="password" name="password" placeholder="••••••••"/>
