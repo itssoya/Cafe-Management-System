@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.main404{
+	color : #16319E;
+	margin-top : 9rem;
+	display: flex;
+	align-items: center;
+	justify-content: center; 
+	flex-direction: column;
+}
+.main404 > img{
+	margin: 2rem 0rem;
+} 
+.main404 p{
+	font-size: 1.25rem;
+	margin: 0rem 0rem 0.75rem 0;
+	>a{
+		font-size: 1.25rem;
+	}
+} 
+
+.main404 b{
+	font-size: 1.25rem;
+}
+a:active, a:hover{
+	color: #16319E;
+}
+.beanbear{ 
+	position: absolute;  
+	bottom : 12rem;
+	right : 5rem;
+}
+
+.checker.bottom {
+	position: fixed;
+	bottom: -5vh;
+	left: 0;
+	width: 100%;
+}
+@media (max-width: 768px) {
+	.main404 > img {
+		max-width: 80vw;
+		height: auto;
+	}
+	
+	.beanbear {
+		display: none;
+	}
+	
+	.checker.bottom {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+	}
+}
