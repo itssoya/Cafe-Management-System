@@ -65,7 +65,6 @@ public class SignupService {
 			 throw new ServiceException("File Not Found");
 		}
 		
-		
 		try {
 			
 			if (!dao.signUp(user)) throw new ServiceException ("Failed to Register"); 
