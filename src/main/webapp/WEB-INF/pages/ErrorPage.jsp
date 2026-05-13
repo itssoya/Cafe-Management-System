@@ -44,7 +44,7 @@
 			<!-- Logged Out View -->
 			<div id="loggedOutView">
 				<div class="guest-header">
-					<img src="../images/sidebar/GuestUser.svg" alt="guest-placeholder" class="profile-pic">
+					<img src="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg" alt="guest-placeholder" class="profile-pic">
 					<h2>Welcome Guest</h2>
 				</div>
 				<div class="auth-buttons">
