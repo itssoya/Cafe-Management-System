@@ -10,8 +10,6 @@ import com.beanbrew.util.DBConnection;
 
 public class CheckCategoryDAO {
 	
-	private static Category category = new Category();
-	
 	private static final String query = "SELECT * FROM category WHERE category_name = ?";
 	
 	public static Category checkCatgeory(String category_name) throws SQLException {
@@ -22,6 +20,8 @@ public class CheckCategoryDAO {
 			preparedStatement.setString(1, category_name);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			Category category = new Category();
 			
 			if(resultSet.next()) {
 				

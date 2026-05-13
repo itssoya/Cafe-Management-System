@@ -23,8 +23,21 @@ public class SignupService {
 	
 	private static final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 	
+	private static final String nameRegex = "^[A-Za-z].*$";
+	
+	private static final String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+	
+	
 	
 	public void addUser(User user, Part imagePart)  {
+		
+		String username = user.getUsername();		
+		
+		if(!username.trim().matches(nameRegex)) throw new ServiceException ("The first character must be an alphabet.");
+		
+		String email = user.getEmail();
+		
+		if(!email.matches(emailRegex)) throw new ServiceException ("Invalid email format.");
 		
 		String password = user.getPassword();
 		
@@ -33,11 +46,6 @@ public class SignupService {
 		String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
 		
 		user.setPassword(hashedPassword);
-		
-		
-		
-			
-		
 		
 		try {
 			if(imagePart != null&& imagePart.getSize() > 0) {
@@ -64,6 +72,7 @@ public class SignupService {
 			 e.printStackTrace();
 			 throw new ServiceException("File Not Found");
 		}
+		
 		
 		try {
 			
