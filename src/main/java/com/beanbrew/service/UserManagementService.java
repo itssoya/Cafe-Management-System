@@ -66,29 +66,20 @@ public class UserManagementService {
 	
 	public List<User> fetchFilteredUser(int currentPageNumber, Boolean isAdmin, Boolean isVerified, String search){
 		
-			try {
-				
-				return fetchUserBySearchFilter.getUser(currentPageNumber, isAdmin, isVerified, search);
-				
-			} catch (SQLException e) {
-				
-				throw new ServiceException("Failed to Fetch User");
-			}
+		 return ServiceExecutor.execute(
+		            () -> fetchUserBySearchFilter.getUser(currentPageNumber, isAdmin, isVerified,search ),
+		            
+		            "Failed to Fetch User");
 		
 	}
 	
 	public int getTotalPages(Boolean isAdmin, Boolean isVerified, String search){
-		
-		try {
 			
-			int total = fetchUserBySearchFilter.countUserForFilter(isAdmin, isVerified, search);
+			int total = ServiceExecutor.execute(
+					() -> fetchUserBySearchFilter.countUserForFilter(isAdmin, isVerified, search), "Falied to Fetch User");
 			
 			return (int) Math.ceil ((double) total/userPerPage);
 			
-		} catch (SQLException e) {
-			
-			throw new ServiceException("Falied to Fetch User");
-		}	
 	}
 	
 	public void disableUser(int userId) {
