@@ -18,7 +18,7 @@
 
 	<!-- TOP NAVBAR / SEARCH BAR -->
 	<div class="NavBar">
-		<form action="${pageContext.request.contextPath}/StockManagementServlet" method="post">
+		<form action="${pageContext.request.contextPath}/stockmanagement" method="post">
 			<input type="hidden" name="page" value="1">
 			<input type="hidden" name="isbakery" value="${param.isbakery}">
 			<div class="search-bar">
@@ -54,7 +54,7 @@
 					<h1>Inventory</h1>
 					<p>Keep your artisan brews flowing with real-time stock tracking.</p>
 				</div>
-				<a href="${pageContext.request.contextPath}/StockManagementServlet?action=addstock" class="btn-add">
+				<a href="${pageContext.request.contextPath}/stockmanagement?action=addstock" class="btn-add">
 					<i class="fa-solid fa-plus"></i> Add Stock Item
 				</a>
 			</div>
@@ -89,16 +89,11 @@
 					<span class="stat-label">Low Stock Alerts</span>
 					<span class="stat-data">${lowStockItem}</span>
 				</div>
-				<div class="stat-card stat-dark">
-					<span class="stat-label">Next Delivery</span>
-					<span class="stat-data-sm">Tomorrow, 08:30 AM</span>
-					<span class="stat-sub">Milk &amp; Fresh Pastries</span>
-				</div>
 			</div>
 
 			<!-- FILTER -->
 			<div class="filter">
-				<form action="${pageContext.request.contextPath}/StockManagementServlet" method="post">
+				<form action="${pageContext.request.contextPath}/stockmanagement" method="post">
 					<input type="hidden" name="page" value="1">
 					<input type="hidden" name="search" value="${search}">
 					<select name="isbakery" class="filter-select" onchange="this.form.submit()">
@@ -178,26 +173,26 @@
 									<td>
 										<div class="action-btns">
 
-											<a href="${pageContext.request.contextPath}/StockManagementServlet?action=edit&id=${item.id}"
+											<a href="${pageContext.request.contextPath}/stockmanagement?action=edit&id=${item.id}"
 											   class="btn-edit">
 												<i class="fa-solid fa-pen"></i> Edit
 											</a>
 
 											<c:choose>
 												<c:when test="${item.quantityInStock <= 0}">
-													<a href="${pageContext.request.contextPath}/StockManagementServlet?action=restock&id=${item.id}"
+													<a href="${pageContext.request.contextPath}/stockmanagement?action=restock&id=${item.id}"
 													   class="btn-order">
 														<i class="fa-solid fa-cart-shopping"></i> Order Now
 													</a>
 												</c:when>
 												<c:when test="${item.quantityInStock <= item.lowStockThreshold}">
-													<a href="${pageContext.request.contextPath}/StockManagementServlet?action=restock&id=${item.id}"
+													<a href="${pageContext.request.contextPath}/stockmanagement?action=restock&id=${item.id}"
 													   class="btn-restock-now">
 														<i class="fa-solid fa-rotate-left"></i> Restock Now
 													</a>
 												</c:when>
 												<c:otherwise>
-													<a href="${pageContext.request.contextPath}/StockManagementServlet?action=restock&id=${item.id}"
+													<a href="${pageContext.request.contextPath}/stockmanagement?action=restock&id=${item.id}"
 													   class="btn-restock">
 														Restock
 													</a>
@@ -228,7 +223,7 @@
 
 					<c:choose>
 						<c:when test="${currentPage > 1}">
-							<a href="${pageContext.request.contextPath}/StockManagementServlet?page=${currentPage - 1}&search=${search}&isbakery=${param.isbakery}"
+							<a href="${pageContext.request.contextPath}/stockmanagement?page=${currentPage - 1}&search=${search}&isbakery=${param.isbakery}"
 							   class="page-btn prev-btn">
 								<i class="fa-solid fa-chevron-left"></i> Prev
 							</a>
@@ -246,7 +241,7 @@
 								<span class="page-btn page-number active">${i}</span>
 							</c:when>
 							<c:when test="${i == 1 || i == totalPage || (i >= currentPage - 2 && i <= currentPage + 2)}">
-								<a href="${pageContext.request.contextPath}/StockManagementServlet?page=${i}&search=${search}&isbakery=${param.isbakery}"
+								<a href="${pageContext.request.contextPath}/stockmanagement?page=${i}&search=${search}&isbakery=${param.isbakery}"
 								   class="page-btn page-number">${i}</a>
 							</c:when>
 							<c:when test="${i == currentPage - 3 || i == currentPage + 3}">
@@ -257,7 +252,7 @@
 
 					<c:choose>
 						<c:when test="${currentPage < totalPage}">
-							<a href="${pageContext.request.contextPath}/StockManagementServlet?page=${currentPage + 1}&search=${search}&isbakery=${param.isbakery}"
+							<a href="${pageContext.request.contextPath}/stockmanagement?page=${currentPage + 1}&search=${search}&isbakery=${param.isbakery}"
 							   class="page-btn next-btn">
 								Next <i class="fa-solid fa-chevron-right"></i>
 							</a>

@@ -7,22 +7,22 @@ import java.sql.SQLException;
 import com.beanbrew.model.StockItem;
 import com.beanbrew.util.DBConnection;
 
-public class AddStockItem {
+public class AddStockItemDAO {
 	
 	private static final String INSERT_STOCK_ITEM =
-	        "INSERT INTO stock_items (name, unit, quantity_in_stock, updated_at) " +
-	        "VALUES (?, ?, ?, now())";
+	        "INSERT INTO stock_items (stock_name, stock_unit, quantity_in_stock, updated_at, low_stock_threshold, is_bakery) " +
+	        "VALUES (?, ?, ?, now(),?,?)";
 	
-	public static boolean addStockItem(StockItem item) throws SQLException{
+	public boolean addStockItem(StockItem item) throws SQLException{
 		
 		try (Connection con = DBConnection.buildConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(INSERT_STOCK_ITEM)) {
-			
-			con.setAutoCommit(false);
 
 			preparedStatement.setString(1, item.getName());
             preparedStatement.setString(2, item.getUnit());
             preparedStatement.setDouble(3, item.getQuantityInStock());
+            preparedStatement.setDouble(4, item.getLowStockThreshold());
+            preparedStatement.setBoolean(5, item.isBakery());
 
             int rowsAffected= preparedStatement.executeUpdate();
 

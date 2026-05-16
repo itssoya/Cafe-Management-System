@@ -8,7 +8,7 @@ import java.util.List;
 import com.beanbrew.model.RecipeItem;
 import com.beanbrew.util.DBConnection;
 
-public class AddReceipeDAO {
+public class AddRecipeDAO {
 	
 	public static boolean addRecipes(int menuItemId, List<RecipeItem> ingredients)
 	        throws SQLException {

@@ -3,7 +3,7 @@ package com.beanbrew.model;
 public class RecipeItem {
 
 	private int stockItemId;      
-	private String stockItemName; 
+	private int menuItemId; 
 	private double quantityUsed;
 	
 	public int getStockItemId() {
@@ -12,11 +12,11 @@ public class RecipeItem {
 	public void setStockItemId(int stockItemId) {
 		this.stockItemId = stockItemId;
 	}
-	public String getStockItemName() {
-		return stockItemName;
+	public int getMenuItemId() {
+		return menuItemId;
 	}
-	public void setStockItemName(String stockItemName) {
-		this.stockItemName = stockItemName;
+	public void setMenuItemId(int menuItemId) {
+		this.menuItemId = menuItemId;
 	}
 	public double getQuantityUsed() {
 		return quantityUsed;

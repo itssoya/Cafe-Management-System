@@ -7,7 +7,21 @@ public class StockItem {
     private String unit;
     private double quantityInStock;
     private String lastUpdatedDate;
+    private double lowStockThreshold;
+    private boolean isBakery;
     
+	public boolean isBakery() {
+		return isBakery;
+	}
+	public void setBakery(boolean isBakery) {
+		this.isBakery = isBakery;
+	}
+	public double getLowStockThreshold() {
+		return lowStockThreshold;
+	}
+	public void setLowStockThreshold(double lowStockThreshold) {
+		this.lowStockThreshold = lowStockThreshold;
+	}
 	public int getId() {
 		return id;
 	}

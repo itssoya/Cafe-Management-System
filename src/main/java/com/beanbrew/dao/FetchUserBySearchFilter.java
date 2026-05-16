@@ -136,10 +136,6 @@ public class FetchUserBySearchFilter {
 					
 				}
 				
-				resultSet.close();
-				preparedStatement.close();
-				con.close();
-				
 				return rowsCount;
 				
 				
