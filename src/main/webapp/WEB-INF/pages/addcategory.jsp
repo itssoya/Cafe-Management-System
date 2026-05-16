@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/stockManagement.css">
-<title>Add Menu Item — BrewBar</title>
+<title>Add Category — BrewBar</title>
 <style>
     .page-blur-bg {
         position: fixed;
@@ -27,7 +27,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
     }
 
     .modal {
@@ -35,9 +34,7 @@
         border-radius: 20px;
         padding: 40px 44px;
         width: 100%;
-        max-width: 560px;
-        max-height: 90vh;
-        overflow-y: auto;
+        max-width: 480px;
         box-shadow: 0 24px 60px rgba(0,0,0,0.18);
         text-align: center;
     }
@@ -94,8 +91,6 @@
     }
 
     .form-group input[type="text"],
-    .form-group input[type="number"],
-    .form-group select,
     .form-group textarea {
         width: 100%;
         background: #f5f0eb;
@@ -114,59 +109,65 @@
     }
 
     .form-group textarea {
-        height: 80px;
+        height: 90px;
         resize: none;
     }
 
-    .form-group select {
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233b2017' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 14px center;
-        background-color: #f5f0eb;
-        padding-right: 36px;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-    }
-
-    /* ── Image upload ── */
-    .image-upload-area {
+    /* ── Toggle switch ── */
+    .toggle-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         background: #f5f0eb;
         border-radius: 10px;
-        border: 2px dashed #d4c8c0;
-        padding: 24px;
-        text-align: center;
+        padding: 12px 14px;
+    }
+
+    .toggle-label-text {
+        font-size: 0.9rem;
+        color: #3b2017;
+        font-weight: 500;
+    }
+
+    .toggle-switch {
+        position: relative;
+        width: 44px;
+        height: 24px;
+    }
+
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        inset: 0;
+        background: #d4c8c0;
+        border-radius: 24px;
         cursor: pointer;
-        transition: border-color 0.2s;
+        transition: background 0.2s;
     }
 
-    .image-upload-area:hover { border-color: #3b2017; }
-
-    .image-upload-area i {
-        font-size: 28px;
-        color: #b0a09a;
-        margin-bottom: 8px;
-        display: block;
+    .toggle-slider::before {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        left: 3px;
+        top: 3px;
+        background: #fff;
+        border-radius: 50%;
+        transition: transform 0.2s;
     }
 
-    .image-upload-area p {
-        font-size: 0.8rem;
-        color: #9a8478;
-        margin: 0;
+    .toggle-switch input:checked + .toggle-slider {
+        background: #3b2017;
     }
 
-    #image-preview {
-        display: none;
-        width: 100%;
-        max-height: 140px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-top: 10px;
+    .toggle-switch input:checked + .toggle-slider::before {
+        transform: translateX(20px);
     }
 
     .modal-actions {
@@ -213,7 +214,7 @@
         <div class="NavBar">
             <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search menu items..." disabled>
+                <input type="text" placeholder="Search..." disabled>
                 <button disabled>Search</button>
             </div>
         </div>
@@ -223,9 +224,9 @@
                     <h1>BrewBar</h1>
                     <ul class="category">
                         <li><span class="material-icons">dashboard</span> Dashboard</li>
-                        <li class="active"><span class="material-icons">menu_book</span> Menu</li>
+                        <li><span class="material-icons">menu_book</span> Menu</li>
                         <li><span class="material-icons">account_box</span> Users</li>
-                        <li><span class="material-icons">inventory_2</span> Inventory</li>
+                        <li class="active"><span class="material-icons">inventory_2</span> Inventory</li>
                         <li class="logout"><span class="material-icons">logout</span> Logout</li>
                     </ul>
                 </div>
@@ -234,7 +235,7 @@
                 <div class="pageHeader">
                     <div class="pageHeader-left">
                         <h1>Menu</h1>
-                        <p>Manage your artisan menu items.</p>
+                        <p>Manage your menu categories.</p>
                     </div>
                 </div>
             </div>
@@ -246,11 +247,11 @@
         <div class="modal">
 
             <div class="modal-icon">
-                <i class="fa-solid fa-mug-hot"></i>
+                <i class="fa-solid fa-tag"></i>
             </div>
 
-            <h2>Add Menu Item</h2>
-            <p class="modal-subtitle">Add a new item to your artisan menu</p>
+            <h2>Add New Category</h2>
+            <p class="modal-subtitle">Organise your menu with a new category</p>
 
             <c:if test="${not empty error}">
                 <div class="modal-alert">
@@ -258,57 +259,33 @@
                 </div>
             </c:if>
 
-            <form action="${pageContext.request.contextPath}/addmenu" method="post"
-                  enctype="multipart/form-data">
+            <form action="${pageContext.request.contextPath}/addcategory" method="post">
 
-                <!-- Item Name -->
+                <!-- Category Name -->
                 <div class="form-group">
-                    <label for="itemName">ITEM NAME</label>
-                    <input type="text" id="itemName" name="itemName"
-                           placeholder="e.g., Caramel Latte"
-                           value="${param.itemName}">
-                </div>
-
-                <!-- Price + Category -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="price">PRICE</label>
-                        <input type="number" id="price" name="price"
-                               placeholder="0.00" min="0" step="0.01"
-                               value="${param.price}">
-                    </div>
-                    <div class="form-group">
-                        <label for="categoryName">CATEGORY</label>
-                        <select id="categoryName" name="categoryName">
-                            <option value="">Select category...</option>
-                            <c:forEach var="cat" items="${categories}">
-                                <option value="${cat.categoryName}"
-                                    ${param.categoryName == cat.categoryName ? 'selected' : ''}>
-                                    ${cat.categoryName}
-                                </option>
-                            </c:forEach>
-                        </select>
-                    </div>
+                    <label for="categoryName">CATEGORY NAME</label>
+                    <input type="text" id="categoryName" name="categoryName"
+                           placeholder="e.g., Hot Drinks" value="${param.categoryName}">
                 </div>
 
                 <!-- Description -->
                 <div class="form-group">
-                    <label for="description">DESCRIPTION</label>
-                    <textarea id="description" name="description"
-                              placeholder="Brief description of this item...">${param.description}</textarea>
+                    <label for="categoryDescription">DESCRIPTION</label>
+                    <textarea id="categoryDescription" name="categoryDescription"
+                              placeholder="Brief description of this category...">${param.categoryDescription}</textarea>
                 </div>
 
-                <!-- Image Upload -->
+                <!-- Active Status toggle -->
                 <div class="form-group">
-                    <label>IMAGE <span style="font-weight:400;color:#b0a09a;letter-spacing:0">(Optional)</span></label>
-                    <div class="image-upload-area"
-                         onclick="document.getElementById('imageFile').click()">
-                        <i class="fa-solid fa-image"></i>
-                        <p>Click to upload a photo of this item</p>
-                        <input type="file" id="imageFile" name="imageFile"
-                               accept="image/*" onchange="previewImage(event)">
+                    <label>STATUS</label>
+                    <div class="toggle-group">
+                        <span class="toggle-label-text">Active on menu</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" name="activeStatus" value="true"
+                                   ${param.activeStatus == 'true' ? 'checked' : 'checked'}>
+                            <span class="toggle-slider"></span>
+                        </label>
                     </div>
-                    <img id="image-preview" alt="Preview">
                 </div>
 
                 <!-- Actions -->
@@ -317,24 +294,13 @@
                         Cancel
                     </a>
                     <button type="submit" class="btn-submit">
-                        <i class="fa-solid fa-check"></i> Add to Menu
+                        <i class="fa-solid fa-check"></i> Add Category
                     </button>
                 </div>
 
             </form>
         </div>
     </div>
-
-<script>
-    function previewImage(event) {
-        const preview = document.getElementById('image-preview');
-        const file = event.target.files[0];
-        if (file) {
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-        }
-    }
-</script>
 
 </body>
 </html>

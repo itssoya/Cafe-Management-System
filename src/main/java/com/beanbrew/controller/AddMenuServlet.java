@@ -10,12 +10,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
+import com.beanbrew.dao.FetchCategory;
+import com.beanbrew.model.Category;
 import com.beanbrew.model.MenuItem;
-import com.beanbrew.model.User;
 import com.beanbrew.service.AddMenuService;
-import com.beanbrew.service.UserManagementService;
+import com.beanbrew.util.MessageKeysUtil;
+import com.beanbrew.util.ServiceException;
+import com.beanbrew.util.TypeMismatchException;
 
 /**
  * Servlet implementation class AddMenuServlet
@@ -40,7 +44,17 @@ public class AddMenuServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/addmenu.jsp");
+		try {
+			
+			List<Category> categories = FetchCategory.getAllActive();
+			request.setAttribute("categories", categories);
+			
+		} catch (SQLException e) {
+			
+			request.setAttribute(MessageKeysUtil.ERROR, "Falied to load Categories");
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/addmenu.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -51,25 +65,55 @@ public class AddMenuServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		MenuItem menuItem = new MenuItem();
-		
-		menuItem.setItemName(request.getParameter("itemName"));
-		menuItem.setCategory(request.getParameter("category"));
-		menuItem.setPrice(Double.parseDouble(request.getParameter("price")));
-		menuItem.setDescription(request.getParameter("description"));
-		//menuItem.setImage(request.getPart("image"));
-		
-		Part imagePart = request.getPart("image");
-		String category = request.getParameter("category");
-		
-		AddMenuService service = new AddMenuService();
-	    boolean result = service.addItem(menuItem, imagePart, category);
-	    
-	    if(result){
-	        response.getWriter().println("Item Added Successfully");
-	    } else {
-	        response.getWriter().println("Failed to Add Item");
-	    }
+		String itemName    = request.getParameter("itemName");
+        String category    = request.getParameter("categoryName");
+        String priceParam  = request.getParameter("price");
+        String description = request.getParameter("description");
+        Part imagePart     = request.getPart("imageFile");
+        
+        if (itemName == null || itemName.trim().isEmpty()
+            || category == null || category.trim().isEmpty()
+            || priceParam == null || priceParam.trim().isEmpty()) {
+
+                request.setAttribute(MessageKeysUtil.ERROR, "Item name, category and price are required.");
+                return;
+            }
+        
+        try{
+        	
+        	double price = Double.parseDouble(priceParam);
+        	
+        	if(price <0) {
+        		request.setAttribute(MessageKeysUtil.ERROR, "Price cannot be negative.");
+        		return;
+        	}
+        	
+        	MenuItem menuItem = new MenuItem();
+    		
+    		menuItem.setItemName(itemName.trim());
+    		menuItem.setPrice(price);
+    		menuItem.setDescription(description != null ? description.trim() : "");
+    		
+    		AddMenuService service = new AddMenuService();
+            service.addItem(menuItem, imagePart, category.trim());
+
+            response.sendRedirect(request.getContextPath() + "/menumanagement"); 
+            
+        } catch (NumberFormatException e) {
+        	
+            request.setAttribute(MessageKeysUtil.ERROR, "Price must be a valid number.");
+            doGet(request, response);
+            
+        }catch (TypeMismatchException e) {
+        	
+            request.setAttribute(MessageKeysUtil.ERROR, "Only image files are allowed (jpg, png, gif, webp).");
+            doGet(request, response);
+
+        } catch (ServiceException e) {
+        	
+            request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
+            doGet(request, response);
+        }
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.beanbrew.controller;
 
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,7 +34,10 @@ public class AddCategory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/pages/addcategory.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**
@@ -51,6 +55,7 @@ public class AddCategory extends HttpServlet {
             
 			request.setAttribute(MessageKeysUtil.ERROR, "All fields required");
 			request.getRequestDispatcher("/WEB-INF/pages/").forward(request, response);
+			return;
 			
         }
 		
@@ -63,10 +68,13 @@ public class AddCategory extends HttpServlet {
 			 
 			 CategoryManagementService categoryManagementService = new CategoryManagementService();
 			 categoryManagementService.addCategory(category);
+			 response.sendRedirect(request.getContextPath() + "/menumanagement");
+			 return;
+			 
 		 }catch(ServiceException e) {
 			 
 			 request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
-			 request.getRequestDispatcher("/WEB-INF/pages/").forward(request, response);
+			 request.getRequestDispatcher("/WEB-INF/pages/addcategory.jsp").forward(request, response);
 		 }
 		 
 		//doGet(request, response);

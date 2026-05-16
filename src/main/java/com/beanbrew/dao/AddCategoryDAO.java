@@ -9,7 +9,7 @@ import com.beanbrew.util.DBConnection;
 
 public class AddCategoryDAO {
 	
-	private static final String query = "INSERT INTO category (name, description, active_status) VALUES (?, ?, ?)";
+	private static final String query = "INSERT INTO category (category_name, description, active_status) VALUES (?, ?, ?)";
 	
 	public static boolean addNewCategory(Category category) throws SQLException {
 		

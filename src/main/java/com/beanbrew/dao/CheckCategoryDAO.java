@@ -27,7 +27,7 @@ public class CheckCategoryDAO {
 				
 				category.setActiveStatus(resultSet.getBoolean("active_status"));
 				category.setCategoryName(resultSet.getString("category_name"));
-				category.setCategoryId(resultSet.getInt("category_int"));
+				category.setCategoryId(resultSet.getInt("category_id"));
 				category.setDescription(resultSet.getString("description"));
 				
 				return category;

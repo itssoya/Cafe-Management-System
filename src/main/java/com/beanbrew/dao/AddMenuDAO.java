@@ -9,7 +9,7 @@ import com.beanbrew.util.DBConnection;
 
 public class AddMenuDAO {
 	
-	private String query = "INSERT INTO MENU ( item_name, item_category, item_price, item_description, item_img_url, file_extension, createdDate) "
+	private String query = "INSERT INTO menu ( item_name, category_id, item_price, item_description, item_img_url, file_extension, createdDate) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, now())";
 	
 	public boolean addItem(MenuItem item) throws SQLException {
@@ -18,7 +18,7 @@ public class AddMenuDAO {
 			PreparedStatement preparedStatment = con.prepareStatement(query)){
 			
 			preparedStatment.setString(1, item.getItemName());
-			preparedStatment.setString(2, item.getCategory());
+			preparedStatment.setInt(2, item.getCategoryId());
 			preparedStatment.setDouble(3, item.getPrice());
 			preparedStatment.setString(4, item.getDescription());
 			preparedStatment.setString(5, item.getImageUrl());
