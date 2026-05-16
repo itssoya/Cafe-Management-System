@@ -127,11 +127,11 @@
 							<td>
 							<span>
 							 <c:choose>
-										<c:when test="${u.active == false }">
+										<c:when test="${u.admin == false }">
 											User
 										</c:when>
 
-										<c:when test="${u.active == true }">
+										<c:when test="${u.admin == true }">
 											Admin
 										</c:when>
 									</c:choose>
@@ -179,8 +179,7 @@
 							</span></td>
 							<td><span class="activeStatus"> <c:choose>
 										<c:when test="${u.active == false }">
-											<form
-												action="${pageContext.request.contextPath}/usermanagement"
+											<form action="${pageContext.request.contextPath}/usermanagement"
 												method="post">
 												<input type="hidden" name="action" value="makeActive" /> <input
 													type="hidden" name="userId" value="${u.userId}" />
@@ -189,8 +188,7 @@
 										</c:when>
 
 										<c:when test="${u.active == true }">
-											<form
-												action="${pageContext.request.contextPath }/usermanagement"
+											<form action="${pageContext.request.contextPath }/usermanagement"
 												method="post">
 												<input type="hidden" name="action" value="removeActive" /> <input
 													type="hidden" name="userId" value="${u.userId}">
