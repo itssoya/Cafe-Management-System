@@ -13,7 +13,16 @@ public class MenuItem {
 	private String imageUrl;
 	private String fileExtension;
 	private String createdDate;
+	private String categoryName;
 	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	public String getCreatedDate() {
 		return createdDate;
 	}

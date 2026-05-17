@@ -18,7 +18,7 @@ public class SignupService {
 	
 	private SignupDAO dao = new SignupDAO();
 
-	private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads";
+	private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads/user_img";
 	
 	private static final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 	

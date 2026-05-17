@@ -290,7 +290,7 @@
 
                 <!-- Actions -->
                 <div class="modal-actions">
-                    <a href="${pageContext.request.contextPath}/menu" class="btn-cancel">
+                    <a href="${pageContext.request.contextPath}/menumanagement" class="btn-cancel">
                         Cancel
                     </a>
                     <button type="submit" class="btn-submit">

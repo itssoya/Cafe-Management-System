@@ -278,12 +278,12 @@
                                value="${param.price}">
                     </div>
                     <div class="form-group">
-                        <label for="categoryName">CATEGORY</label>
-                        <select id="categoryName" name="categoryName">
+                        <label for="categoryId">CATEGORY</label>
+                        <select id="categoryId" name="categoryId">
                             <option value="">Select category...</option>
                             <c:forEach var="cat" items="${categories}">
-                                <option value="${cat.categoryName}"
-                                    ${param.categoryName == cat.categoryName ? 'selected' : ''}>
+                                <option value="${cat.categoryId}"
+                                    ${param.categoryId == cat.categoryId ? 'selected' : ''}>
                                     ${cat.categoryName}
                                 </option>
                             </c:forEach>
@@ -299,21 +299,29 @@
                 </div>
 
                 <!-- Image Upload -->
-                <div class="form-group">
-                    <label>IMAGE <span style="font-weight:400;color:#b0a09a;letter-spacing:0">(Optional)</span></label>
-                    <div class="image-upload-area"
-                         onclick="document.getElementById('imageFile').click()">
-                        <i class="fa-solid fa-image"></i>
-                        <p>Click to upload a photo of this item</p>
-                        <input type="file" id="imageFile" name="imageFile"
-                               accept="image/*" onchange="previewImage(event)">
-                    </div>
-                    <img id="image-preview" alt="Preview">
-                </div>
+               <div class="form-group">
+				    <label>IMAGE <span style="font-weight:400;color:#b0a09a;letter-spacing:0">(Optional)</span></label>
+				
+				    <!-- Clickable area — preview replaces icon inside here -->
+				    <div class="image-upload-area" id="uploadArea"
+				         onclick="document.getElementById('imageFile').click()">
+				        <i class="fa-solid fa-image" id="uploadIcon"></i>
+				        <p id="uploadText">Click to upload a photo of this item</p>
+				        <img id="image-preview" alt="Preview"
+				             style="display:none; width:100%; max-height:140px; 
+				                    object-fit:cover; border-radius:8px; margin-top:8px;">
+				    </div>
+				
+				    <!-- Hidden input outside -->
+				    <input type="file" id="imageFile" name="imageFile"
+				           accept="image/*"
+				           onchange="previewImage(event)"
+				           style="display:none">
+				</div>
 
                 <!-- Actions -->
                 <div class="modal-actions">
-                    <a href="${pageContext.request.contextPath}/menu" class="btn-cancel">
+                    <a href="${pageContext.request.contextPath}/menumanagement" class="btn-cancel">
                         Cancel
                     </a>
                     <button type="submit" class="btn-submit">
@@ -326,14 +334,19 @@
     </div>
 
 <script>
-    function previewImage(event) {
-        const preview = document.getElementById('image-preview');
-        const file = event.target.files[0];
-        if (file) {
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-        }
+function previewImage(event) {
+    const preview = document.getElementById('image-preview');
+    const icon    = document.getElementById('uploadIcon');
+    const text    = document.getElementById('uploadText');
+    const file    = event.target.files[0];
+
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+        icon.style.display    = 'none';   // hide icon
+        text.style.display    = 'none';   // hide text
     }
+}
 </script>
 
 </body>
