@@ -10,6 +10,7 @@ public class StockItem {
     private double lowStockThreshold;
     private boolean isBakery;
     
+    
 	public boolean isBakery() {
 		return isBakery;
 	}

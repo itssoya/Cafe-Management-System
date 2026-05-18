@@ -52,9 +52,10 @@ public class RecipeManagementService {
             } catch (SQLException e) {
                 throw new ServiceException("Database error checking: " + name);
             }
+        }
             
             try {
-                 AddRecipeDAO.addRecipes(menuItemId, ingredients);
+            	AddRecipeDAO.addRecipes(menuItemId, ingredients);
 
             } catch (SQLException e) {
             	switch (e.getErrorCode()) {
@@ -72,7 +73,7 @@ public class RecipeManagementService {
     	                "Something went wrong", e);
     			}
             }
-	}
+	
 	
 }
 }
