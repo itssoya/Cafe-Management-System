@@ -10,7 +10,7 @@ import com.beanbrew.util.DBConnection;
 
 public class CheckCategoryDAO {
 	
-	private static final String query = "SELECT * FROM category WHERE category_name = ?";
+	private static final String query = "SELECT * FROM category WHERE category_id = ?";
 	
 	public static Category checkCatgeory(String category_name) throws SQLException {
 		

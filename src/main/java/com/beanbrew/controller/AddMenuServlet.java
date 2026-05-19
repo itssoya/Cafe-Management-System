@@ -52,6 +52,7 @@ public class AddMenuServlet extends HttpServlet {
 		} catch (SQLException e) {
 			
 			request.setAttribute(MessageKeysUtil.ERROR, "Falied to load Categories");
+			return;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/addmenu.jsp");
@@ -66,7 +67,7 @@ public class AddMenuServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String itemName    = request.getParameter("itemName");
-        String category    = request.getParameter("categoryName");
+        String category    = request.getParameter("categoryId");
         String priceParam  = request.getParameter("price");
         String description = request.getParameter("description");
         Part imagePart     = request.getPart("imageFile");
@@ -76,6 +77,7 @@ public class AddMenuServlet extends HttpServlet {
             || priceParam == null || priceParam.trim().isEmpty()) {
 
                 request.setAttribute(MessageKeysUtil.ERROR, "Item name, category and price are required.");
+                doGet(request, response);
                 return;
             }
         
@@ -85,6 +87,7 @@ public class AddMenuServlet extends HttpServlet {
         	
         	if(price <0) {
         		request.setAttribute(MessageKeysUtil.ERROR, "Price cannot be negative.");
+        		doGet(request, response);
         		return;
         	}
         	
@@ -103,16 +106,19 @@ public class AddMenuServlet extends HttpServlet {
         	
             request.setAttribute(MessageKeysUtil.ERROR, "Price must be a valid number.");
             doGet(request, response);
+            return;
             
         }catch (TypeMismatchException e) {
         	
             request.setAttribute(MessageKeysUtil.ERROR, "Only image files are allowed (jpg, png, gif, webp).");
             doGet(request, response);
+            return;
 
         } catch (ServiceException e) {
         	
             request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
             doGet(request, response);
+            return;
         }
 	}
 

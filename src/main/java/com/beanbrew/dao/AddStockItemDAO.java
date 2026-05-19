@@ -13,6 +13,16 @@ public class AddStockItemDAO {
 	        "INSERT INTO stock_items (stock_name, stock_unit, quantity_in_stock, updated_at, low_stock_threshold, is_bakery) " +
 	        "VALUES (?, ?, ?, now(),?,?)";
 	
+	/**
+	 * Adds a new stock item record to the database.
+	 *
+	 * @param item The StockItem object containing the name, unit, quantity in stock,
+	 *             low stock threshold, and bakery flag to be inserted.
+	 * @return true if the stock item was successfully added (exactly one row affected),
+	 *         false otherwise.
+	 * @throws SQLException if a database access error occurs.
+	 */
+	
 	public boolean addStockItem(StockItem item) throws SQLException{
 		
 		try (Connection con = DBConnection.buildConnection();

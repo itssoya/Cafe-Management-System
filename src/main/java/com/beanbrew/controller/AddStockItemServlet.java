@@ -60,7 +60,7 @@ public class AddStockItemServlet extends HttpServlet {
 				
 	        }
 		
-		if (unit != "kg" || unit != "ltr" || unit != "pcs") {
+		if (!unit.equals("kg") && !unit.equals("ltr") && !unit.equals("pcs")) {
 		            
 					request.setAttribute(MessageKeysUtil.ERROR, "Invalid Unit Type");
 					request.getRequestDispatcher("/WEB-INF/pages/addstock.jsp").forward(request, response);

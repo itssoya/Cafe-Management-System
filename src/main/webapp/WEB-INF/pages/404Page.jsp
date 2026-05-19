@@ -52,7 +52,7 @@
 			</div>
 		</div>
 
-	<section class="checker bottom" >
+	<section class="checker" >
 		<br><br><br><br><br><br>
 	</section>
 	<script src="${pageContext.request.contextPath}/javascript/main.js"></script>
