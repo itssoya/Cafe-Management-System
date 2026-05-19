@@ -1,0 +1,175 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	font-family:'Poppins', sans-serif;
+}
+
+body{
+	background:#F7F1E8;
+	color:#1E34B7;
+}
+nav{ 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+
+    color: #16319E;
+    background-color: #FFF0D8;
+    padding: .75rem 3.75rem .75rem 3.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+nav>.links{ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    list-style-type: none;
+    gap:4rem;
+}
+.links>li:hover{
+    text-decoration: underline;
+}
+.links>li>a{
+    text-decoration: none;
+    color: #16319E;
+}
+
+.logo img{
+    max-width: 20rem;
+    height: auto;
+}
+
+.profile main{
+    font-weight: 700;
+}
+.profile main::before{
+    content: "Welcome,";
+    font-weight: 500;
+    margin-right: 0.5rem;
+    font-size: 0.7em;
+}
+nav button{
+    color: #16319E;
+    background-color:#FFF0D8; 
+    border-style: none;
+    margin-top:0rem;
+    padding: 0.5rem;
+    border-radius: 0.2rem; 
+}
+nav button:hover , nav button:active{
+    background-color: #ffe1b0;
+}
+.hero-section{
+	width:100%;
+	min-height:85vh;
+
+	display:flex;
+	padding: 40px 0 40px 50px;
+	gap:40px;
+}
+
+.hero-left{
+	flex:1;
+
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+
+.flower{
+	font-size:80px;
+	color:#E7C76A;
+	margin-bottom:20px;
+}
+
+.hero-left h1{
+	font-size:75px;
+	line-height:1.1;
+	font-weight:500;
+	margin-bottom:30px;
+}
+
+.hero-left h1 span{
+	font-weight:700;
+}
+
+.hero-left p{
+	font-size:24px;
+	line-height:1.7;
+	color:#222;
+
+	max-width:650px;
+	margin-bottom:30px;
+}
+
+.menu-btn{
+	width:fit-content;
+
+	text-decoration:none;
+	color:#1E34B7;
+	font-size:24px;
+	font-weight:600;
+
+	margin-bottom:40px;
+}
+
+.search-box{
+	width:500px;
+	height:60px;
+
+	background:white;
+	border-radius:40px;
+
+	display:flex;
+	align-items:center;
+
+	padding:0 25px;
+}
+
+.search-box input{
+	width:100%;
+	border:none;
+	outline:none;
+
+	font-size:18px;
+	background:transparent;
+}
+
+/* RIGHT */
+
+.hero-right{
+	flex:1;
+
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin: 0px;
+	padding : 0px;
+}
+
+.hero-right img{
+	width:100%;
+	max-width:700px;
+	margin-top : 15px;
+
+	border-radius:10px;
+	object-fit:cover;
+}
+
+.checker {
+    background-image: url(../images/checker.svg);
+    background-repeat: repeat-x;
+    position: relative;   
+    bottom: 0;   
+    left: 0;
+    width: 100%;   
+    height: 15vh;   
+    margin-top: 1rem;  
+    overflow: hidden;
+}

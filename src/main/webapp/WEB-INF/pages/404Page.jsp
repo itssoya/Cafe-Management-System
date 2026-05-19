@@ -10,7 +10,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap" rel="stylesheet">
 	<title>BeanBrew : 404</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/404Page.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HomePage.css">
 </head>
 <body>
 	<nav>
