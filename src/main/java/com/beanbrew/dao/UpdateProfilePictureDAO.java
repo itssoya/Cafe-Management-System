@@ -13,8 +13,17 @@ public class UpdateProfilePictureDAO {
 	
 	private User user = new User();
 	
+	/**
+	 * Uploads the profile image URL (from the local machine) to the database.
+	 *
+	 * @param profileImageUrl The URL of the profile image to be stored.
+	 * @return true if the profile image was successfully uploaded (exactly one row affected),
+	 *         false otherwise.
+	 * @throws SQLException if a database access error occurs.
+	 */
+
 	
-	public boolean updateProfilePicture (String profileImageUrl)  {
+	public boolean updateProfilePicture (String profileImageUrl) throws SQLException  {
 		
 		
 		try(Connection con = DBConnection.buildConnection();
@@ -28,11 +37,7 @@ public class UpdateProfilePictureDAO {
 			return rowsAffected == 1;
 		
 			
-		} catch (SQLException e){
-			
-			e.printStackTrace();
-			return false;
-		}
+		} 
 	}
 
 }

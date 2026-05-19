@@ -288,7 +288,7 @@
 							</a>
 						</c:when>
 						<c:otherwise>
-							<%-- Disabled state when on last page --%>
+						
 							<span class="page-btn next-btn disabled"> Next <i
 								class="fa-solid fa-chevron-right"></i>
 							</span>

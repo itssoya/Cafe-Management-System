@@ -5,7 +5,21 @@ public class RecipeItem {
 	private int stockItemId;      
 	private int menuItemId; 
 	private double quantityUsed;
+	private String stockName;
+	private String unit;
 	
+	public String getStockName() {
+		return stockName;
+	}
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 	public int getStockItemId() {
 		return stockItemId;
 	}

@@ -17,7 +17,7 @@ public class AddRecipeDAO {
 	        con.setAutoCommit(false);
 
 	        try (PreparedStatement ps = con.prepareStatement(
-	                "INSERT INTO recipes (menu_item_id, stock_item_id, quantity_used) VALUES (?, ?, ?)")) {
+	                "INSERT INTO recipe (menu_item_id, stock_item_id, quantity_used) VALUES (?, ?, ?)")) {
 
 	            for (RecipeItem ingredient : ingredients) {
 	                ps.setInt(1, menuItemId);
