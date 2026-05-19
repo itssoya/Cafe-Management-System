@@ -12,7 +12,7 @@
 	<title>BeanBrew</title>  
 </head>
 <body>
-	<!-- NAVBAR -->
+	
 	<nav>
 		<div class="logo">
 			<img src ="${pageContext.request.contextPath}/images/logo.svg">
@@ -22,7 +22,7 @@
 			<li><a href="#">Home</a></li>
 			<li><a href="#">About</a></li>
 			<li><a href="#">Menu</a></li>
-			<li><a href="#">Rating</a></li>
+			<li><button onclick="window.location.href='${pageContext.request.contextPath}/review'">Rating</button></li>
 		</div>
 		<div class="profile">
 			<button type="button" class="profilePage" onclick="toggleSidebar()">
@@ -31,10 +31,9 @@
 		</div>
 	</nav>
 
-	<!-- Sidebar -->
+	
 	<div id="sidebar" class="sidebar">
 		<div class="sidebar-content">
-			<!-- Logged Out View -->
 			<div id="loggedOutView">
 				<div class="guest-header">
 					<img src ="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg">
@@ -49,7 +48,7 @@
 	</div>
 
 
-	<!-- Hero Section -->
+	
 	<section class="hero">
 		<main>
 			<div>
@@ -69,7 +68,7 @@
 		</div>
 	</section>
 
-	<!-- intro text -->
+	
 	<section class="intro">'
 		<p>Welcome to Bean Brew, where every cup tells a story and every visit feels like a little escape from the everyday rush. We’re all about serving freshly brewed coffee, handcrafted drinks, and delicious bites in a space filled with cozy energy, good music, and even better company. Whether you’re stopping by for your morning caffeine boost or settling in for a long catch-up session, Bean Brew is the kind of place that makes you want to stay awhile.</p><br>
 		<p>At Bean Brew, we believe coffee is more than just a drink, it’s a moment to slow down, connect, and enjoy life’s simple pleasures. From smooth lattes and bold espressos to sweet pastries baked fresh daily, everything we serve is made with care and a whole lot of love. So grab your favorite mug, find your perfect seat, and let the comforting aroma of freshly brewed coffee welcome you home.</p>
@@ -79,7 +78,7 @@
 		<br><br><br><br><br><br><br>
 	</section>
 	
-	<!-- menu section -->
+	
 	<section class="menu">
 		<h1>We Recommend...</h1>
 		<header>Coffee Brew</header>
@@ -152,7 +151,7 @@
 
 	</section>
 
-	<!-- footer --> 
+	
 	<footer>
 		<div class="footer-logo">
 			<img src ="${pageContext.request.contextPath}/images/bigBrew.svg">
