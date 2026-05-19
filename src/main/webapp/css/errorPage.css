@@ -185,7 +185,7 @@ nav button:hover , nav button:active{
 .checker{
 	background-image: url(../images/checker.svg);
 	background-repeat: repeat-x;
-	margin: 2rem -5rem;
+	margin: 1.5rem 0rem;
 	overflow: hidden;
 }
 
