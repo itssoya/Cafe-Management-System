@@ -9,112 +9,73 @@
 
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	
+
+    
+
     <title>Login Page</title>
 </head>
 <body>
-<i class="fa-solid fa-mug-hot bgCup"></i>
-
-<i class="fa-solid fa-utensils bgFood"></i>
-<div class="page">
-
-    <!-- HEADER -->
-    <div class="topLogo">
-
-    <div class="logoBox">
-       <a href ="${pageContext.request.contextPath}/index"> <i class="fa-solid fa-mug-hot"></i></a>
-    </div>
-
-    <h2>BeanBrew</h2>
-
-	</div>
-
-    <!-- LOGIN CARD -->
-    <div class="loginCard">
-
-        <h3>Sign In</h3>
-
+<nav>
+     <div class="logo">
+            <img src="images/logo.svg" alt="BeanBrew logo">
+     </div>
+        <div class="links">
+            <li><a href="${pageContext.request.contextPath}/index">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Rating</a></li>
+        </div>
+      
+</nav>
+    <div class="layout">
+    <div class="form">
+        <h2>Hopping Back !</h2>
         <c:if test="${not empty error}">
-            <p class="error">${error}</p>
+            <p style="color: red; text-align: center; margin-bottom: 12px;">
+                ${error}
+            </p>
         </c:if>
-
-        <form action="${pageContext.request.contextPath}/login"
-        method="post">
-
-            <!-- USERNAME -->
-            <label>Username</label>
-
-            <div class="inputBox">
-				<i class="fa-solid fa-user"></i>
-                <input
-                type="text"
-                name="username"
-                placeholder="Enter your username"
-                required>
-
-            </div>
-
-            <!-- PASSWORD HEADER -->
-            <div class="passHeader">
-
-                <label>Password</label>
-
-                <a href="#">Forgot Password?</a>
-
-            </div>
-
-            <!-- PASSWORD -->
-            <div class="inputBox">
-
-                <i class="fa-solid fa-lock"></i>
-
-                <input
-                type="password"
-                name="password"
-                placeholder="********"
-                required>
-
-            </div>
-
-            <!-- REMEMBER -->
-            <div class="remember">
-                <input type="checkbox">
-                Remember Me
-            </div>
-
-            <button type="submit">
-
-                Sign In
-
-            </button>
-
-        </form>
-
-        <div class="bottomText">
-
-            NEW HERE?
-
-            <a href="${pageContext.request.contextPath}/signup">
-                SIGNUP
-            </a>
-
-        </div>
-
-    </div>
-
-    <!-- FOOTER ICONS -->
-    <div class="footerMenu">
-		<div>
-           <a href="${pageContext.request.contextPath}/index"> HOME </a>
-        </div>
-		
-        <div>
-           <a href="#"> MENU </a>
-        </div>
         
-    </div>
+        <form action="${pageContext.request.contextPath}/login" method="post">
 
+            <!-- Username -->
+            <div class="field">
+                <label>Username</label>
+                <div> 
+                    <input type="text" name="username" placeholder="ILoveCoffee123@01" required>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="field passwordField">
+                <label>Password</label>
+                <div>
+                    <input type="password" placeholder="***********" name="password" required>
+                </div>
+            </div>
+
+            
+            <button class="submitButton" type="submit">
+                Login
+            </button>
+            
+            
+        </form>
+        <div class="signUp">
+            New here ? Proceed to 
+            <a href="${pageContext.request.contextPath}/signup">SignUp</a>
+        </div>
+        <div class="forgotPass">
+            	<a href="#">Forgot Password ?</a>
+        </div>
+
+    </div>
+    <div class="backHome">
+        Back to <a href="${pageContext.request.contextPath}/index">Home →</a>
+    </div>
+</div>
+<div class = "checkboard">
+    <img src="images/main_container/checkboard.svg" alt="BeanBrew logo">
 </div>
 
 </body>

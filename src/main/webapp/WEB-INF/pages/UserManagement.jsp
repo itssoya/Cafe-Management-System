@@ -42,21 +42,39 @@
 		<!-- SIDEBAR -->
 		<aside class="sidebar">
 
-			<div class=sidebar-content>
+
+			<div class="sidebar-content">
+				<img
+					src="${pageContext.request.contextPath}/images/main_container/logo.svg"
+					class="main-icon">
 				<h1>BrewBar</h1>
+
 				<ul class="category">
+					<li><a href=""><img
+							src="${pageContext.request.contextPath}/images/panel/dashboard.svg"
+							class="icon"> <span>Dashboard</span></a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/admindashboard"><span
-							class="material-icons">dashboard</span>Dashboard</a></li>
+						href="${pageContext.request.contextPath}/menumanagement"><img
+							src="${pageContext.request.contextPath}/images/panel/menu.svg"
+							class="icon"> <span>Menu</span></a></li>
+					<li><a href=""><img
+							src="${pageContext.request.contextPath}/images/panel/users.svg"
+							class="icon"> <span>Users</span></a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/menumanagement"><span
-							class="material-icons">menu_book</span> Menu</a></li>
-					<li class="active"><a href="#"><span
-							class="material-icons">account_box</span> Users</a></li>
+						href="${pageContext.request.contextPath}/stockmanagement"><img
+							src="${pageContext.request.contextPath}/images/panel/inventory.svg"
+							class="icon"> <span>Inventory</span></a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/stockmanagement"><span
-							class="material-icons">inventory_2</span>Inventory</a></li>
-					<li class="logout"><a href=""><span class="material-icons">logout</span>Logout</a></li>
+						href="${pageContext.request.contextPath}/ordermanagement"> <img
+							src="${pageContext.request.contextPath}/images/panel/order.svg"
+							class="icon"> <span>Orders</span>
+					</a></li>
+				</ul>
+
+				<ul class="bottom">
+					<li><a href="#"><img
+						src="${pageContext.request.contextPath}/images/panel/logout.svg"
+						class="icon"> <span>Logout</span></a></li>
 				</ul>
 			</div>
 
@@ -144,10 +162,10 @@
 								<td><span class="user-id">${u.userId}</span></td>
 								<td>
 									<div class="profile">
-												<div class="avatar">
-													<i class="fa-solid fa-user"></i>
-												</div>
-											
+										<div class="avatar">
+											<i class="fa-solid fa-user"></i>
+										</div>
+
 										<div class="user-info">
 											<span class="user-id">${u.username}</span> <span
 												class="email">${u.email}</span>
@@ -288,7 +306,7 @@
 							</a>
 						</c:when>
 						<c:otherwise>
-						
+
 							<span class="page-btn next-btn disabled"> Next <i
 								class="fa-solid fa-chevron-right"></i>
 							</span>
