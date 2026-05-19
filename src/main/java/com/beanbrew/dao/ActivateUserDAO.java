@@ -10,6 +10,16 @@ public class ActivateUserDAO {
 	
 	private static final String query = "UPDATE users SET active_status = ? WHERE user_id = ?";
 	
+	/**
+	 * Activates a user account in the database by setting the active status to true.
+	 *
+	 * @param userID The unique identifier of the user to be activated.
+	 * @return true if the user was successfully activated (exactly one row affected),
+	 *         false otherwise.
+	 * @throws SQLException if a database access error occurs.
+	 */
+
+	
 		public boolean activateUser( int userID) throws SQLException {
 				
 				try (Connection con = DBConnection.buildConnection();
