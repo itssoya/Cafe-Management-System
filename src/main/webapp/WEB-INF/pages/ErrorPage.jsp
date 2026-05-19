@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap" rel="stylesheet">
 	<title>BeanBrew : Error</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/errorPage.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HomePage.css">
 </head>
 <body>
 	<nav>
@@ -55,7 +56,7 @@
 		</div>
 	</div>
 
-	<section class="checker bottom" >
+	<section class="checker" >
 		<br><br><br><br><br><br>
 	</section>
 	<script src="${pageContext.request.contextPath}/javascript/main.js"></script>

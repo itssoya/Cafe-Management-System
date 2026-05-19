@@ -16,7 +16,7 @@ import com.beanbrew.util.ServiceException;
 /**
  * Servlet implementation class OrderManagementServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/OrderManagementServlet" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/ordermanagement" })
 public class OrderManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OrderService orderService = new OrderService();
@@ -40,12 +40,21 @@ public class OrderManagementServlet extends HttpServlet {
             List<Order> orders = orderService.getAllOrders();
             request.setAttribute("orders", orders);
 
+            long pending   = orders.stream().filter(o -> "PENDING".equals(o.getStatus())).count();
+            long completed = orders.stream().filter(o -> "COMPLETED".equals(o.getStatus())).count();
+            long cancelled = orders.stream().filter(o -> "CANCELLED".equals(o.getStatus())).count();
+
+            request.setAttribute("totalOrders",     orders.size());
+            request.setAttribute("pendingOrders",   pending);
+            request.setAttribute("completedOrders", completed);
+            request.setAttribute("cancelledOrders", cancelled);
+
         } catch (ServiceException e) {
         	
             request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
         }
 
-        request.getRequestDispatcher("/WEB-INF/pages/ordermanagement.jsp")
+        request.getRequestDispatcher("/WEB-INF/pages/Ordermanagement.jsp")
                .forward(request, response);
 	}
 
@@ -58,6 +67,7 @@ public class OrderManagementServlet extends HttpServlet {
 		
 		String action  = request.getParameter("action");
         String idParam = request.getParameter("orderId");
+        
 
         if (idParam == null || idParam.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/ordermanagement");
