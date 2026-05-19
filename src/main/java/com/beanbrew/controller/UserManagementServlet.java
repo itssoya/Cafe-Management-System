@@ -124,7 +124,7 @@ public class UserManagementServlet extends HttpServlet {
             }
         }
         	
-        	request.setAttribute( MessageKeysUtil.SUCCESS, "Action applied successfully.");
+        	SessionUtil.setAttribute(request,MessageKeysUtil.SUCCESS,"Action applied successfully.");
         
         } catch (ServiceException e) {
         	
