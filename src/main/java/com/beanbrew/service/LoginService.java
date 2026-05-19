@@ -31,9 +31,12 @@ public class LoginService {
             }
             
             if (!user.isVerified()) throw new ServiceException ("Wait for vendor to approve account");
+            
+            if (!user.isActive()) throw new ServiceException ("Account has been deleted");
 
             return user;
-
+            
+            
         } catch (SQLException e) {
         	
         	e.printStackTrace();

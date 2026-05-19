@@ -72,7 +72,7 @@
 				</ul>
 
 				<ul class="bottom">
-					<li><a href="#"><img
+					<li><a href="${pageContext.request.contextPath}/logout"><img
 						src="${pageContext.request.contextPath}/images/panel/logout.svg"
 						class="icon"> <span>Logout</span></a></li>
 				</ul>
@@ -162,9 +162,18 @@
 								<td><span class="user-id">${u.userId}</span></td>
 								<td>
 									<div class="profile">
-										<div class="avatar">
-											<i class="fa-solid fa-user"></i>
-										</div>
+										<c:choose>
+							                    <c:when test="${not empty u.profileImageURL}">
+							                        <img class="profile-img"
+													     src="${pageContext.request.contextPath}/uploads/user_img/${u.profileImageURL}"
+													     alt="${u.username}">
+							                    </c:when>
+							                    <c:otherwise>
+							                        <div class="avatar">
+							                            <i class="fa-solid fa-user"></i>
+							                        </div>
+							                    </c:otherwise>
+							                </c:choose>
 
 										<div class="user-info">
 											<span class="user-id">${u.username}</span> <span

@@ -437,6 +437,19 @@ tbody tr:hover {
     font-weight: 600;
 }
 
+.profile img {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 1px solid #dbe2ff;
+
+    flex-shrink: 0;
+}
+
 .email {
     font-size: 0.75rem;
     color: #7b86b2;

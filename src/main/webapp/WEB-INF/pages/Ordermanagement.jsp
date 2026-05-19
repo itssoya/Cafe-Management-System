@@ -46,7 +46,7 @@
             </ul>
 
             <ul class="bottom">
-					<li><a href="#"><img
+					<li><a href="${pageContext.request.contextPath}/logout"><img
 						src="${pageContext.request.contextPath}/images/panel/logout.svg"
 						class="icon"> <span>Logout</span></a></li>
 				</ul>
