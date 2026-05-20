@@ -19,10 +19,10 @@
 			
 		</div>
 		<div class="links">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">About</a></li>
+			<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/aboutUs">About</a></li>
 			<li><a href="${pageContext.request.contextPath}/menu">Menu</a>
-			<li><a href="#">Rating</a></li>
+			<li><a href="${pageContext.request.contextPath}/rating">Rating</a></li>
 		</div>
 		<div class="profile">
 			<button type="button" class="profilePage" onclick="toggleSidebar()">
@@ -61,7 +61,7 @@
 					<div>is Where Moments</div>			
 					<div>Happen</div>	
 				</div>
-				<button class="ctaButton">View Menu</button>
+				<button onclick="window.location.href='${pageContext.request.contextPath}/menu'" class="ctaButton" >View Menu</button>
 			</div> 
 		</main>
 		<div class="imageframe">
@@ -127,7 +127,7 @@
 				<p>A delicious mix of espresso, chocolate, and steamed milk topped with indulgent sweetness.</p>
 			</div>
 		</section> 
-		<button class="orderButton">Order Now</button>
+		<button onclick="window.location.href='${pageContext.request.contextPath}/menu'" class="orderButton" >Order Now</button>
 	</section>	
 
 	<!-- moments -->
