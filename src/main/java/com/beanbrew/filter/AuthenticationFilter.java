@@ -56,12 +56,23 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			if (isLoggedIn) {
 				// User is logged in, allow the request to proceed to the destination
 				// In my case, now go to that servlet which I have called
+				httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+		        httpResponse.setHeader("Pragma", "no-cache");
+		        httpResponse.setDateHeader("Expires", 0);
+		        
 					chain.doFilter(request, response);
 			} else {
 				// User is not logged in, redirect to login page
 				// Note: Avoid caching the dashboard so the back button doesn't reveal data
-				httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+				
+				String requestedUrlByUser = httpRequest.getRequestURI();
+
+			    // 2. Save it to the session
+			    httpRequest.getSession().setAttribute("intendedUrl", requestedUrlByUser );
+
+			    // 3. Redirect to login
+			    httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+
 				
 				return;
 			}
