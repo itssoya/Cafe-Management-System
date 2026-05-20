@@ -29,7 +29,7 @@
 				<h1>BrewBar</h1>
 
 				<ul class="category">
-					<li><a href="#"> <img
+					<li><a href="${pageContext.request.contextPath}/admindashboard"> <img
 							src="${pageContext.request.contextPath}/images/panel/dashboard.svg"
 							class="icon"> <span>Dashboard</span>
 					</a></li>
@@ -56,6 +56,9 @@
 				</ul>
 
 				<ul class="bottom">
+					<li><a href="${pageContext.request.contextPath}/index"> <i
+						class="fa fa-home icon"></i> <span>Home</span>
+					</a></li>
 					<li><a href="${pageContext.request.contextPath}/logout"><img
 							src="${pageContext.request.contextPath}/images/panel/logout.svg"
 							class="icon"> <span>Logout</span></a></li>
