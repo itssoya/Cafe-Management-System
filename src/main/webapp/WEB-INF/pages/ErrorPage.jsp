@@ -55,8 +55,7 @@
 		</div>
 	</div>
 
-	<section class="checker bottom" >
-		<br><br><br><br><br><br>
+	<section class="checker" >
 	</section>
 	<script src="${pageContext.request.contextPath}/javascript/main.js"></script>
 </body>

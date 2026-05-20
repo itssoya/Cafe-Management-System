@@ -17,24 +17,61 @@
     <!-- BLURRED BACKGROUND (mirrors stockmanagement layout) -->
     <div class="page-blur-bg">
         <div class="NavBar">
-            <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search inventory items..." disabled>
-            </div>
-        </div>
-        <div class="container">
-            <aside class="sidebar">
-                <div class="sidebar-content">
-                    <h1>BrewBar</h1>
-                    <ul class="category">
-                        <li><span class="material-icons">dashboard</span> Dashboard</li>
-                        <li><span class="material-icons">menu_book</span> Menu</li>
-                        <li><span class="material-icons">account_box</span> Users</li>
-                        <li class="active"><span class="material-icons">inventory_2</span> Inventory</li>
-                        <li class="logout"><span class="material-icons">logout</span> Logout</li>
-                    </ul>
-                </div>
-            </aside>
+		<form action="${pageContext.request.contextPath}/usermanagement"
+			method="get">
+
+			<input type="hidden" name="isVerified" value="${isVerified}">
+			<input type="hidden" name="isAdmin" value="${isAdmin}">
+
+			<div class="search-bar">
+				<i class="fa-solid fa-magnifying-glass"></i> <input type="text"
+					name="search" value="${search}"
+					placeholder="Search by username or email...">
+				<button type="submit">Search</button>
+			</div>
+		</form>
+
+	</div>
+
+	<div class="container">
+		<!-- SIDEBAR -->
+		<aside class="sidebar">
+
+			
+				<div class="sidebar-content">
+					<img
+						src="${pageContext.request.contextPath}/images/main_container/logo.svg"
+						class="main-icon">
+					<h1>BrewBar</h1>
+
+					<ul class="category">
+						<li><a href=""><img
+							src="${pageContext.request.contextPath}/images/panel/dashboard.svg"
+							class="icon"> <span>Dashboard</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/menumanagement"><img
+							src="${pageContext.request.contextPath}/images/panel/menu.svg"
+							class="icon"> <span>Menu</span></a></li>
+						<li ><a href=""><img
+							src="${pageContext.request.contextPath}/images/panel/users.svg"
+							class="icon"> <span>Users</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/stockmanagement"><img
+							src="${pageContext.request.contextPath}/images/panel/inventory.svg"
+							class="icon"> <span>Inventory</span></a></li>
+						<li><a
+						href="${pageContext.request.contextPath}/ordermanagement"> <img
+							src="${pageContext.request.contextPath}/images/panel/order.svg"
+							class="icon"> <span>Orders</span>
+					</a></li>
+					</ul>
+
+					<ul class="bottom">
+					<li><img
+						src="${pageContext.request.contextPath}/images/panel/logout.svg"
+						class="icon"> <span>Logout</span></li>
+				</ul>
+				</div>
+
+		</aside>
             <div class="stock-registry-container">
                 <div class="pageHeader">
                     <div class="pageHeader-left">

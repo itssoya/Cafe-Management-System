@@ -14,48 +14,47 @@
 </head>
 <body>
 
-<div class="layout">
+<div class="container">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <div class="sidebar-top">
-            <div class="brand-avatar">B</div>
-            <div class="brand-info">
-                <span class="brand-name">BrewBar</span>
-                <span class="brand-sub">Management Portal</span>
-                
-            </div>
+        <div class="sidebar-content">
+            <img src="${pageContext.request.contextPath}/images/main_container/logo.svg" class="main-icon">
+            <h1>BrewBar</h1>
+
+            <ul class="category">
+                <li><a href="#">
+                    <img src="${pageContext.request.contextPath}/images/panel/dashboard.svg" class="icon">
+                    <span>Dashboard</span>
+                </a></li>
+                <li><a href="${pageContext.request.contextPath}/menumanagement">
+                    <img src="${pageContext.request.contextPath}/images/panel/menu.svg" class="icon">
+                    <span>Menu</span>
+                </a></li>
+                <li><a href="${pageContext.request.contextPath}/usermanagement">
+                    <img src="${pageContext.request.contextPath}/images/panel/users.svg" class="icon">
+                    <span>Users</span>
+                </a></li>
+                <li><a href="${pageContext.request.contextPath}/stockmanagement">
+                    <img src="${pageContext.request.contextPath}/images/panel/inventory.svg" class="icon">
+                    <span>Inventory</span>
+                </a></li>
+                <li><a href="${pageContext.request.contextPath}/ordermanagement">
+                    <img src="${pageContext.request.contextPath}/images/panel/order.svg" class="icon">
+                    <span>Orders</span>
+                </a></li>
+            </ul>
+
+            <ul class="bottom">
+					<li><a href="${pageContext.request.contextPath}/logout"><img
+						src="${pageContext.request.contextPath}/images/panel/logout.svg"
+						class="icon"> <span>Logout</span></a></li>
+				</ul>
         </div>
-
-        <a href="${pageContext.request.contextPath}/addmenu" class="btn-new-entry">
-            <i class="fa-solid fa-plus"></i> New Entry
-        </a>
-
-        <nav class="sidebar-nav">
-            <a href="#" class="nav-item">
-                <span class="material-icons">dashboard</span> Dashboard
-            </a>
-            <a href="${pageContext.request.contextPath}/menumanagement" class="nav-item active">
-                <span class="material-icons">inventory_2</span> Inventory
-            </a>
-            <a href="#" class="nav-item">
-                <span class="material-icons">receipt_long</span> Orders
-            </a>
-            <a href="#" class="nav-item">
-                <span class="material-icons">account_box</span> User Management
-            </a>
-            <a href="#" class="nav-item">
-                <span class="material-icons">settings</span> Settings
-            </a>
-        </nav>
-
-        <a href="#" class="nav-item logout">
-            <span class="material-icons">logout</span> Logout
-        </a>
     </aside>
 
     <!-- MAIN -->
-    <div class="main">
+    <div class="main-content">
 
         <!-- TOP BAR -->
         <div class="topbar">
@@ -68,10 +67,9 @@
                     <form action="${pageContext.request.contextPath}/menumanagement" method="get">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" name="search" value="${search}" placeholder="Find an item...">
+                        <button type="submit">Search</button>
                     </form>
                 </div>
-                <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-                <button class="icon-btn"><i class="fa-regular fa-circle-user"></i></button>
             </div>
         </div>
 
@@ -132,13 +130,19 @@
         </div>
 
         <!-- CATEGORY FILTER TABS -->
-        <div class="filter-tabs">
-            <button class="tab active" onclick="filterTab(this, 'all')">All Items</button>
-            <c:forEach var="cat" items="${categories}">
-                <button class="tab" onclick="filterTab(this, '${cat.categoryName}')">
-                    ${cat.categoryName}
-                </button>
-            </c:forEach>
+        <div class="menu-controls">
+            <div class="filter-tabs">
+                <button class="tab active" onclick="filterTab(this, 'all')">All Items</button>
+                <c:forEach var="cat" items="${categories}">
+                    <button class="tab" onclick="filterTab(this, '${cat.categoryName}')">
+                        ${cat.categoryName}
+                    </button>
+                </c:forEach>
+            </div>
+            
+            <a href="${pageContext.request.contextPath}/addmenu" class="btn-new-entry">
+                <i class="fa-solid fa-plus"></i> Add Menu
+            </a>
         </div>
 
         <!-- MENU TABLE -->
@@ -200,10 +204,12 @@
                                                class="btn-edit">
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
+                                            <div class = "addRecipe">
                                             <a href="${pageContext.request.contextPath}/addrecipe?menuItemId=${item.itemId}"
 												   class="btn-recipe" title="Add Recipe">
-												    <i class="fa-solid fa-book-open"></i>
+												    Add Recipe
 												</a>
+												</div>
                                             <form action="${pageContext.request.contextPath}/menumanagement"
                                                   method="post" style="display:inline"
                                                   onsubmit="return confirm('Delete ${item.itemName}?')">
@@ -281,7 +287,7 @@
 
     </div>
 </div>
-
+</body>
 <script>
     function filterTab(btn, category) {
         document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
@@ -296,6 +302,4 @@
         });
     }
 </script>
-
-</body>
 </html>

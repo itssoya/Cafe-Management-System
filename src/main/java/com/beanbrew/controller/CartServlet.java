@@ -19,7 +19,7 @@ import com.beanbrew.util.SessionUtil;
 /**
  * Servlet implementation class CartServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/CartServlet" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/cart" })
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -51,7 +51,7 @@ public class CartServlet extends HttpServlet {
         request.setAttribute("cart",  cart);
         request.setAttribute("total", total);
 
-        request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/Cart.jsp").forward(request, response);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class CartServlet extends HttpServlet {
             	
                 request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
                 request.setAttribute("cart", cart);
-                request.getRequestDispatcher("/WEB-INF/pages/cart.jsp")
+                request.getRequestDispatcher("/WEB-INF/pages/Cart.jsp")
                        .forward(request, response);
             }
             

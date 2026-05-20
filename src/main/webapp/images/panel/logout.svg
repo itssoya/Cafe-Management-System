@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="128"
+     height="128"
+     fill="none">
+
+    <!-- Door -->
+    <path d="M4 3L13 1V23L4 21V3Z"
+          stroke="#16319E"
+          stroke-width="2"
+          stroke-linejoin="round"/>
+
+    <!-- Door handle -->
+    <rect x="8" y="10"
+          width="1.5"
+          height="4"
+          rx="0.75"
+          fill="#16319E"/>
+
+    <!-- Arrow -->
+    <path d="M13 12H22M19 9L22 12L19 15"
+          stroke="#16319E"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+</svg>

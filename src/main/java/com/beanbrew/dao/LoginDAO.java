@@ -30,6 +30,7 @@ public class LoginDAO {
 					user.setPassword(resultSet.getString("password"));
 					user.setCreatedAt(resultSet.getString("created_at"));
 					user.setIsAdmin(resultSet.getBoolean("is_admin"));
+					user.setIsActive(resultSet.getBoolean("active_status"));
 					user.setIsVerified(resultSet.getBoolean("is_verified"));
 				}
 			}		

@@ -77,6 +77,7 @@ public class FetchUserBySearchFilter {
 					user.setIsAdmin(resultSet.getBoolean("is_admin"));
 					user.setIsVerified(resultSet.getBoolean("is_verified"));
 					user.setIsActive(resultSet.getBoolean("active_status"));
+					user.setProfileImageURL(resultSet.getString("profileimageurl"));
 					
 					users.add(user);
 					

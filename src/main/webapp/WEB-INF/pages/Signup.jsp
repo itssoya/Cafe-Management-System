@@ -32,13 +32,18 @@
 	    
 
         <div class="avatar">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="14" r="8" fill="#F5A623"/>
-                <path d="M4 38c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#F5A623"/>
-            </svg>
+            <label for="avatarUpload" style="cursor: pointer;" title="Upload Avatar">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="14" r="8" fill="#F5A623"/>
+                    <path d="M4 38c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#F5A623"/>
+                </svg>
+            </label>
         </div>
 
         <form action="${pageContext.request.contextPath}/signup" method="post" enctype="multipart/form-data">
+        
+        	<input type="file" id="avatarUpload" name="profile_image" accept="image/*" style="display: none;" />
+        	
             <label>Username</label>
             <input type="text" name="username" placeholder="ILoveCoffee123@01"/>
 
