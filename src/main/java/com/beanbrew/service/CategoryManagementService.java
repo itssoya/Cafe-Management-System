@@ -45,7 +45,7 @@ public class CategoryManagementService {
 	public void removeCategory(int categoryId) {
 		
         ServiceExecutor.execute(
-                () -> RemoveCategoryDAO.removeCategory(categoryId), "Category removed");
+                () -> RemoveCategoryDAO.removeCategory(categoryId), "Category fail to remove");
     }
 
 }
