@@ -102,17 +102,12 @@
 					<span class="stat-label">Total Items</span> <span
 						class="stat-value">${totalItems}</span>
 				</div>
-				<div class="stat-card stat-alert">
-					<span class="stat-label">Low Stock</span> <span class="stat-value">${lowStock}</span>
-				</div>
+				
 				<div class="stat-card stat-dark">
 					<span class="stat-label">Most Popular</span> <span
 						class="stat-value-lg">Lavender Latte</span>
 				</div>
-				<div class="stat-card stat-pink">
-					<span class="stat-label">Today's Special</span> <span
-						class="stat-value-lg">Maple Pecan</span>
-				</div>
+				
 			</div>
 
 			<!-- MANAGE CATEGORIES -->
@@ -217,7 +212,7 @@
 										<td><span class="cat-badge">${item.categoryName}</span></td>
 
 										<!-- Price -->
-										<td><span class="price"> $<fmt:formatNumber
+										<td><span class="price"> Rs.<fmt:formatNumber
 													value="${item.price}" minFractionDigits="2"
 													maxFractionDigits="2" />
 										</span></td>
@@ -225,9 +220,8 @@
 										<!-- Actions -->
 										<td>
 											<div class="action-btns">
-												<a
-													href="${pageContext.request.contextPath}/menumanagement?action=editMenu&id=${item.itemId}"
-													class="btn-edit"> <i class="fa-solid fa-pen"></i>
+												<a href="${pageContext.request.contextPath}/editmenu?id=${item.itemId}"
+   													class="btn-edit"><i class="fa-solid fa-pen"></i>
 												</a>
 												<div class="addRecipe">
 													<a

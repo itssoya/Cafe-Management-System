@@ -195,11 +195,6 @@
 									<td>
 										<div class="action-btns">
 
-											<a href="${pageContext.request.contextPath}/stockmanagement?action=edit&id=${item.id}"
-											   class="btn-edit">
-												<i class="fa-solid fa-pen"></i> Edit
-											</a>
-
 											<c:choose>
 												<c:when test="${item.quantityInStock <= 0}">
 													<a href="${pageContext.request.contextPath}/stockmanagement?action=restock&id=${item.id}"
