@@ -22,7 +22,7 @@
 			<li><a href="#">Home</a></li>
 			<li><a href="#">About</a></li>
 			<li><a href="#">Menu</a></li>
-			<li><button onclick="window.location.href='${pageContext.request.contextPath}/review'">Rating</button></li>
+			<li><a href="${pageContext.request.contextPath}/review">Rating</a></li>
 		</div>
 		<div class="profile">
 			<button type="button" class="profilePage" onclick="toggleSidebar()">

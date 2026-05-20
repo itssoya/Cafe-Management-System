@@ -204,25 +204,6 @@ nav>.links{
     word-break: break-word;
 }
 
-.more-comments {
-    display: block;
-    text-align: center;
-    margin: 28px auto;
-    color: #6d79af;
-    font-family: 'Fustat', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: underline;
-}
-
-.more-reviews {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-}
 
 .form-section {
     border: 2px solid #F6C251;
@@ -339,17 +320,6 @@ nav>.links{
     background: #283593;
 }
 
-.less-comments {
-    display: block;
-    text-align: center;
-    margin: 28px auto;
-    color: #6d79af;
-    font-family: 'Fustat', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: underline;
-}
-
 .form-section {
     width: 90%;
     max-width: 1200px;
@@ -378,4 +348,53 @@ nav>.links{
     font-size: 0.85rem;
     font-weight: 600;
     margin: 4px 0 0 0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.page-btn {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 13px;
+    text-decoration: none;
+    color: #333;
+    background: white;
+    display: inline-block;
+}
+
+.page-btn:hover {
+    background: #16319E;
+    color: white;
+    border-color: #16319E;
+}
+
+.page-number.active {
+    background: #16319E;
+    color: white;
+    border-color: #16319E;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.page-ellipsis {
+    padding: 0 5px;
+}
+
+.paginationInfo {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #6b7bbd;
+    text-align: center;
 }

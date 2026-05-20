@@ -22,53 +22,61 @@ public class ReviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
 
-        // pick up flash messages from session and clear them
+        // pick up success/error flash messages
         String success = (String) request.getSession().getAttribute(MessageKeysUtil.SUCCESS);
-        String error   = (String) request.getSession().getAttribute(MessageKeysUtil.ERROR);
-        if (success != null) {
+        String error = (String) request.getSession().getAttribute(MessageKeysUtil.ERROR);
+        if(success != null){
             request.setAttribute(MessageKeysUtil.SUCCESS, success);
             request.getSession().removeAttribute(MessageKeysUtil.SUCCESS);
         }
-        if (error != null) {
+        if (error != null){
             request.setAttribute(MessageKeysUtil.ERROR, error);
             request.getSession().removeAttribute(MessageKeysUtil.ERROR);
         }
 
-        try {
-            List<Review> reviews = new FetchReviewsDAO().fetchApproved();
-            request.setAttribute("reviews", reviews);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/review.jsp");
-        rd.forward(request, response);
-        
         String errorMessage = (String) request.getSession().getAttribute("errorMessage");
-        String errorRating  = (String) request.getSession().getAttribute("errorRating");
-        String errorBoth    = (String) request.getSession().getAttribute("errorBoth");
+        String errorRating = (String) request.getSession().getAttribute("errorRating");
+        String errorBoth= (String) request.getSession().getAttribute("errorBoth");
 
-        if (errorMessage != null) {
+        if (errorMessage != null || errorRating != null || errorBoth != null){
             request.setAttribute("errorMessage", errorMessage);
-            request.getSession().removeAttribute("errorMessage");
-        }
-        if (errorRating != null) {
-            request.setAttribute("errorRating", errorRating);
-            request.getSession().removeAttribute("errorRating");
-        }
-        if (errorBoth != null) {
+            request.setAttribute("errorRating",errorRating);
             request.setAttribute("errorBoth", errorBoth);
+            request.getSession().removeAttribute("errorMessage");
+            request.getSession().removeAttribute("errorRating");
             request.getSession().removeAttribute("errorBoth");
         }
+
+        try {
+            FetchReviewsDAO dao = new FetchReviewsDAO();
+            String pageParam = request.getParameter("page");
+            int page = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
+            if (page<1) page = 1;
+
+            int totalReviews = dao.countApproved();
+            int totalPages= (int) Math.ceil((double) totalReviews / 6);
+            if (totalPages < 1) totalPages = 1;
+            if (page > totalPages) page = totalPages;
+
+            request.setAttribute("reviews", dao.fetchApprovedPaged(page));
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
+        	} catch (Exception e) {
+            e.printStackTrace();
+        	}
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/review.jsp");
+        rd.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
 
         User currentUser = SessionUtil.getAttribute(request, "currentUser", User.class);
 
-        if (currentUser == null) {
+        if(currentUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
@@ -78,11 +86,11 @@ public class ReviewServlet extends HttpServlet {
         // Delete review
         if ("delete".equals(action)) {
             String reviewIdStr = request.getParameter("reviewId");
-            if (reviewIdStr != null) {
+            if (reviewIdStr != null){
                 try {
                     int reviewId = Integer.parseInt(reviewIdStr);
                     new DeleteReviewDAO().delete(reviewId, currentUser.getUserId());
-                } catch (Exception e) {
+                } catch(Exception e){
                     e.printStackTrace();
                 }
             }
@@ -90,12 +98,12 @@ public class ReviewServlet extends HttpServlet {
             return;
         }
 
-        //SUBMIT new review
-        String message   = request.getParameter("message");
+        // Submit new review
+        String message= request.getParameter("message");
         String ratingStr = request.getParameter("rating");
 
         boolean noMessage = (message == null || message.trim().isEmpty());
-        boolean noRating  = (ratingStr == null || ratingStr.equals("0"));
+        boolean noRating = (ratingStr == null || ratingStr.equals("0"));
 
         if (noMessage && noRating) {
             request.getSession().setAttribute("errorBoth", "Please include a review and rating.");
@@ -103,13 +111,14 @@ public class ReviewServlet extends HttpServlet {
             return;
         } else if (noMessage) {
             request.getSession().setAttribute("errorMessage", "Please include a message with the rating.");
-            response.sendRedirect(request.getContextPath() + "/review");
+            response.sendRedirect(request.getContextPath() +"/review");
             return;
         } else if (noRating) {
-            request.getSession().setAttribute("errorRating", "Please include a rating as well.");
+            request.getSession().setAttribute("errorRating","Please include a rating as well.");
             response.sendRedirect(request.getContextPath() + "/review");
             return;
         }
+
         Review review = new Review();
         review.setUserId(currentUser.getUserId());
         review.setMessage(message.trim());
