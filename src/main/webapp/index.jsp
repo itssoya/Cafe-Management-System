@@ -70,7 +70,7 @@
 	</section>
 
 	<!-- intro text -->
-	<section class="intro">'
+	<section class="intro">
 		<p>Welcome to Bean Brew, where every cup tells a story and every visit feels like a little escape from the everyday rush. We’re all about serving freshly brewed coffee, handcrafted drinks, and delicious bites in a space filled with cozy energy, good music, and even better company. Whether you’re stopping by for your morning caffeine boost or settling in for a long catch-up session, Bean Brew is the kind of place that makes you want to stay awhile.</p><br>
 		<p>At Bean Brew, we believe coffee is more than just a drink, it’s a moment to slow down, connect, and enjoy life’s simple pleasures. From smooth lattes and bold espressos to sweet pastries baked fresh daily, everything we serve is made with care and a whole lot of love. So grab your favorite mug, find your perfect seat, and let the comforting aroma of freshly brewed coffee welcome you home.</p>
 	</section>
