@@ -77,6 +77,7 @@ public class FetchUserBySearchFilter {
 					user.setIsAdmin(resultSet.getBoolean("is_admin"));
 					user.setIsVerified(resultSet.getBoolean("is_verified"));
 					user.setIsActive(resultSet.getBoolean("active_status"));
+					user.setProfileImageURL(resultSet.getString("profileimageurl"));
 					
 					users.add(user);
 					
@@ -104,7 +105,8 @@ public class FetchUserBySearchFilter {
 			
 			if(search != null && !search.isEmpty()) {
 				query.append(" AND (username LIKE ?");
-				query.append(" OR email_id LIKE ?)");
+				query.append(" OR em"
+						+ "ail_id LIKE ?)");
 				
 				patternSearch = "%" + search + "%";
 			}
@@ -134,10 +136,6 @@ public class FetchUserBySearchFilter {
 					rowsCount = resultSet.getInt(1);
 					
 				}
-				
-				resultSet.close();
-				preparedStatement.close();
-				con.close();
 				
 				return rowsCount;
 				

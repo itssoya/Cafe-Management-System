@@ -13,20 +13,19 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import com.beanbrew.util.SessionUtil;
 
 
 /**
- * Servlet Filter implementation class GlobalExceptionFilter
+ * Servlet Filter implementation class GuestFilter
  */
-@WebFilter("/*")
-public class GlobalExceptionFilter extends HttpFilter implements Filter {
-	
-	private static final long serialVersionUID = 1L;
+@WebFilter("/GuestFilter")
+public class GuestFilter extends HttpFilter implements Filter {
        
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public GlobalExceptionFilter() {
+    public GuestFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,26 +43,23 @@ public class GlobalExceptionFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		
-		 HttpServletRequest req = (HttpServletRequest) request;
-	     HttpServletResponse res = (HttpServletResponse) response;
 
 		// pass the request along the filter chain
-	     
-	     try {
-	            chain.doFilter(req, res);
+		//chain.doFilter(request, response)
+	    	// Cast the generic request/response to HTTP-specific versions
+			HttpServletRequest httpRequest = (HttpServletRequest) request;
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-	        } catch (Exception e) {
-	           
-	        	System.out.println("Unhandled error catch by Filter");
+			
+			boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "currentUser", Object.class) != null;
 
-	            HttpServletRequest  httpReq = (HttpServletRequest)  req;
-	            HttpServletResponse httpRes = (HttpServletResponse) res;
-
-	            httpReq.setAttribute("errorMessage", "Something went wrong. Please try again later.");
-	            httpRes.sendRedirect(httpReq.getContextPath() + "/unexpectederror");
+	        if (isLoggedIn) {
+	            
+	            httpResponse.sendRedirect(httpRequest.getContextPath() + "/dashboard");
+	        } else {
+	          
+	            chain.doFilter(request, response);
 	        }
-		
 	}
 
 	/**

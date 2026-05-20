@@ -18,10 +18,29 @@ public class SignupService {
 	
 	private SignupDAO dao = new SignupDAO();
 
-	private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads";
+	private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads/user_img";
+	
+	private static final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+	
+	private static final String nameRegex = "^[A-Za-z].*$";
+	
+	private static final String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+	
 	
 	
 	public void addUser(User user, Part imagePart)  {
+		
+		String username = user.getUsername();		
+		
+		if(!username.trim().matches(nameRegex)) throw new ServiceException ("The first character must be an alphabet.");
+		
+		String email = user.getEmail();
+		
+		if(!email.matches(emailRegex)) throw new ServiceException ("Invalid email format.");
+		
+		String password = user.getPassword();
+		
+		if(!password.matches(passwordRegex)) throw new ServiceException ("Password must be minimium 8 charcaters, atleast one letter and one number.");
 		
 		String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
 		

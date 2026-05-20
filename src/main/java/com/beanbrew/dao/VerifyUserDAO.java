@@ -16,7 +16,6 @@ public class VerifyUserDAO {
 	 * @param userID The unique identifier of user
 	 * @return true if the user was successfully verified (exactly one row updated),
 	 *         false otherwise
-	 * @throws ClassNotFoundException if the database driver class is not found
 	 * @throws SQLException if a database access error occurs
 	 */
 	

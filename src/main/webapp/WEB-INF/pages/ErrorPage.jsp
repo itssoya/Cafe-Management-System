@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,12 +9,12 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap" rel="stylesheet">
 	<title>BeanBrew : Error</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/404Page.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/errorPage.css">
 </head>
 <body>
 	<nav>
 		<div class="logo">
-			<img src="../public/logo.svg" alt="BeanBrew logo">
+			<img src="${pageContext.request.contextPath}/public/logo.svg" alt="BeanBrew logo">
 		</div>
 		<div class="links">
 			<li><a href="#">Home</a></li>
@@ -30,13 +30,13 @@
 	</nav>
 
 	<section class="main404">
-		<img src="../images/ErrorPage/opps.svg" alt="opps"> 
+		<img src="${pageContext.request.contextPath}/images/ErrorPage/opps.svg" alt="opps"> 
 		<p><b>Something went wrong</b></p>
 		<p>Go to <a href="${pageContext.request.contextPath}/index">Home</a></p> 
 	</section>
 
 	<div class="beanbear">
-		<img src="../images/ErrorPage/errorbear.svg" alt="errorbear">
+		<img src="${pageContext.request.contextPath}/images/ErrorPage/errorbear.svg" alt="errorbear">
 	</div>
 		<!-- Sidebar -->
 	<div id="sidebar" class="sidebar">
@@ -44,7 +44,7 @@
 			<!-- Logged Out View -->
 			<div id="loggedOutView">
 				<div class="guest-header">
-					<img src="../images/sidebar/GuestUser.svg" alt="guest-placeholder" class="profile-pic">
+					<img src="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg" alt="guest-placeholder" class="profile-pic">
 					<h2>Welcome Guest</h2>
 				</div>
 				<div class="auth-buttons">
@@ -55,9 +55,8 @@
 		</div>
 	</div>
 
-	<section class="checker bottom" >
-		<br><br><br><br><br><br>
+	<section class="checker" >
 	</section>
-	<script src="../javascript/main.js"></script>
+	<script src="${pageContext.request.contextPath}/javascript/main.js"></script>
 </body>
 </html>
