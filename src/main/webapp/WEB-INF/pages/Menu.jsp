@@ -559,7 +559,7 @@
 
 	                        <div class="card-footer">
 	                            <span class="card-price">
-	                                $<fmt:formatNumber value="${item.price}"
+	                                Rs.<fmt:formatNumber value="${item.price}"
 	                                    minFractionDigits="2" maxFractionDigits="2"/>
 	                            </span>
 	                            <span class="card-view">
@@ -605,7 +605,7 @@
 	                                    <p class="modal-desc">${item.description}</p>
 	                                </c:if>
 	                                <div class="modal-price">
-	                                    $<fmt:formatNumber value="${item.price}"
+	                                    Rs.<fmt:formatNumber value="${item.price}"
 	                                        minFractionDigits="2" maxFractionDigits="2"/>
 	                                </div>
 
