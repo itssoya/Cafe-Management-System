@@ -105,7 +105,8 @@ nav button:hover , nav button:active{
 }
 
 .hero main{
-	flex: 1;
+	z-index: 2;
+	position: relative;
 }
 
 .herotext{  
@@ -124,22 +125,28 @@ nav button:hover , nav button:active{
 	margin: 0.6rem 0rem 0.6rem 0rem; 
 	width: 40%;
 }
-button{   
-	color: #FFF8ED;
-	background-color: #16319E; 
-	border-style: none;
-	margin-top: 1.5rem; 
-	padding: 0.5rem 1rem;
-	font-size: 1.2rem; 	  
-	border-radius: 0.4rem;
+.ctaButton{   
+	margin-top: 1rem;
+	border: 0.2rem solid #16319E;
+	padding: 0.8rem 1.6rem;
+	background-color: #16319E;
+	color: #FFF0D8;
+	border-radius: 0.3rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: inline-block;
 }
 
+button.ctaButton:hover{
+	border-color: #16319E;
+	background-color: #FDF6EB;
+	color: #16319E;
+}
 
 .imageframe{
-	width: 50%;
-	height: inherit;
-	/* background-color: blueviolet; */
-}  
+	z-index: 1;
+}
+
 .imageframe img{
 	width: 100%;
 	height: 100%;

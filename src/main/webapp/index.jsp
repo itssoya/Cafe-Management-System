@@ -19,10 +19,10 @@
 			
 		</div>
 		<div class="links">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">About</a></li>
+			<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/aboutUs">About</a></li>
 			<li><a href="${pageContext.request.contextPath}/menu">Menu</a>
-			<li><a href="#">Rating</a></li>
+			<li><a href="${pageContext.request.contextPath}/rating">Rating</a></li>
 		</div>
 		<div class="profile">
 			<button type="button" class="profilePage" onclick="toggleSidebar()">
@@ -61,7 +61,7 @@
 					<div>is Where Moments</div>			
 					<div>Happen</div>	
 				</div>
-				<button class="ctaButton">View Menu</button>
+				<button onclick="window.location.href='${pageContext.request.contextPath}/menu'" class="ctaButton" >View Menu</button>
 			</div> 
 		</main>
 		<div class="imageframe">
@@ -70,7 +70,7 @@
 	</section>
 
 	<!-- intro text -->
-	<section class="intro">'
+	<section class="intro">
 		<p>Welcome to Bean Brew, where every cup tells a story and every visit feels like a little escape from the everyday rush. We’re all about serving freshly brewed coffee, handcrafted drinks, and delicious bites in a space filled with cozy energy, good music, and even better company. Whether you’re stopping by for your morning caffeine boost or settling in for a long catch-up session, Bean Brew is the kind of place that makes you want to stay awhile.</p><br>
 		<p>At Bean Brew, we believe coffee is more than just a drink, it’s a moment to slow down, connect, and enjoy life’s simple pleasures. From smooth lattes and bold espressos to sweet pastries baked fresh daily, everything we serve is made with care and a whole lot of love. So grab your favorite mug, find your perfect seat, and let the comforting aroma of freshly brewed coffee welcome you home.</p>
 	</section>
@@ -127,7 +127,7 @@
 				<p>A delicious mix of espresso, chocolate, and steamed milk topped with indulgent sweetness.</p>
 			</div>
 		</section> 
-		<button class="orderButton">Order Now</button>
+		<button onclick="window.location.href='${pageContext.request.contextPath}/menu'" class="orderButton" >Order Now</button>
 	</section>	
 
 	<!-- moments -->

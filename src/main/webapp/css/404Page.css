@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body{
+	background-color: #FFF8ED;
+}
+
 .main404{
 	font-family: Fustat, sans-serif;
 	color : #16319E;
