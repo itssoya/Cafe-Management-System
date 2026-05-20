@@ -7,7 +7,7 @@ import com.beanbrew.util.DBConnection;
 public class SubmitReviewDAO{
 
 	private static final String QUERY =
-		    "INSERT INTO reviews (user_id, message, rating, status) VALUES (?, ?, ?, 'APPROVED')";
+		    "INSERT INTO reviews (user_id, message, rating) VALUES (?, ?, ?)";
 	
     public boolean submit(Review review) throws SQLException{
         try (Connection con = DBConnection.buildConnection();

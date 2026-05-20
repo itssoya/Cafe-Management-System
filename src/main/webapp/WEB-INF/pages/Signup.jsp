@@ -23,13 +23,11 @@
 
     <div class="card">
         <h2>Someone New !</h2>
-        
-     
-        <!-- Error message block -->
-	    <c:if test="${not empty error}">
-	        <div class="error-message">${error}</div>
-	    </c:if>
-	    
+
+        <!-- General error: all fields empty or service errors -->
+        <c:if test="${not empty error}">
+            <div class="error-message">${error}</div>
+        </c:if>
 
         <div class="avatar">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -39,16 +37,26 @@
         </div>
 
         <form action="${pageContext.request.contextPath}/signup" method="post" enctype="multipart/form-data">
+
             <label>Username</label>
-            <input type="text" name="username" placeholder="ILoveCoffee123@01"/>
+            <input type="text" name="username" placeholder="ILoveCoffee123@01" value="${username}"/>
+            <c:if test="${not empty errorUsername}">
+                <div class="field-error">${errorUsername}</div>
+            </c:if>
 
             <label>Email</label>
-            <input type="text" name="email" placeholder="coooffeeeiielover@gmail.com"/>
+            <input type="text" name="email" placeholder="coooffeeeiielover@gmail.com" value="${email}"/>
+            <c:if test="${not empty errorEmail}">
+                <div class="field-error">${errorEmail}</div>
+            </c:if>
 
             <label>Password</label>
             <input type="password" name="password" placeholder="••••••••"/>
+            <c:if test="${not empty errorPassword}">
+                <div class="field-error">${errorPassword}</div>
+            </c:if>
 
-                <button type="submit">Sign Up</button>
+            <button type="submit">Sign Up</button>
 
         </form>
 
@@ -56,8 +64,8 @@
     </div>
 
     <p class="back">Back to <a href="${pageContext.request.contextPath}/index.jsp">Home</a> →</p>
-<div class = "checkboard">
-   <img src="${pageContext.request.contextPath}/images/main_container/checkboard.svg" alt="BeanBrew logo">
-</div>
+    <div class="checkboard">
+        <img src="${pageContext.request.contextPath}/images/main_container/checkboard.svg" alt="BeanBrew logo">
+    </div>
 </body>
 </html>
