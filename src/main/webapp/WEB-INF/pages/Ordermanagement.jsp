@@ -64,14 +64,14 @@
             </div>
             <div class="topbar-right">
                 <div class="search-bar">
-                    <form action="${pageContext.request.contextPath}/ordermanagement" method="get">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" name="search"
-                               value="${search}"
-                               placeholder="Search by customer or order ID...">
-                         <button type="submit">Search</button>
-                    </form>
-                </div>
+				    <form action="${pageContext.request.contextPath}/ordermanagement" method="get">
+				        <input type="hidden" name="orderStatus" value="${orderStatus}">
+				        <i class="fa-solid fa-magnifying-glass"></i>
+				        <input type="text" name="search" value="${search}" 
+				               placeholder="Search by customer or menu item...">
+				        <button type="submit">Search</button>
+				    </form>
+				</div>
             </div>
         </div>
 
@@ -108,18 +108,17 @@
         </div>
 
         <!-- FILTER ROW -->
-        <div class="filter-row">
-            <form action="${pageContext.request.contextPath}/ordermanagement" method="get"
-                  style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                <input type="hidden" name="search" value="${search}">
-                <select name="status" class="filter-select" onchange="this.form.submit()">
-                    <option value="">All Status</option>
-                    <option value="PENDING"   ${param.status == 'PENDING'   ? 'selected' : ''}>Pending</option>
-                    <option value="COMPLETED" ${param.status == 'COMPLETED' ? 'selected' : ''}>Completed</option>
-                    <option value="CANCELLED" ${param.status == 'CANCELLED' ? 'selected' : ''}>Cancelled</option>
-                </select>
-            </form>
-        </div>
+        <div class="filter">
+		    <form action="${pageContext.request.contextPath}/ordermanagement" method="get">
+		        <input type="hidden" name="search" value="${search}">
+		        <select name="orderStatus" class="filter-select" onchange="this.form.submit()">
+		            <option value="">All Status</option>
+		            <option value="PENDING"   ${orderStatus == 'PENDING'   ? 'selected' : ''}>Pending</option>
+		            <option value="COMPLETED" ${orderStatus == 'COMPLETED' ? 'selected' : ''}>Completed</option>
+		            <option value="CANCELLED" ${orderStatus == 'CANCELLED' ? 'selected' : ''}>Cancelled</option>
+		        </select>
+		    </form>
+		</div>
 
         <!-- ORDERS TABLE -->
         <div class="table-card">
@@ -152,7 +151,7 @@
                                     </td>
                                     <td>
                                         <span class="order-amount">
-                                            $<fmt:formatNumber value="${order.totalAmount}"
+                                            Rs.<fmt:formatNumber value="${order.totalAmount}"
                                                 minFractionDigits="2" maxFractionDigits="2"/>
                                         </span>
                                     </td>

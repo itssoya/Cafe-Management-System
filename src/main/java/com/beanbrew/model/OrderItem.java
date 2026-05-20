@@ -6,6 +6,7 @@ public class OrderItem {
 	private int orderId;
 	private int menuItemId;
 	private int quantity;
+	private String username;
 	public int getOrderItemId() {
 		return orderItemId;
 	}

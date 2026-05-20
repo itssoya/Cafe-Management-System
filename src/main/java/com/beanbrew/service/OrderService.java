@@ -6,6 +6,7 @@ import java.util.List;
 import com.beanbrew.dao.AddOrderDAO;
 import com.beanbrew.dao.AddOrderItems;
 import com.beanbrew.dao.FetchAllOrdersDAO;
+import com.beanbrew.dao.FetchOrderBySearchFilterDAO;
 import com.beanbrew.dao.FetchOrderItemsDAO;
 import com.beanbrew.dao.FetchRecipeDAO;
 import com.beanbrew.dao.ReduceStockDAO;
@@ -26,6 +27,9 @@ public class OrderService {
     private FetchRecipeDAO fetchRecipeDAO = new FetchRecipeDAO();
     private ReduceStockDAO reduceStockDAO = new ReduceStockDAO();
     private UpdateOrderStatusDAO updateStatusDAO = new UpdateOrderStatusDAO();
+    private FetchOrderBySearchFilterDAO fetchOrderBySearchFilter = new FetchOrderBySearchFilterDAO();
+    
+    private static final int stockPerPage = 10;
     
     public void placeOrder(int userId, List<Cart> cart) {
     	
@@ -96,5 +100,23 @@ public class OrderService {
     	
         return ServiceExecutor.execute(() 
         		-> fetchAllOrdersDAO.getAllOrders(),  "Failed to fetch orders.");
+    }
+    
+    public int countPageForFilter(String orderStatus, String search) {
+    	
+        int total = ServiceExecutor.execute(
+                () -> fetchOrderBySearchFilter.countOrdersForFilter(orderStatus, search),
+                "Failed to count Order items."
+        );
+        return (int) Math.ceil((double) total / stockPerPage);
+    }
+
+  
+    public List<Order> fetchOrder(int currentPageNumber, String orderStatus, String search) {
+    	
+        return ServiceExecutor.execute(
+                () -> fetchOrderBySearchFilter.getOrder(currentPageNumber, orderStatus, search),
+                "Failed to fetch order items."
+        );
     }
 }

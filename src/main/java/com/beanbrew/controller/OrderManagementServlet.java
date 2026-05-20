@@ -36,26 +36,40 @@ public class OrderManagementServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		try {
-            List<Order> orders = orderService.getAllOrders();
-            request.setAttribute("orders", orders);
+		String pageParam = request.getParameter("page");
+	    String search = request.getParameter("search");
+	    String orderStatus = request.getParameter("orderStatus");
 
-            long pending   = orders.stream().filter(o -> "PENDING".equals(o.getStatus())).count();
-            long completed = orders.stream().filter(o -> "COMPLETED".equals(o.getStatus())).count();
-            long cancelled = orders.stream().filter(o -> "CANCELLED".equals(o.getStatus())).count();
+	    int currentPage = (pageParam != null && !pageParam.isEmpty()) ? Integer.parseInt(pageParam) : 1;
 
-            request.setAttribute("totalOrders",     orders.size());
-            request.setAttribute("pendingOrders",   pending);
-            request.setAttribute("completedOrders", completed);
-            request.setAttribute("cancelledOrders", cancelled);
+	    try {
+	       
+	        List<Order> orders = orderService.fetchOrder(currentPage, orderStatus, search);
+	        int totalPages = orderService.countPageForFilter(orderStatus, search);
 
-        } catch (ServiceException e) {
-        	
-            request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
-        }
+	        List<Order> allOrders = orderService.getAllOrders();
 
-        request.getRequestDispatcher("/WEB-INF/pages/Ordermanagement.jsp")
-               .forward(request, response);
+	        long pending   = allOrders.stream().filter(o -> "PENDING".equals(o.getStatus())).count();
+	        long completed = allOrders.stream().filter(o -> "COMPLETED".equals(o.getStatus())).count();
+	        long cancelled = allOrders.stream().filter(o -> "CANCELLED".equals(o.getStatus())).count();
+
+	        request.setAttribute("orders", orders);
+	        request.setAttribute("totalPage", totalPages);
+	        request.setAttribute("currentPage", currentPage);
+	        request.setAttribute("search", search);
+	        request.setAttribute("orderStatus",orderStatus);
+
+	        request.setAttribute("totalOrders", allOrders.size());
+	        request.setAttribute("pendingOrders", pending);
+	        request.setAttribute("completedOrders", completed);
+	        request.setAttribute("cancelledOrders", cancelled);
+
+	    } catch (ServiceException e) {
+	        request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
+	    }
+
+	    request.getRequestDispatcher("/WEB-INF/pages/Ordermanagement.jsp")
+	           .forward(request, response);
 	}
 
 	/**
