@@ -204,10 +204,12 @@
                                                class="btn-edit">
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
+                                            <div class = "addRecipe">
                                             <a href="${pageContext.request.contextPath}/addrecipe?menuItemId=${item.itemId}"
 												   class="btn-recipe" title="Add Recipe">
-												    <i class="fa-solid fa-book-open"></i>
+												    Add Recipe
 												</a>
+												</div>
                                             <form action="${pageContext.request.contextPath}/menumanagement"
                                                   method="post" style="display:inline"
                                                   onsubmit="return confirm('Delete ${item.itemName}?')">
