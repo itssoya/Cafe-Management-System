@@ -12,6 +12,8 @@ import java.util.List;
 
 import com.beanbrew.dao.CheckStockItemDAO;
 import com.beanbrew.dao.FetchMenuBySearchFilter;
+import com.beanbrew.dao.FetchRecipeDAO;
+import com.beanbrew.dao.FetchStockBySearchFilter;
 import com.beanbrew.model.MenuItem;
 import com.beanbrew.model.RecipeItem;
 import com.beanbrew.model.StockItem;
@@ -27,7 +29,7 @@ import com.beanbrew.util.SessionUtil;
 public class AddRecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecipeManagementService recipeService = new RecipeManagementService();
-       
+    private FetchStockBySearchFilter fetchStockBySearchFilter = new FetchStockBySearchFilter();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,11 +48,12 @@ public class AddRecipeServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String menuItemIdParam = request.getParameter("menuItemId");
-        String searchStock     = request.getParameter("searchStock");
-        String clearParam      = request.getParameter("clear");
+        String searchStock = request.getParameter("searchStock");
+        String clearParam = request.getParameter("clear");
         
         
         if (menuItemIdParam == null || menuItemIdParam.isEmpty()) {
+        	
             response.sendRedirect(request.getContextPath() + "/menumanagement");
             return;
         }
@@ -58,7 +61,7 @@ public class AddRecipeServlet extends HttpServlet {
         int menuId = Integer.parseInt(menuItemIdParam);
         
         if ("true".equals(clearParam)) {
-            request.getSession().removeAttribute("recipeIngredients_" + menuId);
+        	request.getSession().removeAttribute("recipe_" + menuId);
         }
         
         try {
@@ -73,14 +76,35 @@ public class AddRecipeServlet extends HttpServlet {
             if (searchStock != null && !searchStock.trim().isEmpty()) {
                 List<StockItem> searchResults = CheckStockItemDAO.searchStock(searchStock.trim());
                 request.setAttribute("searchResults", searchResults);
-                request.setAttribute("searchStock",   searchStock);
+                request.setAttribute("searchStock", searchStock);
             }
  
-            List<RecipeItem> ingredients = (List<RecipeItem>) SessionUtil.getAttribute( request, "recipe_" + menuId, List.class);
-            if (ingredients == null) ingredients = new ArrayList<>();
+            
+            List<RecipeItem> ingredients = (List<RecipeItem>) SessionUtil.getAttribute(request, "recipe_" + menuId, List.class);
+            
+            if (ingredients == null) {
+            	
+                FetchRecipeDAO fetchRecipeDAO = new FetchRecipeDAO();
+                ingredients = fetchRecipeDAO.getRecipeByMenuItemId(menuId);
+                
+                for (RecipeItem r : ingredients) {
+                	
+                    StockItem stock = fetchStockBySearchFilter.getStockById(r.getStockItemId());
+                    
+                    if (stock != null) {
+                        r.setStockName(stock.getName());
+                        r.setUnit(stock.getUnit());
+                    }
+                }
+                
+                if (!ingredients.isEmpty()) {
+                	
+                    SessionUtil.setAttribute(request, "recipe_" + menuId, ingredients);
+                }
+            }
  
-            request.setAttribute("menuItem",    menuItem);
-            request.setAttribute("menuItemId",  menuId);
+            request.setAttribute("menuItem", menuItem);
+            request.setAttribute("menuItemId", menuId);
             request.setAttribute("ingredients", ingredients);
  
         } catch (SQLException e) {
@@ -101,7 +125,7 @@ public class AddRecipeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
     	
-    	String action          = request.getParameter("action");
+    	String action = request.getParameter("action");
         String menuItemIdParam = request.getParameter("menuItemId");
  
         if (menuItemIdParam == null || menuItemIdParam.isEmpty()) {
@@ -113,26 +137,53 @@ public class AddRecipeServlet extends HttpServlet {
  
         if ("addIngredient".equals(action)) {
  
-            String stockId   = request.getParameter("stockId");
+            String stockId = request.getParameter("stockId");
             String stockName = request.getParameter("stockName");
-            String unit      = request.getParameter("unit");
-            String quantity  = request.getParameter("quantity");
+            String unit = request.getParameter("unit");
+            String quantity = request.getParameter("quantity");
  
             if (quantity == null || quantity.trim().isEmpty()) {
             	response.sendRedirect(request.getContextPath() + "/addrecipe?menuItemId=" + menuItemId);
                 return;
             }
  
-            List<RecipeItem> list = (List<RecipeItem>) SessionUtil.getAttribute(request, "recipe_" + menuItemId, List.class);
-            if (list == null) list = new ArrayList<>();
- 
-            int id = Integer.parseInt(stockId);
-            boolean exists = list.stream().anyMatch(i -> i.getStockItemId() == id);
+            List<RecipeItem> list = (List<RecipeItem>) SessionUtil.getAttribute(
+                    request, "recipe_" + menuItemId, List.class);
+
+            if (list == null) {
+            	
+                try {
+                	
+                    FetchRecipeDAO fetchRecipeDAO = new FetchRecipeDAO(); 
+                    list = fetchRecipeDAO.getRecipeByMenuItemId(menuItemId);
+                    
+                    for (RecipeItem r : list) {
+                    	
+                        StockItem stock = fetchStockBySearchFilter.getStockById(r.getStockItemId());
+                        
+                        if (stock != null) {
+                        	
+                            r.setStockName(stock.getName());
+                            r.setUnit(stock.getUnit());
+                        }
+                    }
+                    
+                    SessionUtil.setAttribute(request, "recipe_" + menuItemId, list);
+                    
+                } catch (SQLException e) {
+                    list = new ArrayList<>();
+                }
+            }
+            
+            int stockIdInt = Integer.parseInt(stockId);
+            boolean exists = list.stream()
+                                 .anyMatch(i -> i.getStockItemId() == stockIdInt);
+
  
             if (!exists) {
             	
                 RecipeItem item = new RecipeItem();
-                item.setStockItemId(id);
+                item.setStockItemId(stockIdInt);
                 item.setStockName(stockName);
                 item.setUnit(unit);
                 item.setQuantityUsed(Double.parseDouble(quantity));
@@ -145,7 +196,6 @@ public class AddRecipeServlet extends HttpServlet {
             return;
         }
  
-        // REMOVE one ingredient from session list
         if ("removeIngredient".equals(action)) {
  
             int stockId = Integer.parseInt(request.getParameter("stockId"));
@@ -166,6 +216,7 @@ public class AddRecipeServlet extends HttpServlet {
                     request, "recipe_" + menuItemId, List.class);
  
             if (list == null || list.isEmpty()) {
+            	
                 request.setAttribute(MessageKeysUtil.ERROR, "Add at least one ingredient.");
                 request.setAttribute("menuItemId", menuItemId);
                 request.getRequestDispatcher("/WEB-INF/pages/Recipe.jsp").forward(request, response);
@@ -181,6 +232,7 @@ public class AddRecipeServlet extends HttpServlet {
             }
  
             try {
+            	
                 recipeService.addRecipe(menuItemId, names, qtys);
                 SessionUtil.removeAttribute(request, "recipe_" + menuItemId);
                 response.sendRedirect(request.getContextPath() + "/menumanagement");
@@ -192,6 +244,7 @@ public class AddRecipeServlet extends HttpServlet {
                 request.setAttribute("ingredients", list);
                 request.getRequestDispatcher("/WEB-INF/pages/Recipe.jsp").forward(request, response);
             }
+            
             return;
         }
  

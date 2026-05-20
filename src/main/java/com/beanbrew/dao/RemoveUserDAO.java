@@ -28,9 +28,6 @@ public class RemoveUserDAO {
 			
 			int rowsAffected = preparedStatement.executeUpdate();
 			
-			preparedStatement.close();
-			con.close();
-			
 			return rowsAffected == 1;	
 			
 		} 

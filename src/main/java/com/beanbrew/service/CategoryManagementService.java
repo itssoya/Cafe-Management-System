@@ -3,8 +3,10 @@ package com.beanbrew.service;
 import java.sql.SQLException;
 
 import com.beanbrew.dao.AddCategoryDAO;
+import com.beanbrew.dao.RemoveCategoryDAO;
 import com.beanbrew.model.Category;
 import com.beanbrew.util.ServiceException;
+import com.beanbrew.util.ServiceExecutor;
 
 public class CategoryManagementService {
 	
@@ -39,5 +41,11 @@ public class CategoryManagementService {
 	            }
 	        }
 	    }
+	
+	public void removeCategory(int categoryId) {
+		
+        ServiceExecutor.execute(
+                () -> RemoveCategoryDAO.removeCategory(categoryId), "Category removed");
+    }
 
 }

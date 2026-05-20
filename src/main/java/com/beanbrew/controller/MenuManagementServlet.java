@@ -12,6 +12,7 @@ import java.util.List;
 import com.beanbrew.dao.FetchCategory;
 import com.beanbrew.model.Category;
 import com.beanbrew.model.MenuItem;
+import com.beanbrew.service.CategoryManagementService;
 import com.beanbrew.service.MenuManagementService;
 import com.beanbrew.util.MessageKeysUtil;
 import com.beanbrew.util.ServiceException;
@@ -24,6 +25,7 @@ public class MenuManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private MenuManagementService menuManagementService = new MenuManagementService();
+	private CategoryManagementService categoryManagementService = new CategoryManagementService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -134,6 +136,24 @@ public class MenuManagementServlet extends HttpServlet {
             }
             return;
         }
+		
+		if ("removeCategory".equals(action)) {
+			
+			String categoryIdParam = request.getParameter("categoryId");
+            
+            try {
+            	
+                categoryManagementService.removeCategory(Integer.parseInt(categoryIdParam));
+                response.sendRedirect(request.getContextPath() + "/menumanagement");
+                
+               } catch (ServiceException e) {
+            	   
+            	   request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
+                   response.sendRedirect(request.getContextPath() + "/menumanagement");
+                   
+               }
+            return;
+		}
 		doGet(request, response);
 	}
 	

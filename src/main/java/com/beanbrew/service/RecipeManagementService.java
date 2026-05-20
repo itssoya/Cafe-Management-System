@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.beanbrew.dao.AddRecipeDAO;
 import com.beanbrew.dao.CheckStockItemDAO;
+import com.beanbrew.dao.RemoveCategoryDAO;
 import com.beanbrew.model.RecipeItem;
 import com.beanbrew.model.StockItem;
 import com.beanbrew.util.ServiceException;
+import com.beanbrew.util.ServiceExecutor;
 
 public class RecipeManagementService {
 	
@@ -74,6 +76,6 @@ public class RecipeManagementService {
     			}
             }
 	
+	}
 	
-}
 }

@@ -80,12 +80,12 @@
                                 <div class="item-details">
                                     <div class="item-name">${item.itemName}</div>
                                     <div class="item-meta">
-                                        $<fmt:formatNumber value="${item.price}" minFractionDigits="2" maxFractionDigits="2"/>
+                                        Rs. <fmt:formatNumber value="${item.price}" minFractionDigits="2" maxFractionDigits="2"/>
                                         &nbsp;&times;&nbsp;${item.quantity}
                                     </div>
                                 </div>
                                 <div class="item-price">
-                                    $<fmt:formatNumber value="${item.subtotal}" minFractionDigits="2" maxFractionDigits="2"/>
+                                    Rs. <fmt:formatNumber value="${item.subtotal}" minFractionDigits="2" maxFractionDigits="2"/>
                                 </div>
                                 <form action="${pageContext.request.contextPath}/cart" method="post">
                                     <input type="hidden" name="action"     value="removeFromCart">
