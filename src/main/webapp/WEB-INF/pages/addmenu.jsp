@@ -11,204 +11,338 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/stockManagement.css">
 <title>Add Menu Item — BrewBar</title>
 <style>
-    .page-blur-bg {
-        position: fixed;
-        inset: 0;
-        filter: blur(3px) brightness(0.6);
-        pointer-events: none;
-        z-index: 0;
-        overflow: hidden;
-    }
+.page-blur-bg {
+    position: fixed;
+    inset: 0;
+    filter: blur(3px) brightness(0.6);
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
 
-    .modal-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
 
-    .modal {
-        background: #fff;
-        border-radius: 20px;
-        padding: 40px 44px;
-        width: 100%;
-        max-width: 560px;
-        max-height: 90vh;
-        overflow-y: auto;
-        box-shadow: 0 24px 60px rgba(0,0,0,0.18);
-        text-align: center;
-    }
+.NavBar {
+    position: fixed;
+    top: 0;
+    left: 240px;
+    right: 0;
+    height: 60px;
+    background: #FFF8ED;
+    border-bottom: 1px solid #dbe2ff;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    z-index: 90;
+    box-shadow: 0 1px 4px rgba(22,49,158,0.08);
+}
 
-    .modal-icon {
-        width: 56px;
-        height: 56px;
-        background: #f5f0eb;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 18px;
-        font-size: 22px;
-        color: #3b2017;
-    }
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f5f7ff;
+    border: 1.5px solid #dbe2ff;
+    border-radius: 8px;
+    padding: 0 14px;
+}
 
-    .modal h2 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #1e1208;
-        margin: 0 0 6px;
-    }
+.search-bar:focus-within {
+    background: white;
+    border-color: #16319E;
+}
 
-    .modal-subtitle {
-        font-size: 0.875rem;
-        color: #9a8478;
-        margin: 0 0 24px;
-    }
+.search-bar i,
+.search-bar input::placeholder {
+    color: #7b86b2;
+}
 
-    .modal-alert {
-        background: #fef2f2;
-        color: #b91c1c;
-        border: 1px solid #fecaca;
-        border-radius: 8px;
-        padding: 10px 14px;
-        font-size: 0.875rem;
-        text-align: left;
-        margin-bottom: 18px;
-    }
+.search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+}
 
-    .form-group {
-        text-align: left;
-        margin-bottom: 18px;
-    }
+.search-bar button {
+    background: #16319E;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
 
-    .form-group label {
-        display: block;
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        color: #6b5c52;
-        margin-bottom: 6px;
-    }
+.search-bar button:hover {
+    background: #0f2578;
+}
 
-    .form-group input[type="text"],
-    .form-group input[type="number"],
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        background: #f5f0eb;
-        border: none;
-        border-radius: 10px;
-        padding: 12px 14px;
-        font-size: 0.9rem;
-        color: #1e1208;
-        outline: none;
-        box-sizing: border-box;
-    }
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    background: #FFF8ED;
+    border-right: 1px solid #16319E;
+    color: #16319E;
+    display: flex;
+    flex-direction: column;
+}
 
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-        color: #b0a09a;
-    }
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
-    .form-group textarea {
-        height: 80px;
-        resize: none;
-    }
+.main-icon {
+    width: 10rem;
+    padding-left: 1.5rem;
+    padding-top: 1rem;
+}
 
-    .form-group select {
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233b2017' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 14px center;
-        background-color: #f5f0eb;
-        padding-right: 36px;
-    }
+.sidebar-content h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2.5rem;
+    padding-left: 1.5rem;
+    padding-top: 0.25rem;
+    line-height: 1;
+}
 
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-    }
+.category,
+.bottom {
+    list-style: none;
+    padding: 0.5rem;
+}
 
-    /* ── Image upload ── */
-    .image-upload-area {
-        background: #f5f0eb;
-        border-radius: 10px;
-        border: 2px dashed #d4c8c0;
-        padding: 24px;
-        text-align: center;
-        cursor: pointer;
-        transition: border-color 0.2s;
-    }
+.category {
+    flex: 1;
+}
 
-    .image-upload-area:hover { border-color: #3b2017; }
+.category li a,
+.bottom li a {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #16319E;
+    transition: 0.2s;
+}
 
-    .image-upload-area i {
-        font-size: 28px;
-        color: #b0a09a;
-        margin-bottom: 8px;
-        display: block;
-    }
+.category li a:hover,
+.bottom li a:hover {
+    background: #eef2ff;
+}
 
-    .image-upload-area p {
-        font-size: 0.8rem;
-        color: #9a8478;
-        margin: 0;
-    }
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
 
-    #image-preview {
-        display: none;
-        width: 100%;
-        max-height: 140px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-top: 10px;
-    }
 
-    .modal-actions {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 14px;
-        margin-top: 28px;
-    }
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
 
-    .btn-cancel {
-        font-size: 0.9rem;
-        color: #6b5c52;
-        text-decoration: none;
-        padding: 10px 18px;
-        border-radius: 10px;
-        transition: background 0.2s;
-    }
+.modal {
+    background: #FFF8ED;
+    border-radius: 20px;
+    padding: 40px 44px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+    text-align: center;
+}
 
-    .btn-cancel:hover { background: #f5f0eb; }
+.modal-icon {
+    width: 56px;
+    height: 56px;
+    background: #eef2ff;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 22px;
+    color: #16319E;
+}
 
-    .btn-submit {
-        background: #3b2017;
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        padding: 12px 24px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        transition: background 0.2s;
-    }
+.modal h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e1208;
+    margin-bottom: 6px;
+}
 
-    .btn-submit:hover { background: #5a3020; }
+.modal-subtitle {
+    font-size: 0.875rem;
+    color: #7b86b2;
+    margin-bottom: 24px;
+}
+
+.modal-alert {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.875rem;
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #16319E;
+    margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    background: #f5f7ff;
+    border: 1px solid #dbe2ff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    color: #1e1208;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9aa7d6;
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: none;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2316319E' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-color: #f5f7ff;
+    padding-right: 36px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+
+.image-upload-area {
+    background: #f5f7ff;
+    border-radius: 10px;
+    border: 2px dashed #c7d2fe;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.image-upload-area:hover {
+    border-color: #16319E;
+}
+
+.image-upload-area i {
+    font-size: 28px;
+    color: #7b86b2;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.image-upload-area p {
+    font-size: 0.8rem;
+    color: #7b86b2;
+    margin: 0;
+}
+
+#image-preview {
+    display: none;
+    width: 100%;
+    max-height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.btn-cancel {
+    font-size: 0.9rem;
+    color: #16319E;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #eef2ff;
+}
+
+.btn-submit {
+    background: #16319E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-submit:hover {
+    background: #0f2578;
+}
 </style>
 </head>
 <body>
-
-    <!-- BLURRED BACKGROUND -->
     <div class="page-blur-bg">
         <div class="NavBar">
             <div class="search-bar">
@@ -220,16 +354,39 @@
         <div class="container">
             <aside class="sidebar">
                 <div class="sidebar-content">
-                    <h1>BrewBar</h1>
-                    <ul class="category">
-                        <li><span class="material-icons">dashboard</span> Dashboard</li>
-                        <li class="active"><span class="material-icons">menu_book</span> Menu</li>
-                        <li><span class="material-icons">account_box</span> Users</li>
-                        <li><span class="material-icons">inventory_2</span> Inventory</li>
-                        <li class="logout"><span class="material-icons">logout</span> Logout</li>
-                    </ul>
-                </div>
-            </aside>
+					<img
+						src="${pageContext.request.contextPath}/images/main_container/logo.svg"
+						class="main-icon">
+					<h1>BrewBar</h1>
+
+					<ul class="category">
+						<li><a href="#"><img
+							src="${pageContext.request.contextPath}/images/panel/dashboard.svg"
+							class="icon"> <span>Dashboard</span></a></li>
+						<li><a href="#"><img
+							src="${pageContext.request.contextPath}/images/panel/menu.svg"
+							class="icon"> <span>Menu</span></a></li>
+						<li ><a href="#"><img
+							src="${pageContext.request.contextPath}/images/panel/users.svg"
+							class="icon"> <span>Users</span></a></li>
+						<li><a href="#"><img
+							src="${pageContext.request.contextPath}/images/panel/inventory.svg"
+							class="icon"> <span>Inventory</span></a></li>
+						<li><a
+						href="#"> <img
+							src="${pageContext.request.contextPath}/images/panel/order.svg"
+							class="icon"> <span>Orders</span>
+					</a></li>
+					</ul>
+
+					<ul class="bottom">
+					<li><img
+						src="${pageContext.request.contextPath}/images/panel/logout.svg"
+						class="icon"> <span>Logout</span></li>
+				</ul>
+				</div>
+
+		</aside>
             <div class="stock-registry-container">
                 <div class="pageHeader">
                     <div class="pageHeader-left">

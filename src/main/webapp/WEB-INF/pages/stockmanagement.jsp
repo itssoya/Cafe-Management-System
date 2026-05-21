@@ -16,7 +16,6 @@
 </head>
 <body>
 
-	<!-- TOP NAVBAR / SEARCH BAR -->
 	<div class="NavBar">
 		<form action="${pageContext.request.contextPath}/stockmanagement" method="post">
 			<input type="hidden" name="page" value="1">
@@ -33,16 +32,42 @@
 
 		<!-- SIDEBAR -->
 		<aside class="sidebar">
-			<div class="sidebar-content">
-				<h1>BrewBar</h1>
-				<ul class="category">
-					<li><span class="material-icons">dashboard</span> Dashboard</li>
-					<li><span class="material-icons">menu_book</span> Menu</li>
-					<li><span class="material-icons">account_box</span> Users</li>
-					<li class="active"><span class="material-icons">inventory_2</span> Inventory</li>
-					<li class="logout"><span class="material-icons">logout</span> Logout</li>
+			
+				<div class="sidebar-content">
+					<img
+						src="${pageContext.request.contextPath}/images/main_container/logo.svg"
+						class="main-icon">
+					<h1>BrewBar</h1>
+
+					<ul class="category">
+						<li><a href="${pageContext.request.contextPath}/admindashboard"><img
+							src="${pageContext.request.contextPath}/images/panel/dashboard.svg"
+							class="icon"> <span>Dashboard</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/menumanagement"><img
+							src="${pageContext.request.contextPath}/images/panel/menu.svg"
+							class="icon"> <span>Menu</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/usermanagement"><img
+							src="${pageContext.request.contextPath}/images/panel/users.svg"
+							class="icon"> <span>Users</span></a></li>
+						<li><a href="${pageContext.request.contextPath}/stockmanagement"><img
+							src="${pageContext.request.contextPath}/images/panel/inventory.svg"
+							class="icon"> <span>Inventory</span></a></li>
+						<li><a
+						href="${pageContext.request.contextPath}/ordermanagement"> <img
+							src="${pageContext.request.contextPath}/images/panel/order.svg"
+							class="icon"> <span>Orders</span>
+					</a></li>
+					</ul>
+
+					<ul class="bottom">
+					<li><a href="${pageContext.request.contextPath}/index"> <i
+						class="fa fa-home icon"></i> <span>Home</span>
+					</a></li>
+					<li><a href="${pageContext.request.contextPath}/logout"><img
+						src="${pageContext.request.contextPath}/images/panel/logout.svg"
+						class="icon"> <span>Logout</span></a></li>
 				</ul>
-			</div>
+				</div>
 		</aside>
 
 		<!-- MAIN CONTENT -->
@@ -172,11 +197,6 @@
 									<!-- Actions -->
 									<td>
 										<div class="action-btns">
-
-											<a href="${pageContext.request.contextPath}/stockmanagement?action=edit&id=${item.id}"
-											   class="btn-edit">
-												<i class="fa-solid fa-pen"></i> Edit
-											</a>
 
 											<c:choose>
 												<c:when test="${item.quantityInStock <= 0}">

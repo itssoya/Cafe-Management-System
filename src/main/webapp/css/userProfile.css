@@ -1,0 +1,343 @@
+@charset "UTF-8";
+ 
+/* ── Layout ─────────────────────────────────────────── */
+.profile-layout {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem 2rem;
+}
+ 
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+ 
+/* ── Greeting ────────────────────────────────────────── */
+.profile-greeting {
+    margin-bottom: 0.5rem;
+}
+ 
+.eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #F6C251;
+    margin-bottom: 0.3rem;
+}
+ 
+.greeting-name {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #16319E;
+}
+ 
+/* ── Cards ───────────────────────────────────────────── */
+.profile-section-card {
+    background: #ffffff;
+    border: 1px solid rgba(22, 49, 158, 0.1);
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    box-shadow: 0 4px 24px rgba(22, 49, 158, 0.06);
+}
+ 
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+ 
+/* ── Overview Card ───────────────────────────────────── */
+.overview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+ 
+.overview-header .eyebrow {
+    margin-bottom: 0;
+}
+ 
+.overview-body {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+ 
+.overview-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+ 
+.picture-frame.compact-picture {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(22, 49, 158, 0.15);
+    background: #FFF0D8;
+}
+ 
+.picture-frame.compact-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+ 
+.overview-fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+ 
+.compact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+ 
+.compact-field span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #5A5957;
+}
+ 
+.compact-input {
+    background: #FFF8ED;
+    border: 1.5px solid rgba(22, 49, 158, 0.15);
+    border-radius: 0.6rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.95rem;
+    color: #16319E;
+    font-weight: 600;
+    font-family: "Fustat";
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+ 
+.compact-input:focus {
+    border-color: #16319E;
+}
+ 
+.compact-input:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+ 
+.overview-footer {
+    margin-top: 1.25rem;
+    display: flex;
+    justify-content: flex-end;
+}
+ 
+/* ── Buttons ─────────────────────────────────────────── */
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 0.65rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: "Fustat";
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, opacity 0.2s;
+    margin-top: 0;
+    color: #FFF8ED;
+    background-color: #16319E;
+}
+ 
+.action-button:hover {
+    opacity: 0.88;
+}
+ 
+.action-button.secondary {
+    background: transparent;
+    color: #16319E;
+    border: 1.5px solid rgba(22, 49, 158, 0.3);
+}
+ 
+.action-button.secondary:hover {
+    background: rgba(22, 49, 158, 0.06);
+}
+ 
+.action-button.edit-toggle {
+    background: transparent;
+    padding: 0.4rem;
+    border: 1.5px solid rgba(22, 49, 158, 0.15);
+    border-radius: 0.55rem;
+    color: #16319E;
+}
+ 
+.action-button.edit-toggle img {
+    width: 1rem;
+    height: 1rem;
+}
+ 
+.upload-button {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.75rem;
+    text-align: center;
+    cursor: pointer;
+}
+ 
+.save-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+ 
+/* ── Status Chips ────────────────────────────────────── */
+.status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    background: rgba(90, 89, 87, 0.1);
+    color: #5A5957;
+    width: fit-content;
+}
+ 
+.status-chip.verified {
+    background: rgba(34, 197, 94, 0.12);
+    color: #16a34a;
+}
+ 
+.status-chip.delivered {
+    background: rgba(34, 197, 94, 0.12);
+    color: #16a34a;
+}
+ 
+/* ── History Card ────────────────────────────────────── */
+.history-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+ 
+.history-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    background: #FFF8ED;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(22, 49, 158, 0.08);
+}
+ 
+.history-row span {
+    font-size: 0.88rem;
+    color: #5A5957;
+    font-weight: 500;
+}
+ 
+.history-row strong {
+    font-size: 0.95rem;
+    color: #16319E;
+    font-weight: 700;
+}
+ 
+/* ── Orders Table ────────────────────────────────────── */
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+ 
+.section-heading h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #16319E;
+    margin-top: 0.2rem;
+}
+ 
+.table-shell-light {
+    overflow-x: auto;
+    border-radius: 0.85rem;
+    border: 1px solid rgba(22, 49, 158, 0.1);
+}
+ 
+.orders-table-light {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
+.orders-table-light thead tr {
+    background: #FFF0D8;
+}
+ 
+.orders-table-light th {
+    padding: 0.85rem 1.1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #16319E;
+}
+ 
+.orders-table-light td {
+    padding: 0.95rem 1.1rem;
+    font-size: 0.9rem;
+    color: #16319E;
+    font-weight: 500;
+    border-top: 1px solid rgba(22, 49, 158, 0.07);
+}
+ 
+.orders-table-light tbody tr:hover {
+    background: rgba(22, 49, 158, 0.03);
+}
+ 
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+    .profile-layout {
+        padding: 5rem 1rem 3rem 1rem;
+    }
+ 
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+ 
+    .overview-body {
+        flex-direction: column;
+        align-items: center;
+    }
+ 
+    .overview-fields {
+        width: 100%;
+    }
+ 
+    .greeting-name {
+        font-size: 1.5rem;
+    }
+}
+ 
+@media (max-width: 480px) {
+    .profile-layout {
+        padding: 5rem 0.75rem 2rem 0.75rem;
+    }
+ 
+    .profile-section-card {
+        padding: 1.25rem;
+    }
+ 
+    .orders-table-light th,
+    .orders-table-light td {
+        padding: 0.75rem 0.75rem;
+        font-size: 0.82rem;
+    }
+}

@@ -1,6 +1,5 @@
 package com.beanbrew.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,17 +7,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.beanbrew.util.SessionUtil;
+
+
 /**
- * Servlet implementation class AdminDashboard
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/admindashboard" })
-public class AdminDashboard extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/logout" })
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDashboard() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +30,11 @@ public class AdminDashboard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/AdminDashboard.jsp");
-		rd.forward(request,response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+        SessionUtil.invalidateSession(request);
+
+        response.sendRedirect(request.getContextPath() + "/index");
 	}
 
 	/**
