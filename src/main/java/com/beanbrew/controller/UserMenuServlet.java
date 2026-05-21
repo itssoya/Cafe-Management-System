@@ -11,13 +11,13 @@ import java.io.IOException;
  * Servlet implementation class Menu
  */
 @WebServlet("/Menu")
-public class Menu extends HttpServlet {
+public class UserMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Menu() {
+    public UserMenuServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

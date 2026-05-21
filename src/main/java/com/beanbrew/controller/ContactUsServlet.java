@@ -47,28 +47,29 @@ public class ContactUsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
-		String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String subject = request.getParameter("subject");
-        String message = request.getParameter("message");
-        
-        try{
-        	
-        	ContactUs contactUs = new ContactUs();
-        	contactUs.setName(name);
-        	contactUs.setEmail(email);
-        	contactUs.setSubject(subject);
-        	contactUs.setMessage(message);
-        	
-        	contactUsManagementService.addContactUs(contactUs);
-        	
-        } catch (ServiceException e) {
-        	 
-        	request.setAttribute(MessageKeysUtil.ERROR, e);
-            request.getRequestDispatcher("/WEB-INF/pages/contactus.jsp").forward(request, response);
-            return;
-        }
-        
+		String name    = request.getParameter("name");
+	    String email   = request.getParameter("email");
+	    String subject = request.getParameter("subject");
+	    String message = request.getParameter("message");
+
+	    try {
+
+	        ContactUs contactUs = new ContactUs();
+	        contactUs.setName(name);
+	        contactUs.setEmail(email);
+	        contactUs.setSubject(subject);
+	        contactUs.setMessage(message);
+
+	        contactUsManagementService.addContactUs(contactUs);
+
+	      
+	        response.sendRedirect(request.getContextPath() + "/contactus?success=true");
+
+	    } catch (ServiceException e) {
+	    	
+	        request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
+	        request.getRequestDispatcher("/WEB-INF/pages/ContactUs.jsp").forward(request, response);
+	    }
 	}
 
 }

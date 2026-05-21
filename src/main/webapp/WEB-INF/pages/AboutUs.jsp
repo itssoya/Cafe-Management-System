@@ -112,7 +112,7 @@
 	<div class="team">
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/sourav.jpg">	
+				<img src ="${pageContext.request.contextPath}/images/sourav.jpg">	
 			</div>
 			<h2>Sourav Yadav</h2>
 			<p>Project Manager</p>
@@ -120,7 +120,7 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/palden.jpg">	
+				<img src ="${pageContext.request.contextPath}/images/palden.jpg">	
 			</div>
 			<h2>Palden Lama</h2>
 			<p>Backend Developer</p>
@@ -128,7 +128,7 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/siddharth.png">	
+				<img src ="${pageContext.request.contextPath}/images/siddharth.png">	
 			</div>
 			<h2>Siddhartha Thapa</h2>
 			<p>System Tester</p>
@@ -136,7 +136,7 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/shaleen.jpg">
+				<img src ="${pageContext.request.contextPath}/images/shaleen.jpg">
 			</div>
 			<h2>Shaleen Thapa</h2>
 			<p>UI/UX Designer</p>
@@ -144,7 +144,7 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/suhana.jpeg">
+				<img src ="${pageContext.request.contextPath}/images/suhana.jpeg">
 			</div>
 			<h2>Suhana Shrestha</h2>
 			<p>Frontend Developer</p>
@@ -152,7 +152,7 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/roshan.jpg">
+				<img src ="${pageContext.request.contextPath}/images/roshan.jpg">
 			</div>
 			<h2>Roshan Jaiswal</h2>
 			<p>Intern</p>

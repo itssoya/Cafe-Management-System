@@ -11,13 +11,21 @@ public class ContactUsManagementService {
 	
 public void addContactUs (ContactUs contactUs) {
 		
-       if (contactUs.getName()== null || !contactUs.getName().isEmpty()) throw new ServiceException ("All filed required");
-       
-       if (contactUs.getEmail()== null || !contactUs.getEmail().isEmpty()) throw new ServiceException ("All filed required");
-       
-       if (contactUs.getSubject()== null || !contactUs.getSubject().isEmpty()) throw new ServiceException ("All filed required");
-       
-       if (contactUs.getMessage()== null || !contactUs.getMessage().isEmpty()) throw new ServiceException ("All filed required");
+	  if (contactUs.getName() == null || contactUs.getName().trim().isEmpty())
+		  
+          throw new ServiceException("All fields are required");
+
+      if (contactUs.getEmail() == null || contactUs.getEmail().trim().isEmpty())
+    	  
+          throw new ServiceException("All fields are required");
+
+      if (contactUs.getSubject() == null || contactUs.getSubject().trim().isEmpty())
+    	  
+          throw new ServiceException("All fields are required");
+
+      if (contactUs.getMessage() == null || contactUs.getMessage().trim().isEmpty())
+    	  
+          throw new ServiceException("All fields are required");
        
        try {
     	   
