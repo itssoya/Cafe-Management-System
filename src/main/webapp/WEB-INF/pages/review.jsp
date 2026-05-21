@@ -10,93 +10,48 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/review.css">
 </head>
 <body>
-<!-- NAVBAR -->
-	<nav>
-		<div class="logo">
-			<img src="${pageContext.request.contextPath}/images/logo.svg">
-		</div>
-		<div class="links">
-			<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/aboutus">About</a></li>
-			<li><a href="${pageContext.request.contextPath}/menu">Menu</a></li>
-			<li><a href="${pageContext.request.contextPath}/review">Rating</a></li>
-			<li><a href="${pageContext.request.contextPath}/contactus">Contact Us</a></li>
-		</div>
-		<div class="nav-actions">
+    <nav>
+        <div class="logo">
+            <img src="${pageContext.request.contextPath}/images/logo.svg">
+        </div>
+        <div class="links">
+            <li><a href="${pageContext.request.contextPath}/index">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="${pageContext.request.contextPath}/review">Rating</a></li>
+        </div>
+        <div class="profile">
+            <button type="button" class="profilePage" onclick="toggleSidebar()">
+            </button>
+        </div>
+    </nav>
 
-			<a class="cart-link" href="${pageContext.request.contextPath}/cart">
-				<img src="${pageContext.request.contextPath}/images/cart.svg">
-			</a>
-
-			<div class="profile">
-
-				<details class="profile-dropdown">
-					<summary class="profile-trigger">
-
-						<c:if test="${empty sessionScope.currentUser}">
-							<img
-								src="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg"
-								class="profile-avatar">
-						</c:if>
-
-						<!-- LOGGED IN AVATAR -->
-						<c:if test="${not empty sessionScope.currentUser}">
-							<c:choose>
-								<c:when
-									test="${not empty sessionScope.currentUser.profileImageURL}">
-									<img
-										src="${pageContext.request.contextPath}/uploads/user_img/${sessionScope.currentUser.profileImageURL}"
-										class="profile-avatar">
-								</c:when>
-								<c:otherwise>
-									<img
-										src="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg"
-										class="profile-avatar">
-								</c:otherwise>
-							</c:choose>
-						</c:if>
-
-					</summary>
-
-					<div class="profile-menu">
-
-						<!-- NOT LOGGED IN -->
-						<div class="profile-menu">
-
-							<!-- NOT LOGGED IN -->
-							<c:if test="${empty sessionScope.currentUser}">
-								<a href="${pageContext.request.contextPath}/login">Login</a>
-								<a href="${pageContext.request.contextPath}/signup">Get
-									Started</a>
-							</c:if>
-
-							<!-- LOGGED IN -->
-							<c:if test="${not empty sessionScope.currentUser}">
-								<a href="${pageContext.request.contextPath}/userprofile">My Profile</a>
-								<form action="${pageContext.request.contextPath}/logout"
-									method="post">
-									<button type="submit">Logout</button>
-								</form>
-							</c:if>
-
-						</div>
-				</details>
-			</div>
-
-		</div>
-	</nav>
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-content">
+            <div id="loggedOutView">
+                <div class="guest-header">
+                    <img src="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg">
+                    <h2>Welcome ${sessionScope.currentUser.username}</h2>
+                </div>
+                <div class="auth-buttons">
+                    <button onclick="window.location.href='${pageContext.request.contextPath}/login'">Login</button>
+                    <button onclick="window.location.href='${pageContext.request.contextPath}/signup'">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="review-heading">
         <h1>Coffee may taste bitter,<br>
-        <img src="${pageContext.request.contextPath}/images/gallery/Sweet.svg" class="sweet">
+            <img src="${pageContext.request.contextPath}/images/gallery/Sweet.svg" class="sweet">
         </h1>
     </div>
 
     <c:if test="${not empty success}">
-       <p style="text-align:center; color:green; font-family:Fustat; font-weight:600;">${success}</p>
+        <p style="text-align:center; color:green; font-family:Fustat; font-weight:600;">${success}</p>
     </c:if>
     <c:if test="${not empty error}">
-      <p style="text-align:center; color:red; font-family:Fustat; font-weight:600;">${error}</p>
+        <p style="text-align:center; color:red; font-family:Fustat; font-weight:600;">${error}</p>
     </c:if>
 
     <c:choose>
@@ -118,7 +73,7 @@
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="reviewId" value="${r.reviewId}">
                                 <button type="submit" class="btn-delete-review"
-                                 onclick="return confirm('Delete your review?')">Delete</button>
+                                    onclick="return confirm('Delete your review?')">Delete</button>
                             </form>
                         </c:if>
                     </div>
@@ -126,46 +81,44 @@
             </div>
 
             <c:if test="${totalPages > 0}">
-    <div class="pagination">
+                <div class="pagination">
+                    <c:choose>
+                        <c:when test="${currentPage > 1}">
+                            <a href="${pageContext.request.contextPath}/review?page=${currentPage - 1}"
+                               class="page-btn prev-btn">&#8249; Prev</a>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="page-btn prev-btn disabled">&#8249; Prev</span>
+                        </c:otherwise>
+                    </c:choose>
 
-        <c:choose>
-            <c:when test="${currentPage > 1}">
-                <a href="${pageContext.request.contextPath}/review?page=${currentPage - 1}"
-                   class="page-btn prev-btn">&#8249; Prev</a>
-            </c:when>
-            <c:otherwise>
-                <span class="page-btn prev-btn disabled">&#8249; Prev</span>
-            </c:otherwise>
-        </c:choose>
+                    <c:forEach begin="1" end="${totalPages}" var="i">
+                        <c:choose>
+                            <c:when test="${i == currentPage}">
+                                <span class="page-btn page-number active">${i}</span>
+                            </c:when>
+                            <c:when test="${i == 1 || i == totalPages || (i >= currentPage - 2 && i <= currentPage + 2)}">
+                                <a href="${pageContext.request.contextPath}/review?page=${i}"
+                                   class="page-btn page-number">${i}</a>
+                            </c:when>
+                            <c:when test="${i == currentPage - 3 || i == currentPage + 3}">
+                                <span class="page-ellipsis">...</span>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
 
-        <c:forEach begin="1" end="${totalPages}" var="i">
-            <c:choose>
-                <c:when test="${i == currentPage}">
-                    <span class="page-btn page-number active">${i}</span>
-                </c:when>
-                <c:when test="${i == 1 || i == totalPages || (i >= currentPage - 2 && i <= currentPage + 2)}">
-                    <a href="${pageContext.request.contextPath}/review?page=${i}"
-                       class="page-btn page-number">${i}</a>
-                </c:when>
-                <c:when test="${i == currentPage - 3 || i == currentPage + 3}">
-                    <span class="page-ellipsis">...</span>
-                </c:when>
-            </c:choose>
-        </c:forEach>
-
-        <c:choose>
-            <c:when test="${currentPage < totalPages}">
-                <a href="${pageContext.request.contextPath}/review?page=${currentPage + 1}"
-                   class="page-btn next-btn">Next &#8250;</a>
-            </c:when>
-            <c:otherwise>
-                <span class="page-btn next-btn disabled">Next &#8250;</span>
-            </c:otherwise>
-        </c:choose>
-
-    </div>
-    <div class="paginationInfo">Showing page ${currentPage} of ${totalPages}</div>
-</c:if>
+                    <c:choose>
+                        <c:when test="${currentPage < totalPages}">
+                            <a href="${pageContext.request.contextPath}/review?page=${currentPage + 1}"
+                               class="page-btn next-btn">Next &#8250;</a>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="page-btn next-btn disabled">Next &#8250;</span>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="paginationInfo">Showing page ${currentPage} of ${totalPages}</div>
+            </c:if>
         </c:when>
         <c:otherwise>
             <p style="text-align:center; color:#16319E; font-family:Fustat; margin:40px 0;">
@@ -183,13 +136,13 @@
                     <label>Leave a Message*</label>
                     <textarea name="message" placeholder="Tell us how you felt at BeanBrew..."></textarea>
                     <c:if test="${not empty errorMessage}">
-                      <p class="field-error">${errorMessage}</p>
+                        <p class="field-error">${errorMessage}</p>
                     </c:if>
                     <div class="rating-row">
                         <label>Rate BeanBrew*</label>
                         <div>
                             <div class="stars-input">
-                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                             </div>
                             <c:if test="${not empty errorRating}">
                                 <p class="field-error" style="text-align:right;">${errorRating}</p>
@@ -202,7 +155,7 @@
                         <div style="display:flex; flex-direction:column; align-items:flex-end;">
                             <button type="submit">Submit</button>
                             <c:if test="${not empty errorBoth}">
-                            <p class="field-error" style="margin-top:6px;">${errorBoth}</p>
+                                <p class="field-error" style="margin-top:6px;">${errorBoth}</p>
                             </c:if>
                         </div>
                     </div>
@@ -218,15 +171,15 @@
 
     <script>
         const stars = document.querySelectorAll('.stars-input span');
-        let selected= 0;
+        let selected = 0;
         stars.forEach((star, i) => {
-            star.addEventListener('mouseover',() => {
+            star.addEventListener('mouseover', () => {
                 stars.forEach((s, j) => s.style.color = j <= i ? '#F6C251' : '#ccc');
             });
-            star.addEventListener('mouseout',() => {
-                stars.forEach((s, j) => s.style.color= j < selected ? '#F6C251' : '#ccc');
+            star.addEventListener('mouseout', () => {
+                stars.forEach((s, j) => s.style.color = j < selected ? '#F6C251' : '#ccc');
             });
-            star.addEventListener('click',() => {
+            star.addEventListener('click', () => {
                 selected = i + 1;
                 document.getElementById('ratingValue').value = selected;
                 stars.forEach((s, j) => s.style.color = j < selected ? '#F6C251' : '#ccc');

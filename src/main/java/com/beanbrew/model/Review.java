@@ -3,10 +3,9 @@ package com.beanbrew.model;
 public class Review {
     private int reviewId;
     private int userId;
-    private String username;   
+    private String username;
     private String message;
     private int rating;
-    private String status;
     private String createdAt;
 
     public int getReviewId(){ return reviewId; }
@@ -23,9 +22,6 @@ public class Review {
 
     public int getRating(){ return rating; }
     public void setRating(int r){ this.rating = r; }
-
-    public String getStatus(){ return status; }
-    public void setStatus(String s){ this.status = s; }
 
     public String getCreatedAt(){ return createdAt; }
     public void setCreatedAt(String c){ this.createdAt = c; }

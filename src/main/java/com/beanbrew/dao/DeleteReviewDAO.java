@@ -7,7 +7,7 @@ public class DeleteReviewDAO {
 
     private static final String QUERY = "DELETE FROM reviews WHERE review_id = ? AND user_id = ?";
 
-    // user_id check ensures a user can only delete their own review
+  
     public boolean delete(int reviewId, int userId) throws SQLException {
         try (Connection con = DBConnection.buildConnection();
              PreparedStatement ps = con.prepareStatement(QUERY)) {

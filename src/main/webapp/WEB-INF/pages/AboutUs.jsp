@@ -91,9 +91,9 @@
 	<!-- Hero Section -->
 	<section class="hero">
 		<div class="imageframe">
-			<img src ="${pageContext.request.contextPath}/images/gallery/Cafe_Bg.png">
+			<img src ="${pageContext.request.contextPath}/images/Cafe_Bg.png">
 		</div>
-			<img src ="${pageContext.request.contextPath}/images/gallery/image_title.svg" class = "image-title">
+			<img src ="${pageContext.request.contextPath}/images/image_title.svg" class = "image-title">
 	</section>
 
 	<section class="intro">

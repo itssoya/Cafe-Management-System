@@ -184,7 +184,7 @@
 
             <div class="summary-row">
                 <span>Subtotal</span>
-                <span>$<fmt:formatNumber value="${total}" minFractionDigits="2" maxFractionDigits="2"/></span>
+                <span>Rs.<fmt:formatNumber value="${total}" minFractionDigits="2" maxFractionDigits="2"/></span>
             </div>
             <div class="summary-row">
                 <span>Estimated Tax (8%)</span>
