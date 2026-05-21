@@ -21,8 +21,7 @@ import jakarta.servlet.http.Part;
 public class UserDashboardService {
 	
 	private static final int order_per_page = 5;
-    private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads/profile";
- 
+    private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webapp_uploads/user_img";
     private FetchUserByIdDAO  fetchUserDAO  = new FetchUserByIdDAO();
     private UpdateUserDAO     updateUserDAO = new UpdateUserDAO();
     private FetchUserOrdersDAO ordersDAO    = new FetchUserOrdersDAO();

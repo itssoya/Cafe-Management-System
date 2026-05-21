@@ -1,6 +1,7 @@
 package com.beanbrew.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,9 +19,15 @@ import com.beanbrew.util.ServiceException;
 import com.beanbrew.util.SessionUtil;
 
 /**
- * Servlet implementation class UserDashboard
+ * Servlet implementation class UserDashboardServlet
  */
-@WebServlet("/UserDashboard")
+
+@WebServlet(asyncSupported = true, urlPatterns = { "/userprofile" })
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024,      
+    maxFileSize       = 1024 * 1024 * 5,  
+    maxRequestSize    = 1024 * 1024 * 10 
+)
 public class UserDashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDashboardService userDashboardService = new UserDashboardService();
@@ -70,8 +77,7 @@ public class UserDashboardServlet extends HttpServlet {
             request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
         }
  
-        request.getRequestDispatcher("/WEB-INF/pages/userdashboard.jsp")
-               .forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/userProfile.jsp").forward(request, response);
 	}
 
 	/**
@@ -107,13 +113,13 @@ public class UserDashboardServlet extends HttpServlet {
                 
                 SessionUtil.setAttribute(request, "currentUser", updatedUser);
                 response.sendRedirect(request.getContextPath()
-                        + "/userdashboard?success=Profile updated successfully.");
+                        + "/userprofile?success=Profile updated successfully.");
                 
  
             } catch (ServiceException e) {
             	
                 request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
-                response.sendRedirect(request.getContextPath() + "/userdashboard");
+                response.sendRedirect(request.getContextPath() + "/userprofile");
                 return;
             }
             
@@ -121,6 +127,7 @@ public class UserDashboardServlet extends HttpServlet {
         }
  
         if ("deactivateAccount".equals(action)) {
+        	
             try {
                 userDashboardService.disableUser(userId);
                 
@@ -130,13 +137,14 @@ public class UserDashboardServlet extends HttpServlet {
             } catch (ServiceException e) {
             	
                 request.setAttribute(MessageKeysUtil.ERROR, e.getMessage());
-                response.sendRedirect(request.getContextPath() + "/userdashboard");
+                response.sendRedirect(request.getContextPath() + "/userprofile");
                 
             }
             return;
         }
  
-        response.sendRedirect(request.getContextPath() + "/userdashboard");
+        response.sendRedirect(request.getContextPath() + "/userprofile");
 	}
 
 }
+
