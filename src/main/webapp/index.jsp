@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,11 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/Homepage.css">
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/homepage.css">
 <title>BeanBrew</title>
 </head>
 <body>
@@ -26,9 +22,8 @@
 			<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
 			<li><a href="${pageContext.request.contextPath}/aboutUs">About</a></li>
 			<li><a href="${pageContext.request.contextPath}/menu">Menu</a></li>
-			<li><a href="${pageContext.request.contextPath}/rating">Rating</a></li>
-			<li><a href="${pageContext.request.contextPath}/contactUs">Contact
-					Us</a></li>
+			<li><a href="${pageContext.request.contextPath}/review">Rating</a></li>
+			<li><a href="${pageContext.request.contextPath}/contactus">Contact Us</a></li>
 		</div>
 		<div class="nav-actions">
 
@@ -80,9 +75,7 @@
 
 							<!-- LOGGED IN -->
 							<c:if test="${not empty sessionScope.currentUser}">
-								<a href="${pageContext.request.contextPath}/userprofile">My
-									Profile</a>
-								<a href="${pageContext.request.contextPath}/cart">Cart</a>
+								<a href="${pageContext.request.contextPath}/userprofile">My Profile</a>
 								<form action="${pageContext.request.contextPath}/logout"
 									method="post">
 									<button type="submit">Logout</button>
