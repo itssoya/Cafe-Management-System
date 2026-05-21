@@ -131,12 +131,12 @@
             </div>
             <div class="summary-row">
                 <span>Estimated Tax (8%)</span>
-                <span>$<fmt:formatNumber value="${total * 0.08}" minFractionDigits="2" maxFractionDigits="2"/></span>
+                <span>Rs.<fmt:formatNumber value="${total * 0.08}" minFractionDigits="2" maxFractionDigits="2"/></span>
             </div>
             <hr class="summary-divider">
             <div class="summary-total">
                 <span>Total</span>
-                <span>$<fmt:formatNumber value="${total * 1.08}" minFractionDigits="2" maxFractionDigits="2"/></span>
+                <span>Rs.<fmt:formatNumber value="${total * 1.08}" minFractionDigits="2" maxFractionDigits="2"/></span>
             </div>
 
             <form action="${pageContext.request.contextPath}/cart" method="post">
@@ -146,11 +146,7 @@
                     <i class="fa-solid fa-check"></i> Place Order
                 </button>
             </form>
-
-            <p class="order-note">
-                By placing your order you agree to our
-                <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-            </p>    
+  
         </div>
 
     </div>

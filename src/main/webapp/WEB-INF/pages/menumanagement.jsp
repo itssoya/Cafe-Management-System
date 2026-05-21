@@ -29,7 +29,7 @@
 				<h1>BrewBar</h1>
 
 				<ul class="category">
-					<li><a href="#"> <img
+					<li><a href="${pageContext.request.contextPath}/admindashboard"> <img
 							src="${pageContext.request.contextPath}/images/panel/dashboard.svg"
 							class="icon"> <span>Dashboard</span>
 					</a></li>
@@ -56,6 +56,9 @@
 				</ul>
 
 				<ul class="bottom">
+					<li><a href="${pageContext.request.contextPath}/index"> <i
+						class="fa fa-home icon"></i> <span>Home</span>
+					</a></li>
 					<li><a href="${pageContext.request.contextPath}/logout"><img
 							src="${pageContext.request.contextPath}/images/panel/logout.svg"
 							class="icon"> <span>Logout</span></a></li>
@@ -102,17 +105,12 @@
 					<span class="stat-label">Total Items</span> <span
 						class="stat-value">${totalItems}</span>
 				</div>
-				<div class="stat-card stat-alert">
-					<span class="stat-label">Low Stock</span> <span class="stat-value">${lowStock}</span>
-				</div>
+				
 				<div class="stat-card stat-dark">
 					<span class="stat-label">Most Popular</span> <span
 						class="stat-value-lg">Lavender Latte</span>
 				</div>
-				<div class="stat-card stat-pink">
-					<span class="stat-label">Today's Special</span> <span
-						class="stat-value-lg">Maple Pecan</span>
-				</div>
+				
 			</div>
 
 			<!-- MANAGE CATEGORIES -->
@@ -225,9 +223,8 @@
 										<!-- Actions -->
 										<td>
 											<div class="action-btns">
-												<a
-													href="${pageContext.request.contextPath}/menumanagement?action=editMenu&id=${item.itemId}"
-													class="btn-edit"> <i class="fa-solid fa-pen"></i>
+												<a href="${pageContext.request.contextPath}/editmenu?id=${item.itemId}"
+   													class="btn-edit"><i class="fa-solid fa-pen"></i>
 												</a>
 												<div class="addRecipe">
 													<a
