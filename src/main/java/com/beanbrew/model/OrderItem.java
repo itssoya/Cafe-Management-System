@@ -6,6 +6,7 @@ public class OrderItem {
 	private int orderId;
 	private int menuItemId;
 	private int quantity;
+	private String username;
 	public int getOrderItemId() {
 		return orderItemId;
 	}
@@ -29,6 +30,12 @@ public class OrderItem {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	} 	
 
 }

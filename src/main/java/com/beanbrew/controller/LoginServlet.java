@@ -60,17 +60,20 @@ public class LoginServlet extends HttpServlet {
 				
 				SessionUtil.setAttribute(request, "currentUser", user, 3600);
 				
-				if(user.isAdmin()) {
-					
-					response.sendRedirect(request.getContextPath() + "/usermanagement");
-					
+				String intendedUrl = (String) request.getSession().getAttribute("intendedUrl");
+				
+				if (intendedUrl != null) {
+					request.getSession().removeAttribute("intendedUrl");
+					response.sendRedirect(intendedUrl);
 				} else {
-					
-					response.sendRedirect(request.getContextPath() + "/index");
-					
+					if(user.isAdmin()) {
+						response.sendRedirect(request.getContextPath() + "/usermanagement");
+					} else {
+						response.sendRedirect(request.getContextPath() + "/index");
+					}
 				}
 	
-			} else{
+			} else {
 				
 				request.setAttribute(MessageKeysUtil.ERROR, "Invalid username or password");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
@@ -85,9 +88,6 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/Login.jsp");
 			rd.forward(request, response);
 		}
-		
-		
-		//doGet(request, response);
 	}
 
 }

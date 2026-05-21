@@ -21,6 +21,8 @@ import com.beanbrew.util.SessionUtil;
  */
 @WebFilter("/GuestFilter")
 public class GuestFilter extends HttpFilter implements Filter {
+	
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpFilter#HttpFilter()

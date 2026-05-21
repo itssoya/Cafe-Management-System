@@ -498,6 +498,11 @@ tbody tr:hover { background: #f7f9ff; }
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.addRecipe {
+    width: auto;
+    font-weight: 600;
+    white-space: nowrap;
+}
 
 /* ── Category badge ── */
 .cat-badge {
@@ -520,7 +525,7 @@ tbody tr:hover { background: #f7f9ff; }
     align-items: center;
 }
 
-.btn-edit, .btn-recipe, .btn-delete {
+.btn-edit, .btn-delete {
     width: 32px;
     height: 32px;
     border-radius: 8px;
@@ -532,6 +537,23 @@ tbody tr:hover { background: #f7f9ff; }
     cursor: pointer;
     text-decoration: none;
     transition: background 0.2s;
+}
+.btn-recipe {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    background: #f5f7ff;
+    color: #16319E;
 }
 
 .btn-edit   { background: #f5f7ff; color: #16319E; }

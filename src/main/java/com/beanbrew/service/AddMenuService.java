@@ -21,21 +21,19 @@ public class AddMenuService {
 	public void addItem(MenuItem item, Part imagePart, String categoryName) {
 		
 		try {
-			if(imagePart != null&& imagePart.getSize() > 0) {
-				
-				FileUploadUtil.isValidType(imagePart);
-				
-				if(FileUploadUtil.isImage(imagePart) ) {
-				
-					String extension = FileUploadUtil.getFileExtension(imagePart.getSubmittedFileName());
-					String fileName = "Img_" + System.currentTimeMillis() + extension;
-	                FileUploadUtil.saveFile(imagePart, UPLOAD_DIR, fileName);
-	                
-	                String imageUrl =  fileName;
-	        		item.setImageUrl(imageUrl);
-				
-				}
-			}
+            if (imagePart != null && imagePart.getSize() > 0) {
+
+                FileUploadUtil.isValidType(imagePart);
+
+                if (FileUploadUtil.isImage(imagePart)) {
+                    String extension = FileUploadUtil.getFileExtension(
+                            imagePart.getSubmittedFileName());
+                    String fileName = "Img_" + System.currentTimeMillis() + extension;
+                    FileUploadUtil.saveFile(imagePart, UPLOAD_DIR, fileName);
+                    item.setImageUrl(fileName);
+                    item.setFileExtension(extension);
+                }
+            }
 			
 		} catch(TypeMismatchException e) {
 			
@@ -45,23 +43,6 @@ public class AddMenuService {
 			
 			 e.printStackTrace();
 			 throw new ServiceException("File Not Found");
-		}
-		
-		
-		try {
-			
-			Category categoryOBJ = CheckCategoryDAO.checkCatgeory(categoryName);
-			
-			if(categoryOBJ == null) throw new ServiceException("Category doesn't exists");
-			
-			if(!categoryOBJ.isActiveStatus()) throw new ServiceException("Category is not active");
-			
-			item.setCategoryId(categoryOBJ.getCategoryId());
-		
-		
-		} catch (SQLException e) {
-			
-			 throw new ServiceException("Database error checking category.");
 		}
 		
 		try {

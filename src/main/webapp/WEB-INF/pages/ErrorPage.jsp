@@ -14,7 +14,7 @@
 <body>
 	<nav>
 		<div class="logo">
-			<img src="${pageContext.request.contextPath}/public/logo.svg" alt="BeanBrew logo">
+			<img src="${pageContext.request.contextPath}/images/logo.svg" alt="BeanBrew logo">
 		</div>
 		<div class="links">
 			<li><a href="#">Home</a></li>

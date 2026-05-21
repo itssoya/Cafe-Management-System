@@ -20,7 +20,6 @@
     overflow: hidden;
 }
 
-/* ================= NAVBAR ================= */
 
 .NavBar {
     position: fixed;
@@ -81,8 +80,6 @@
 .search-bar button:hover {
     background: #0f2578;
 }
-
-/* ================= SIDEBAR ================= */
 
 .sidebar {
     position: fixed;
@@ -150,7 +147,6 @@
     height: 1.5rem;
 }
 
-/* ================= MODAL ================= */
 
 .modal-overlay {
     position: fixed;
@@ -211,8 +207,6 @@
     margin-bottom: 18px;
 }
 
-/* ================= FORM ================= */
-
 .form-group {
     text-align: left;
     margin-bottom: 18px;
@@ -268,7 +262,6 @@
     gap: 16px;
 }
 
-/* ================= IMAGE UPLOAD ================= */
 
 .image-upload-area {
     background: #f5f7ff;
@@ -306,7 +299,7 @@
     margin-top: 10px;
 }
 
-/* ================= ACTIONS ================= */
+
 
 .modal-actions {
     display: flex;
@@ -350,8 +343,6 @@
 </style>
 </head>
 <body>
-
-    <!-- BLURRED BACKGROUND -->
     <div class="page-blur-bg">
         <div class="NavBar">
             <div class="search-bar">

@@ -10,14 +10,23 @@ import com.beanbrew.util.DBConnection;
 
 public class AddRecipeDAO {
 	
+	
+	private final static String query1 = "INSERT INTO recipe (menu_item_id, stock_item_id, quantity_used) VALUES (?, ?, ?)";
+	
+	private final static String query2 = "DELETE FROM recipe WHERE menu_item_id = ?";
+	
 	public static boolean addRecipes(int menuItemId, List<RecipeItem> ingredients)
 	        throws SQLException {
 
 	    try (Connection con = DBConnection.buildConnection()) {
 	        con.setAutoCommit(false);
+	        
+	        try (PreparedStatement del = con.prepareStatement( query2)) {
+                del.setInt(1, menuItemId);
+                del.executeUpdate();
+            }
 
-	        try (PreparedStatement ps = con.prepareStatement(
-	                "INSERT INTO recipe (menu_item_id, stock_item_id, quantity_used) VALUES (?, ?, ?)")) {
+	        try (PreparedStatement ps = con.prepareStatement(query1)) {
 
 	            for (RecipeItem ingredient : ingredients) {
 	                ps.setInt(1, menuItemId);
