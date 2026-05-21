@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored = "false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,47 +9,71 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Homepage.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/homepage.css">
 	<title>BeanBrew</title>  
 </head>
 <body>
+
 	<!-- NAVBAR -->
 	<nav>
-		<div class="logo">
-			<img src ="${pageContext.request.contextPath}/images/logo.svg">
+        <div class="logo">
+            <img src ="${pageContext.request.contextPath}/images/logo.svg">
+        </div>
+        <div class="links">
+        	<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/aboutUs">About</a></li>
+			<li><a href="${pageContext.request.contextPath}/menu">Menu</a></li>
+			<li><a href="${pageContext.request.contextPath}/rating">Rating</a></li>
+			<li><a href="${pageContext.request.contextPath}/contactUs">Contact Us</a></li>
+        </div>
+        <div class="nav-actions">
+
+			<a class="cart-link" href="${pageContext.request.contextPath}/cart">
+                <img src="${pageContext.request.contextPath}/images/cart.svg">
+			</a>
+
+			<div class="profile">
+
+				<details class="profile-dropdown">
+					<summary class="profile-trigger">
+
+						<!-- DEFAULT AVATAR -->
+						<c:if test="${empty sessionScope.loggedInUser}">
+							<img src="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg" class="profile-avatar">
+						</c:if>
+
+						<!-- LOGGED IN AVATAR -->
+						<c:if test="${not empty sessionScope.loggedInUser}">
+							<img src="${pageContext.request.contextPath}/getimage?email=${sessionScope.loggedInUser.email}" class="profile-avatar">
+						</c:if>
+
+					</summary>
+
+					<div class="profile-menu">
+
+						<!-- NOT LOGGED IN -->
+						<c:if test="${empty sessionScope.loggedInUser}">
+							<a href="${pageContext.request.contextPath}/login">Login</a>
+							<a href="${pageContext.request.contextPath}/signup">Get Started</a>
+						</c:if>
+
+						<!-- LOGGED IN -->
+						<c:if test="${not empty sessionScope.loggedInUser}">
+							<a href="${pageContext.request.contextPath}/userProfile">Dashboard</a>
+							<a href="${pageContext.request.contextPath}/cart">Cart</a>
+
+							<form action="${pageContext.request.contextPath}/logout" method="post">
+								<button type="submit">Logout</button>
+							</form>
+						</c:if>
+
+					</div>
+				</details>
+			</div>
 			
 		</div>
-		<div class="links">
-			<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/aboutUs">About</a></li>
-			<li><a href="${pageContext.request.contextPath}/menu">Menu</a>
-			<li><a href="${pageContext.request.contextPath}/rating">Rating</a></li>
-		</div>
-		<div class="profile">
-			<button type="button" class="profilePage" onclick="toggleSidebar()">
-				<main class="username">${username}</main>
-			</button>
-		</div>
-	</nav>
-
-	<!-- Sidebar -->
-	<div id="sidebar" class="sidebar">
-		<div class="sidebar-content">
-			<!-- Logged Out View -->
-			<div id="loggedOutView">
-				<div class="guest-header">
-					<img src ="${pageContext.request.contextPath}/images/sidebar/GuestUser.svg">
-					<h2>Welcome ${username}</h2>
-				</div>
-				<div class="auth-buttons">
-					 <button onclick="window.location.href='${pageContext.request.contextPath}/login'">Login</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/signup'">Sign Up</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
+    </nav>
+	
 	<!-- Hero Section -->
 	<section class="hero">
 		<main>
