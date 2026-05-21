@@ -1,5 +1,182 @@
 @charset "UTF-8";
  
+ 
+ /* ─── NAVBAR ─────────────────────────────────────────────── */
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	color: #16319E;
+	background-color: #FFF0D8;
+	padding: 0.45rem 3rem;
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	column-gap: 1rem;
+	box-shadow: 0 10px 30px rgba(22, 49, 158, 0.06);
+}
+ 
+.nav-actions {
+	display: flex;
+	align-items: center;
+	justify-self: end;
+	gap: 1rem;
+}
+ 
+nav > .links {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	justify-self: center;
+	list-style-type: none;
+	gap: 2.75rem;
+}
+ 
+summary {
+	list-style: none;
+}
+ 
+.links > li:hover {
+	text-decoration: underline;
+}
+ 
+.links > li > a {
+	text-decoration: none;
+	color: #16319E;
+}
+ 
+.logo img {
+	max-width: 20rem;
+	height: auto;
+}
+ 
+/* ─── CART ───────────────────────────────────────────────── */
+.cart-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.15rem;
+	color: #16319E;
+	flex: 0 0 auto;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	line-height: 0;
+}
+ 
+.cart-link:hover {
+	opacity: 0.8;
+}
+ 
+.cart-link img {
+	width: 1.25rem;
+	height: 1.15rem;
+	display: block;
+}
+ 
+/* ─── PROFILE DROPDOWN ───────────────────────────────────── */
+.profile {
+	position: relative;
+}
+ 
+.profile-dropdown {
+	position: relative;
+	display: inline-block;
+}
+ 
+.profile-dropdown > summary {
+	list-style: none;
+}
+ 
+.profile-dropdown > summary::-webkit-details-marker {
+	display: none;
+}
+ 
+.profile-trigger {
+	width: 2.4rem;
+	height: 2.4rem;
+	border: 2px solid rgba(22, 49, 158, 0.16);
+	border-radius: 50%;
+	background: #FFF8ED;
+	padding: 0.1rem;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	box-shadow: 0 8px 16px rgba(22, 49, 158, 0.08);
+	overflow: hidden;
+}
+ 
+.profile-trigger:hover {
+	background-color: #ffe1b0;
+}
+ 
+.profile-avatar {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
+ 
+.profile-menu {
+	position: absolute;
+	right: 0;
+	top: calc(100% + 0.4rem);
+	min-width: 10.75rem;
+	background: #fffdf7;
+	border: 1px solid rgba(22, 49, 158, 0.14);
+	border-radius: 0.8rem;
+	box-shadow: 0 18px 34px rgba(22, 49, 158, 0.14);
+	padding: 0.35rem;
+	display: none;
+	z-index: 60;
+}
+ 
+.profile-dropdown[open] .profile-menu {
+	display: grid;
+	gap: 0.25rem;
+}
+ 
+.profile-menu a,
+.profile-menu button {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	border: 0;
+	background: transparent;
+	color: #16319E;
+	padding: 0.55rem 0.75rem;
+	border-radius: 0.55rem;
+	font-weight: 700;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 0.88rem;
+}
+ 
+.profile-menu a:hover,
+.profile-menu button:hover {
+	background: rgba(22, 49, 158, 0.08);
+}
+.profile-trigger {
+    width: 2.4rem !important;
+    height: 2.4rem !important;
+    max-width: 2.4rem !important;
+    max-height: 2.4rem !important;
+    overflow: hidden;
+}
+
+.profile-avatar {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+ 
 /* ── Layout ─────────────────────────────────────────── */
 .profile-layout {
     max-width: 72rem;
@@ -301,6 +478,66 @@
 .orders-table-light tbody tr:hover {
     background: rgba(22, 49, 158, 0.03);
 }
+footer {
+	background-color: #16319E;
+	color: #FFF0D8;
+	margin: 0;
+	padding: 3rem 4rem 0rem 4rem;
+}
+ 
+.footer-logo {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2.5rem;
+}
+ 
+.footer-logo img {
+	max-width: 25rem;
+	height: auto;
+}
+ 
+.footer-col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+ 
+.footer-columns {
+	display: flex;
+	justify-content: space-evenly;
+	gap: 1.5rem;
+	padding-bottom: 2.5rem;
+}
+ 
+.footer-col h3 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-bottom: 0.9rem;
+	color: #FFF0D8;
+}
+ 
+.footer-col p {
+	font-size: 0.9rem;
+	font-weight: 300;
+	line-height: 1.7;
+	color: #d9e0ff;
+}
+ 
+.footer-bottom {
+	border-top: 1px solid rgba(255, 240, 216, 0.25);
+	text-align: center;
+	padding: 1rem 0;
+}
+ 
+.footer-bottom span {
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: #FFF0D8;
+	letter-spacing: 0.03em;
+}
+ 
+
  
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 768px) {

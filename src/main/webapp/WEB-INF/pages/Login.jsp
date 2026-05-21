@@ -22,9 +22,9 @@
 		</div>
 		<div class="links">
 			<li><a href="${pageContext.request.contextPath}/index">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/aboutUs">About</a></li>
+			<li><a href="${pageContext.request.contextPath}/aboutus">About</a></li>
 			<li><a href="${pageContext.request.contextPath}/menu">Menu</a></li>
-			<li><a href="${pageContext.request.contextPath}/rating">Rating</a></li>
+			<li><a href="${pageContext.request.contextPath}/review">Rating</a></li>
 			<li><a href="${pageContext.request.contextPath}/contactUs">ContactUs</a></li>
 		</div>
 		<div class="nav-actions">
