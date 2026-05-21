@@ -217,7 +217,7 @@
 										<td><span class="cat-badge">${item.categoryName}</span></td>
 
 										<!-- Price -->
-										<td><span class="price"> $<fmt:formatNumber
+										<td><span class="price"> Rs.<fmt:formatNumber
 													value="${item.price}" minFractionDigits="2"
 													maxFractionDigits="2" />
 										</span></td>
