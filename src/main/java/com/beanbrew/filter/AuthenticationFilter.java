@@ -18,7 +18,7 @@ import com.beanbrew.util.SessionUtil;
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
-@WebFilter(urlPatterns = {"/addmenu", "/usermanagement"})
+@WebFilter(urlPatterns = {"/addmenu", "/usermanagement", "/menu", "/addcategory", "/cart", "/userprofile", "/stockmanagement/restockitem", "/ordermanagement", "/menumanagement","/editmenu", "addrecipe"})
 public class AuthenticationFilter extends HttpFilter implements Filter {
 	
 	private static final long serialVersionUID = 1L;
