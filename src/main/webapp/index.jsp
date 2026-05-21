@@ -89,7 +89,7 @@
 		</div>
 	</nav>
 
-	<!-- Hero Section -->
+	
 	<section class="hero">
 		<main>
 			<div>
