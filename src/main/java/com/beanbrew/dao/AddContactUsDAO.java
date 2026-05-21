@@ -11,6 +11,16 @@ public class AddContactUsDAO {
 	
 	private static final String query = "INSERT INTO contactus (name, email, subject, message) VALUES (?, ?, ?, ?)";
 	
+	/**
+	 * Inserts a new contact inquiry into the database.
+	 *
+	 * @param contactUs The ContactUs object containing the name, email, subject,
+	 *                  and message details to be stored.
+	 * @return true if the contact details were successfully added (exactly one row affected),
+	 *         false otherwise.
+	 * @throws SQLException if a database access error occurs.
+	 */
+	
 	public static boolean addContactDetails(ContactUs contactUs) throws SQLException {
 			
 			try (Connection con = DBConnection.buildConnection();
