@@ -54,9 +54,9 @@
 		<div class="imageframe">
 			<img src ="${pageContext.request.contextPath}/images/gallery/Cafe_Bg.png">
 		</div>
+			<img src ="${pageContext.request.contextPath}/images/gallery/image_title.svg" class = "image-title">
 	</section>
 
-	<!-- intro text -->
 	<section class="intro">
 		<p>At BeanBrew, we don’t just serve coffee—we celebrate it. As one of Nepal’s leading specialty coffee bars, we’re dedicated to redefining how coffee is experienced. Bean-Brew is a space where passion meets precision—where every sip tells a story of origin, quality, and care. Come explore what coffee can truly be.</p><br><br>
 	</section>
@@ -73,7 +73,7 @@
 	<div class="team">
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/suhana.jpeg">	
+				<img src ="${pageContext.request.contextPath}/images/members/sourav.jpg">	
 			</div>
 			<h2>Sourav Yadav</h2>
 			<p>Project Manager</p>
@@ -81,7 +81,7 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/suhana.jpeg">	
+				<img src ="${pageContext.request.contextPath}/images/members/palden.jpg">	
 			</div>
 			<h2>Palden Lama</h2>
 			<p>Backend Developer</p>
@@ -89,15 +89,15 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/suhana.jpeg">	
+				<img src ="${pageContext.request.contextPath}/images/members/siddharth.png">	
 			</div>
 			<h2>Siddhartha Thapa</h2>
-			<p>Frontend Developer</p>
+			<p>System Tester</p>
 		</div>
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/suhana.jpeg">
+				<img src ="${pageContext.request.contextPath}/images/members/shaleen.jpg">
 			</div>
 			<h2>Shaleen Thapa</h2>
 			<p>UI/UX Designer</p>
@@ -113,10 +113,10 @@
 		
 		<div class = "team-card">
 			<div class = "team-photo">
-				<img src ="${pageContext.request.contextPath}/images/members/suhana.jpeg">
+				<img src ="${pageContext.request.contextPath}/images/members/roshan.jpg">
 			</div>
 			<h2>Roshan Jaiswal</h2>
-			<p>Member</p>
+			<p>Intern</p>
 		</div>
 	</div>
 	

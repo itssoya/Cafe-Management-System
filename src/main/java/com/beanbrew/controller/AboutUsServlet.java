@@ -1,6 +1,6 @@
 package com.beanbrew.controller;
 
-
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,16 +9,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class UnexcpectedError
+ * Servlet implementation class AboutUsServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/unexpectederror" })
-public class UnexpectedError extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/AboutUsServlet" })
+public class AboutUsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UnexpectedError () {
+    public AboutUsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,8 @@ public class UnexpectedError extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/pages/AboutUs.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**
